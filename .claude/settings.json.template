@@ -1,5 +1,5 @@
 {
-  "_comment": "Template settings.json pour activer les hooks Doctrine Counterpart. À copier vers .claude/settings.json (projet) ou ~/.claude/settings.json (global). Tous les hooks ont un mécanisme de bypass explicite documenté dans leurs scripts.",
+  "_comment": "settings.json template to activate Counterpart Doctrine hooks. Copy to .claude/settings.json (project) or ~/.claude/settings.json (global). All hooks have an explicit bypass mechanism documented in their scripts.",
 
   "hooks": {
     "PreToolUse": [
@@ -8,7 +8,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/check-palliatif-assumed.sh"
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/check-workaround-assumed.sh"
           },
           {
             "type": "command",
@@ -26,7 +26,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/audit-memoire-rappel.sh"
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/audit-memory-reminder.sh"
           }
         ]
       }

@@ -1,31 +1,31 @@
-Doctrine Counterpart © 2026 Michel Faure
+Counterpart Doctrine © 2026 Michel Faure
 
-Cette œuvre (texte du manifeste, règles opérantes, skills, agent, hooks et scripts d'installation) est mise à disposition selon les termes de la **Creative Commons Attribution 4.0 International License (CC-BY-4.0)**.
+This work (manifesto text, operational rules, skills, agent, hooks, and installation scripts) is made available under the terms of the **Creative Commons Attribution 4.0 International License (CC-BY-4.0)**.
 
-Texte intégral : https://creativecommons.org/licenses/by/4.0/legalcode.fr
-
----
-
-## Vous êtes autorisé(e) à :
-
-- **Partager** — copier, distribuer et communiquer cette œuvre par tous moyens et sous tous formats.
-- **Adapter** — remixer, transformer et créer à partir de cette œuvre pour toute utilisation, y compris commerciale.
-
-L'auteur ne peut révoquer ces libertés tant que vous appliquez les termes de la licence.
-
-## Selon les conditions suivantes :
-
-**Attribution** — Vous devez créditer l'œuvre, intégrer un lien vers la licence et indiquer si des modifications ont été effectuées. Vous devez indiquer ces informations par tous les moyens raisonnables, sans pour autant suggérer que l'auteur vous soutient ou soutient la façon dont vous avez utilisé son œuvre.
-
-Format de citation suggéré :
-
-> Faure, M. (2026). *Doctrine Counterpart — manifeste pour le dev solo IA-natif*.
-> Disponible sous CC-BY-4.0 sur https://github.com/michel-faure/doctrine-counterpart
-
-**Pas de restrictions complémentaires** — Vous n'êtes pas autorisé(e) à appliquer des conditions légales ou des mesures techniques qui restreindraient légalement autrui à utiliser l'œuvre dans les conditions décrites par la licence.
+Full text: https://creativecommons.org/licenses/by/4.0/legalcode
 
 ---
 
-## Avertissement
+## You are free to:
 
-Cette doctrine est une version v0.2 sous test. Elle n'a pas été validée empiriquement à grande échelle. L'auteur ne peut être tenu responsable des conséquences de son application sur des projets réels. L'usage est aux risques de l'utilisateur. Aucune garantie de qualité, de robustesse ou d'adéquation à un usage particulier n'est fournie.
+- **Share** — copy and redistribute the material in any medium or format.
+- **Adapt** — remix, transform, and build upon the material for any purpose, even commercially.
+
+The licensor cannot revoke these freedoms as long as you follow the license terms.
+
+## Under the following terms:
+
+**Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+Suggested citation:
+
+> Faure, M. (2026). *Counterpart Doctrine — a manifesto for the AI-native solo developer*.
+> Available under CC-BY-4.0 at https://github.com/michelfaure/doctrine-counterpart
+
+**No additional restrictions** — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+---
+
+## Disclaimer
+
+This doctrine is a v0.2 release under empirical testing. It has not been validated at scale. The author cannot be held responsible for the consequences of its application on real projects. Use at your own risk. No warranty of quality, robustness, or fitness for any particular purpose is provided.

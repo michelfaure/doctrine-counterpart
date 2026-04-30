@@ -1,65 +1,65 @@
 #!/usr/bin/env bash
-# Installation interactive de la Doctrine Counterpart dans un projet cible.
-# Usage : ./install.sh [chemin/vers/projet]
-#         (si non précisé : utilise le pwd au moment de l'invocation)
+# Interactive install of the Counterpart Doctrine into a target project.
+# Usage: ./install.sh [path/to/project]
+#        (if omitted: uses the pwd at invocation time)
 
 set -euo pipefail
 
-# Détection du répertoire source (où se trouve ce script)
+# Detect source directory (where this script lives)
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Cible
+# Target
 TARGET="${1:-$(pwd)}"
 TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
 echo "=================================================="
-echo "  Doctrine Counterpart v0.2 — installation"
+echo "  Counterpart Doctrine v0.2 — install"
 echo "=================================================="
 echo ""
-echo "Source : $SOURCE_DIR"
-echo "Cible  : $TARGET"
+echo "Source: $SOURCE_DIR"
+echo "Target: $TARGET"
 echo ""
 
 if [[ ! -d "$TARGET" ]]; then
-  echo "❌ Répertoire cible n'existe pas : $TARGET"
+  echo "❌ Target directory does not exist: $TARGET"
   exit 1
 fi
 
 # --- 1. CLAUDE.md ---
-echo "→ Étape 1/5 : CLAUDE.md (règles opérantes)"
+echo "→ Step 1/5: CLAUDE.md (operational rules)"
 if [[ -f "$TARGET/CLAUDE.md" ]]; then
-  echo "  Un CLAUDE.md existe déjà dans $TARGET."
-  read -r -p "  [m]erge manuel après / [a]ppend doctrine à la fin / [s]kip / [o]verwrite ? [m] " choice
+  echo "  A CLAUDE.md already exists in $TARGET."
+  read -r -p "  [m]anual merge after / [a]ppend doctrine to end / [s]kip / [o]verwrite? [m] " choice
   choice="${choice:-m}"
   case "$choice" in
     a)
       echo "" >> "$TARGET/CLAUDE.md"
       echo "" >> "$TARGET/CLAUDE.md"
-      echo "<!-- ===== Doctrine Counterpart v0.2 (append) ===== -->" >> "$TARGET/CLAUDE.md"
+      echo "<!-- ===== Counterpart Doctrine v0.2 (append) ===== -->" >> "$TARGET/CLAUDE.md"
       cat "$SOURCE_DIR/CLAUDE.md" >> "$TARGET/CLAUDE.md"
-      echo "  ✓ Doctrine ajoutée à la fin de CLAUDE.md existant"
+      echo "  ✓ Doctrine appended to existing CLAUDE.md"
       ;;
     o)
       cp "$SOURCE_DIR/CLAUDE.md" "$TARGET/CLAUDE.md"
-      echo "  ✓ CLAUDE.md écrasé"
+      echo "  ✓ CLAUDE.md overwritten"
       ;;
     s)
       echo "  ⊘ skip"
       ;;
     *)
       cp "$SOURCE_DIR/CLAUDE.md" "$TARGET/CLAUDE.md.doctrine-counterpart"
-      echo "  ✓ Posé à côté : $TARGET/CLAUDE.md.doctrine-counterpart (à fusionner manuellement)"
+      echo "  ✓ Placed alongside: $TARGET/CLAUDE.md.doctrine-counterpart (merge manually)"
       ;;
   esac
 else
   cp "$SOURCE_DIR/CLAUDE.md" "$TARGET/CLAUDE.md"
-  echo "  ✓ CLAUDE.md installé"
+  echo "  ✓ CLAUDE.md installed"
 fi
 
 # --- 2. .claude/ (skills + agents) ---
 echo ""
-echo "→ Étape 2/5 : .claude/skills + .claude/agents"
+echo "→ Step 2/5: .claude/skills + .claude/agents"
 mkdir -p "$TARGET/.claude/skills"
 mkdir -p "$TARGET/.claude/agents"
 
@@ -67,10 +67,10 @@ mkdir -p "$TARGET/.claude/agents"
 for skill_dir in "$SOURCE_DIR/.claude/skills"/*/; do
   skill_name=$(basename "$skill_dir")
   if [[ -d "$TARGET/.claude/skills/$skill_name" ]]; then
-    echo "  ⊘ skip $skill_name (existe déjà)"
+    echo "  ⊘ skip $skill_name (already exists)"
   else
     cp -r "$skill_dir" "$TARGET/.claude/skills/"
-    echo "  ✓ skill $skill_name installé"
+    echo "  ✓ skill $skill_name installed"
   fi
 done
 
@@ -78,85 +78,85 @@ done
 for agent_file in "$SOURCE_DIR/.claude/agents"/*.md; do
   agent_name=$(basename "$agent_file")
   if [[ -f "$TARGET/.claude/agents/$agent_name" ]]; then
-    echo "  ⊘ skip agent $agent_name (existe déjà)"
+    echo "  ⊘ skip agent $agent_name (already exists)"
   else
     cp "$agent_file" "$TARGET/.claude/agents/"
-    echo "  ✓ agent $agent_name installé"
+    echo "  ✓ agent $agent_name installed"
   fi
 done
 
-# --- 3. doctrine.md (manifeste lisible) ---
+# --- 3. doctrine.md (readable manifesto) ---
 echo ""
-echo "→ Étape 3/5 : doctrine.md (manifeste, lecture humaine)"
-read -r -p "  Copier doctrine.md dans $TARGET/docs/doctrine.md ? [Y/n] " choice
+echo "→ Step 3/5: doctrine.md (manifesto, human reading)"
+read -r -p "  Copy doctrine.md to $TARGET/docs/doctrine.md? [Y/n] " choice
 choice="${choice:-Y}"
 if [[ "$choice" =~ ^[Yy]$ ]]; then
   mkdir -p "$TARGET/docs"
   cp "$SOURCE_DIR/doctrine.md" "$TARGET/docs/doctrine.md"
-  echo "  ✓ doctrine.md placé dans docs/"
+  echo "  ✓ doctrine.md placed in docs/"
 else
   echo "  ⊘ skip"
 fi
 
-# --- 4. Hooks (optionnels) ---
+# --- 4. Hooks (optional) ---
 echo ""
-echo "→ Étape 4/5 : Hooks (enforcement matériel — optionnel mais recommandé)"
-echo "  Les hooks bloquent commit/push si invariants violés. Bypass explicite documenté."
-echo "  Liste : check-palliatif-assumed, deploy-safeguard, secret-scanner, audit-memoire-rappel"
-read -r -p "  Activer les hooks ? [y/N] " choice
+echo "→ Step 4/5: Hooks (material enforcement — optional but recommended)"
+echo "  Hooks block commit/push if invariants are violated. Explicit bypass documented."
+echo "  List: check-workaround-assumed, deploy-safeguard, secret-scanner, audit-memory-reminder"
+read -r -p "  Activate hooks? [y/N] " choice
 choice="${choice:-N}"
 if [[ "$choice" =~ ^[Yy]$ ]]; then
   mkdir -p "$TARGET/.claude/hooks"
 
-  # Copier les scripts
+  # Copy scripts
   for hook_file in "$SOURCE_DIR/.claude/hooks"/*.sh; do
     hook_name=$(basename "$hook_file")
     cp "$hook_file" "$TARGET/.claude/hooks/$hook_name"
     chmod +x "$TARGET/.claude/hooks/$hook_name"
-    echo "  ✓ hook $hook_name installé et rendu exécutable"
+    echo "  ✓ hook $hook_name installed and made executable"
   done
 
   # Settings.json
   if [[ -f "$TARGET/.claude/settings.json" ]]; then
-    echo "  ⚠ Un .claude/settings.json existe déjà."
-    echo "    Le template Doctrine est posé à côté : .claude/settings.json.doctrine-counterpart"
-    echo "    À fusionner manuellement (le bloc 'hooks' notamment)."
+    echo "  ⚠ A .claude/settings.json already exists."
+    echo "    Doctrine template placed alongside: .claude/settings.json.doctrine-counterpart"
+    echo "    Merge manually (the 'hooks' block in particular)."
     cp "$SOURCE_DIR/.claude/settings.json.template" "$TARGET/.claude/settings.json.doctrine-counterpart"
   else
     cp "$SOURCE_DIR/.claude/settings.json.template" "$TARGET/.claude/settings.json"
-    echo "  ✓ settings.json créé avec hooks activés"
+    echo "  ✓ settings.json created with hooks activated"
   fi
 
-  # Vérification jq disponible
+  # Check jq available
   if ! command -v jq >/dev/null 2>&1; then
     echo ""
-    echo "  ⚠ 'jq' n'est pas installé sur ce système. Les hooks en ont besoin."
-    echo "    macOS : brew install jq"
-    echo "    Linux : sudo apt install jq  /  sudo dnf install jq"
+    echo "  ⚠ 'jq' is not installed on this system. Hooks need it."
+    echo "    macOS: brew install jq"
+    echo "    Linux: sudo apt install jq  /  sudo dnf install jq"
   fi
 else
-  echo "  ⊘ Hooks non activés (peuvent être activés plus tard via settings.json.template)"
+  echo "  ⊘ Hooks not activated (can be activated later via settings.json.template)"
 fi
 
-# --- 5. Récap ---
+# --- 5. Recap ---
 echo ""
 echo "=================================================="
-echo "  Installation terminée"
+echo "  Install complete"
 echo "=================================================="
 echo ""
-echo "Prochaines étapes :"
+echo "Next steps:"
 echo ""
-echo "  1. Ouvrir Claude Code dans $TARGET"
-echo "  2. Le CLAUDE.md sera lu automatiquement à chaque session"
-echo "  3. Les skills s'auto-invoquent sur leurs triggers (cf. description dans frontmatter)"
-echo "  4. L'agent challenger s'invoque manuellement :"
-echo "     'Lance l'agent-challenger sur cette reco avant de figer.'"
+echo "  1. Open Claude Code in $TARGET"
+echo "  2. CLAUDE.md will be read automatically each session"
+echo "  3. Skills auto-invoke on triggers (see description in frontmatter)"
+echo "  4. The challenger agent invokes manually:"
+echo "     'Run agent-challenger on this rec before locking.'"
 echo ""
-echo "  Pour relire le manifeste : $TARGET/docs/doctrine.md"
+echo "  To reread the manifesto: $TARGET/docs/doctrine.md"
 echo ""
-echo "Test demandé (si tu testes pour quelqu'un d'autre) :"
-echo "  Après 2-3 semaines d'usage, répondre aux 3 questions du README :"
-echo "  (a) qu'as-tu chargé / utilisé ?"
-echo "  (b) qu'est-ce qui a changé concrètement ?"
-echo "  (c) quels axes peux-tu nommer sans relire ?"
+echo "Test request (if testing for someone else):"
+echo "  After 2-3 weeks of use, answer the 3 questions in the README:"
+echo "  (a) what did you load / use?"
+echo "  (b) what concretely changed?"
+echo "  (c) which axes can you name without rereading?"
 echo ""

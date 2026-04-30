@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Hook: PreToolUse, matcher: Bash
-# Scanne les fichiers staged pour secrets en clair (clés API, tokens, credentials).
-# Bypass: ajouter [secret-ok] au message de commit (à utiliser uniquement si confirmé faux positif).
+# Scans staged files for plaintext secrets (API keys, tokens, credentials).
+# Bypass: add [secret-ok] to the commit message (use only if confirmed false positive).
 
 set -euo pipefail
 
 INPUT=$(cat)
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null || echo "")
 
-# N'agit que sur git commit
+# Only acts on git commit
 if [[ ! "$COMMAND" =~ ^git[[:space:]]+commit ]]; then
   exit 0
 fi
@@ -18,7 +18,7 @@ if echo "$COMMAND" | grep -q '\[secret-ok\]'; then
   exit 0
 fi
 
-# Patterns de secrets (heuristiques — pas exhaustifs)
+# Secret patterns (heuristics — not exhaustive)
 declare -a PATTERNS=(
   'sk-[A-Za-z0-9]{20,}'                        # OpenAI / Anthropic
   'sk-ant-[A-Za-z0-9_-]{20,}'                  # Anthropic explicite
@@ -30,11 +30,11 @@ declare -a PATTERNS=(
   'xoxp-[0-9]+-[0-9]+-[0-9]+-[A-Za-z0-9]+'     # Slack user token
   'eyJ[A-Za-z0-9_-]{30,}\.eyJ[A-Za-z0-9_-]{30,}\.'  # JWT (heuristique)
   'service_role.{0,10}eyJ'                     # Supabase service role JWT
-  '-----BEGIN[A-Z ]+PRIVATE KEY-----'          # Clés privées
+  '-----BEGIN[A-Z ]+PRIVATE KEY-----'          # Private keys
   'glpat-[A-Za-z0-9_-]{20}'                    # GitLab PAT
 )
 
-# Récupère les fichiers staged
+# Get staged files
 STAGED_FILES=$(git diff --cached --name-only 2>/dev/null || echo "")
 
 if [[ -z "$STAGED_FILES" ]]; then
@@ -68,18 +68,18 @@ done <<< "$STAGED_FILES"
 
 if [[ $DETECTED -eq 1 ]]; then
   cat <<EOF >&2
-⚠ [Doctrine Counterpart — axe 7] Secret potentiel détecté dans les fichiers staged.
+⚠ [Counterpart Doctrine — axis 7] Potential secret detected in staged files.
 
-Détails :$(echo -e "$DETECTED_DETAILS")
+Details:$(echo -e "$DETECTED_DETAILS")
 
-Actions possibles :
-  1. Si vrai secret : retirer du fichier, le mettre en variable d'environnement,
-     puis 'git restore --staged <fichier>' avant de re-commiter
-  2. Si faux positif confirmé : ajouter "[secret-ok]" au commit message
-  3. Si valeur de test / fixture : préfixer "test_" ou "fake_" pour casser le pattern
+Possible actions:
+  1. If real secret: remove from file, move to environment variable,
+     then 'git restore --staged <file>' before re-committing
+  2. If confirmed false positive: add "[secret-ok]" to the commit message
+  3. If test value / fixture: prefix with "test_" or "fake_" to break the pattern
 
-Pourquoi : un secret committé même quelques minutes peut être indexé par GitHub Search
-et exposé. Le solo n'a pas de PR reviewer pour rattraper l'erreur.
+Why: a secret committed even for a few minutes can be indexed by GitHub Search
+and exposed. The solo has no PR reviewer to catch the mistake.
 EOF
   exit 2
 fi

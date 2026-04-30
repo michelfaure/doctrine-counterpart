@@ -1,107 +1,107 @@
-# Doctrine Counterpart — manifeste pour le dev solo IA-natif
+# Counterpart Doctrine — a manifesto for the AI-native solo developer
 
-*Version 0.2 — avril 2026*
-
----
-
-## Position du texte
-
-Cette doctrine s'adresse aux **praticiens conscients du dialogue homme-agent** : entrepreneurs et CEO qui veulent reconnaître la qualité d'un travail IA-natif sans le subir ni le célébrer naïvement, dev solos semi-professionnels qui cherchent à structurer leur pratique, et toute personne qui pilote et exécute simultanément un projet d'envergure avec un agent comme Claude Code.
-
-Elle est **à la fois cadre opératoire et modèle de pensée**. Cadre, parce qu'elle se charge dans un projet — un fichier markdown que le lecteur peut intégrer dans son `CLAUDE.md`, et dont l'application change directement la qualité de ce que produit son agent. Modèle, parce qu'elle propose une grammaire articulée pour comprendre ce qui se joue dans un dialogue homme-agent, applicable au-delà du code, jusqu'à l'analyse anthropologique d'autres pratiques. Le format vise le manifeste : chaque règle technique porte sa charge théorique, chaque thèse théorique produit une règle. Aucune des deux couches ne précède l'autre, aucune n'est décorative.
-
-Le concept central, autour duquel se structure le reste, est celui d'**AI as counterpart**. Ni outil (verticalité maître-instrument, position des tenants d'« AI as tool »), ni collègue (horizontalité naïve, projection anthropomorphique des tenants d'« AI as colleague »), mais **partenaire d'un dispositif hybride où chaque acteur forme l'autre**. Le solo forme l'agent par mémoire, ADR, feedback, doctrine — autant de couches persistantes qui orientent ses sorties. L'agent forme le solo par questions, challenges, méthodologie imposée, sortie de zone de confort — mais aussi par transmission directe de compétences d'autres métiers, au premier rang desquelles le développement lui-même. Une roadmap d'apprentissage technique structurée par l'agent en est l'exemple concret : exercices ciblés (lecture PostgreSQL, structures de schéma, EXPLAIN ANALYZE) au fil desquels le solo gagne en autonomie de lecture et de jugement. **La pédagogie est implicite : on apprend en faisant, sur le travail réel, pas sur un cours détaché.** L'horizontalité n'est pas symétrie : c'est asymétrie d'une autre nature — le solo a la temporalité incarnée (continuité d'identité, fatigue, mémoire vécue), l'agent a l'invariance instantanée (pas de drift d'humeur, pas de progression entre sessions sans dispositif). Le couple produit ce qu'aucun des deux seul ne pourrait. C'est ce que la théorie de l'acteur-réseau (Latour, Callon) appelle un *attelage* : la singularité émerge du dispositif, pas des termes individuels.
-
-Cette doctrine refuse explicitement quatre positions dominantes du moment :
-
-— **Contre l'autonomie de l'agent.** Pour le solo, l'agent autonome est un piège. Il amplifie les drifts sans contrôle, et le solo y perd son seul atout — la vérification matérielle. L'agent doit être bridé pour rester utile.
-
-— **Contre la confiance déclarative.** Toute affirmation déclarative d'un agent (« build vert », « tests passent », « drift généralisé », « contact introuvable ») est présumée fausse jusqu'à vérification matérielle par sortie brute, count SQL, ou rendu visuel. La charge de la preuve est inversée par rapport à l'usage dominant.
-
-— **Contre la spécialisation par domaine.** Le solo IA-natif s'épanouit dans la transversalité. Le travail réel n'est pas la connaissance du domaine — qui s'apprend en quelques semaines avec un agent — mais la dialectique avec l'agent sur des process métier quelconques. La doctrine s'apprend en années ; elle se réutilise sur tout terrain.
-
-— **Contre la complaisance bidirectionnelle.** L'agent est complaisant (sycophancy documentée par Anthropic et la recherche). Le solo l'est aussi, envers son propre travail (auto-validation, biais de confirmation, attachement à la première formulation). La doctrine impose une **adversarialité bidirectionnelle** : l'agent challenge le solo, le solo challenge l'agent, et un protocole tiers (sessions parallèles, contexte vierge, confiance quantifiée) tranche.
-
-Le **critère de succès** est testable. Cette doctrine sera réussie le jour où un autre praticien — dev solo semi-pro, entrepreneur, CEO éclairé — la charge dans son projet, livre un module non trivial à qualité comparable ou supérieure à ce qu'il faisait avant, et nomme dans son retour les axes de la doctrine qui ont fait la différence. Pas de vues, pas d'audience comme métrique. L'adoption opérante d'un fichier comme artefact qui change le résultat.
+*Version 0.2 — April 2026*
 
 ---
 
-## Les sept axes opérants
+## Position of the text
 
-### Axe 1 — Vérification matérielle
+This doctrine addresses **practitioners conscious of the human-agent dialogue**: entrepreneurs and CEOs who want to recognize the quality of AI-native work without suffering it or celebrating it naively, semi-pro solo developers seeking to structure their practice, and anyone who simultaneously pilots and executes a substantial project with an agent like Claude Code.
 
-**Thèse.** Aucune affirmation déclarative d'un agent n'a valeur de preuve. Seule la sortie brute, le count SQL, l'EXPLAIN ANALYZE, le rendu visuel font foi. La charge de la preuve est inversée par rapport à l'usage dominant : le solo présume fausse toute affirmation tant qu'elle n'est pas matérialisée.
+It is **both an operational framework and a model of thought**. Operational, because it loads into a project — a markdown file the reader can integrate into their `CLAUDE.md`, whose application directly changes the quality of what their agent produces. Theoretical, because it offers an articulated grammar for understanding what plays out in a human-agent dialogue, applicable beyond code, all the way to anthropological analysis of other practices. The format aims at the manifesto: every technical rule carries its theoretical charge, every theoretical thesis produces a rule. Neither layer precedes the other, neither is decorative.
 
-**Trade-off contre l'alternative.** L'alternative crédible est la confiance déclarative pragmatique — accepter par défaut ce que dit l'agent, vérifier seulement les cas suspects. Position défendable et largement adoptée : vérifier tout = paralysie, les modèles modernes sont fiables 90 % du temps, la friction systématique tue la vélocité qui justifie l'usage de l'IA. C'est la philosophie des outils dominants (Cursor, Devin, Copilot Workspace) : agent autonome + review humaine en aval au moment du PR.
+The central concept around which the rest is structured is **AI as counterpart**. Neither tool (master-instrument verticality, the position of "AI as tool" advocates), nor colleague (naive horizontality, the anthropomorphic projection of "AI as colleague" advocates), but **partner of a hybrid arrangement where each actor forms the other**. The solo developer forms the agent through memory, ADRs, feedback, doctrine — persistent layers that orient its outputs. The agent forms the solo through questions, challenges, imposed methodology, departures from comfort zones — but also through direct transmission of skills from other trades, foremost among them development itself. A structured technical-foundations roadmap built by the agent is a concrete example: targeted exercises (PostgreSQL reading, schema structures, EXPLAIN ANALYZE) through which the solo gains autonomy of reading and judgment. **Pedagogy is implicit: one learns by doing, on real work, not on a detached course.** Horizontality is not symmetry: it is asymmetry of a different kind — the solo has embodied temporality (continuity of identity, fatigue, lived memory), the agent has instantaneous invariance (no mood drift, no progression between sessions without a dispositive). The pair produces what neither alone could. This is what actor-network theory (Latour, Callon) calls an *assemblage*: singularity emerges from the arrangement, not from the individual terms.
 
-Le solo n'a pas de PR reviewer en aval — il *est* le PR reviewer. Si la vérification n'est pas faite en temps réel par lui-même, elle n'est faite par personne. Le trade-off vélocité est un mensonge à horizon long : la dette d'erreurs non détectées coûte 10× ce qu'elle a fait gagner 18 mois plus tard. Plus la conséquence est asymétrique (un faux négatif coûte peu, un faux positif beaucoup), plus la vérification doit être systématique. Pour le solo, la vérification matérielle n'est pas une option d'archi — c'est la condition de survie de la production.
+This doctrine explicitly refuses four currently dominant positions:
 
-### Axe 2 — Adversarialité bidirectionnelle
+— **Against agent autonomy.** For the solo, the autonomous agent is a trap. It amplifies drifts without control, and the solo loses their only asset — material verification. The agent must be reined in to remain useful.
 
-**Thèse.** La complaisance est bidirectionnelle. L'agent est sycophant par construction (RLHF), le solo est auto-validant par humanité (biais de confirmation, attachement à la première formulation). La décision robuste se fabrique par protocole tiers — sessions parallèles, contexte vierge, confiance quantifiée — pas par dialogue mou. Le solo challenge l'agent, l'agent challenge le solo, un dispositif extérieur tranche.
+— **Against declarative trust.** Every declarative claim by an agent ("build green," "tests pass," "drift detected," "contact not found") is presumed false until materially verified by raw output, SQL count, or visual rendering. The burden of proof is inverted relative to dominant usage.
 
-**Trade-off contre l'alternative.** L'alternative est le dialogue ouvert et la confiance mutuelle — position humaniste, cognitivement moins coûteuse, qui cultive un mode coopératif jugé plus productif. La suspicion projetée sur l'agent te coûte cognitivement ; la confiance authentique entre humains tient bien, pourquoi ne pas l'imiter ?
+— **Against domain specialization.** The AI-native solo thrives in transversality. The real work is not domain knowledge — which can be acquired in weeks with an agent — but dialectical engagement with the agent on arbitrary business processes. The doctrine takes years to learn; it reuses on any terrain.
 
-Parce que la confiance authentique entre humains tient grâce à un *frottement* d'intérêts : chacun a son agenda, sa réputation, son temps à défendre. L'agent n'a pas d'intérêts propres, donc aucun frottement naturel, donc aucune base pour une confiance robuste. Sans pair humain en boucle, le dialogue ouvert avec un agent sycophant produit *systématiquement* des décisions complaisantes — c'est mécanique, pas affectif. L'adversarialité bidirectionnelle n'est pas une posture morale, c'est la mécanique qui produit l'intersubjectivité absente. On fabrique le frottement par protocole.
+— **Against bidirectional complaisance.** The agent is sycophantic (sycophancy documented by Anthropic and the research). The solo is too, toward their own work (self-validation, confirmation bias, attachment to the first formulation). The doctrine imposes **bidirectional adversariality**: the agent challenges the solo, the solo challenges the agent, and a third-party protocol (parallel sessions, blank context, quantified confidence) decides.
 
-### Axe 3 — Taxonomie de la donnée et source unique
-
-**Thèse.** Toute valeur stockée dérivable d'autres données doit déclarer sa nature : *Live* (calculée à la volée, jamais stockée), *Snapshot* (figée à un événement métier, jamais recalculée rétroactivement), ou *Cache* (stockée pour la performance, avec rafraîchisseur explicite déclaré dans le même commit). Toute règle dispersée est un drift en attente. Tout invariant métier irrévocable doit être protégé en DB, pas seulement en TS.
-
-**Trade-off contre l'alternative.** L'alternative est la synchronisation tolérée — duplications autorisées avec scripts périodiques de synchronisation, corrections ponctuelles quand le drift est détecté. Plus rapide à coder, plus flexible, ne contraint pas l'archi par des invariants rigides. Position eventual consistency : dans les systèmes distribués modernes, on accepte le drift transitoire au nom de la performance et de la résilience.
-
-Pour le solo, le drift silencieux n'est pas détecté à temps — il n'y a pas un dev de l'équipe qui un matin remarque la divergence. La taxonomie *Live / Snapshot / Cache* est plus précise que « source unique » naïve : elle reconnaît que toutes les duplications ne sont pas illégitimes, mais qu'aucune ne doit exister sans **contrat de cohérence déclaré**. C'est la précision qui sauve : le solo qui adopte « source unique » strictement bloque des Caches légitimes ; le solo qui adopte « synchronisation tolérée » subit le drift silencieux. La taxonomie tranche entre les deux et donne le vocabulaire qui empêche l'ambiguïté.
-
-### Axe 4 — Discipline de session
-
-**Thèse.** Le solo IA-natif structure le travail avant d'écrire, archive pendant qu'il travaille, ferme proprement avant d'enchaîner. ADR avant code sur tout chantier > 2 fichiers. Phase 0 grep exhaustif des symboles existants avant toute spec. Lots dont le récap tient en 5 lignes. FIFO strict sur les chantiers ouverts. Calendar event d'auto-validation post-deploy quand l'effet se mesure à J+1/J+2. La friction d'organisation économise des heures de rattrapage.
-
-**Trade-off contre l'alternative.** L'alternative est le flow et le vibe coding — la friction d'organisation tue la créativité, le bon code émerge du flow, ADR avant code = bureaucratie qui freine l'invention. Position startup move-fast : ship d'abord, formalise ensuite. Position défendue par toute la culture lean.
-
-Pour le solo IA-natif, la vélocité n'est plus le goulot — l'agent produit 1000 lignes en 10 minutes. Le goulot a basculé vers la capacité à **retrouver pourquoi tu as pris une décision dans 3 mois**. La discipline de session n'est plus un coût d'opportunité contre la créativité — c'est un investissement sur ta mémoire externe, et c'est ce qui fait que le solo *peut être solo* sans devenir prisonnier de son passé non documenté.
-
-### Axe 5 — Cause racine, pas rustine
-
-**Thèse.** Avant tout fix, identifier la cause racine. Un palliatif est légitime *à condition d'être explicitement assumé* (commit message, ADR, mémoire feedback). C'est l'absence d'assumption qui est interdite, pas le palliatif lui-même. Élargir avant d'agir : 1 cas confirmé → grep le pattern complet. Drift identifié sur un objet → ticket scopé, pas patch en cascade. Règle dispersée → refacto complet + ADR, jamais option minimale.
-
-**Trade-off contre l'alternative.** L'alternative est le fix le plus court qui résout le symptôme observé. Position pragmatique : on ne peut pas refaire le système à chaque bug, la rustine bien placée libère du temps pour les vrais chantiers, la cause racine est un luxe. Position YAGNI : creuser plus loin que nécessaire = over-engineering.
-
-Le solo IA-natif n'a pas la mémoire d'équipe qui permet de tracer 3 récidives du même bug. Un palliatif posé sans assumer revient avec un visage différent dans 6 mois, et le solo aura oublié qu'il l'avait déjà rencontré. L'agent ne le rappellera pas — il n'a pas de mémoire long terme inter-sessions sans dispositif. Donc soit on creuse maintenant, soit on paie trois fois.
-
-### Axe 6 — Pédagogie implicite et transversalité métier
-
-**Thèse.** Le solo apprend en faisant — à la fois les compétences techniques (PostgreSQL, EXPLAIN, structures de schéma) et les vocabulaires métier (DREETS, BPF, art. 261-7-1°-a, eIDAS). L'agent transmet en continu, à condition que le solo refuse de le laisser faire à sa place ce qu'il doit apprendre à faire. Vocabulaire métier régulé > vocabulaire technique d'un fournisseur. Pas de prix sans obligation citée — toute mention de norme se vérifie par citation du texte exact.
-
-**Trade-off contre l'alternative.** L'alternative est la spécialisation par métier + délégation aux experts. Position classique : le solo est dev, pas fiscaliste. Pour le fiscal, on appelle un expert-comptable. La division du travail est un principe d'organisation économique depuis Adam Smith. Vouloir tout maîtriser = mauvaise allocation : mieux vaut être excellent sur un domaine que médiocre sur dix.
-
-L'agent transmet à l'occasion du travail réel — coût marginal quasi nul de devenir compétent en PostgreSQL pendant qu'on optimise une RPC, en eIDAS pendant qu'on cadre un horodatage. La spécialisation par division du travail tenait dans une économie où la connaissance était coûteuse à mobiliser. Dans une économie où elle se mobilise à la volée, le solo IA-natif ne se spécialise plus *par discipline* mais *par posture* — être celui qui sait demander à l'agent ce qu'il faut savoir au moment où ça se pose, et challenger l'expert avec un vocabulaire suffisant pour ne pas le subir. La délégation aux experts reste utile sur les zones à enjeu fort, mais elle se fait avec un vocabulaire de pair, pas de client passif.
-
-### Axe 7 — Auditabilité long terme
-
-**Thèse.** La mémoire individuelle du solo est insuffisante. L'archive — ADR, sessions log, MEMORY.md, doctrine elle-même — est l'organe externe qui le tient, à condition d'être elle-même auditée régulièrement. Audit trimestriel obligatoire : relire l'index mémoire ligne à ligne, demander pour chaque entrée « est-ce toujours vrai ? ». ADRs avec > 30 % de péremption à 12 mois = recherche en cours, pas doctrine stable. La doctrine s'applique à elle-même.
-
-**Trade-off contre l'alternative.** L'alternative est la mémoire individuelle + l'historique git — git log + bons messages de commit suffisent, position ingénieur classique. Les ADRs sont une cérémonie qui va se périmer. Maintenir des artefacts archivés (ADR, sessions, MEMORY) = double travail qui finit par pourrir si l'audit n'est pas fait. Position move-fast : un code lisible + git history propre est plus durable qu'une cathédrale de doc.
-
-Git history répond à *quoi a été changé* — pas à *pourquoi*. Pour le solo, le pourquoi est seulement dans sa tête, donc nulle part dehors, donc perdu dès la fatigue, les vacances, ou un changement de contexte. Les ADRs et sessions log sont l'organe externe qui rend le solo réellement solo : capable de fonctionner 12 mois plus tard sans reconstruire son raisonnement. Le risque de pourriture est réel — c'est précisément pour ça que l'audit trimestriel n'est pas une option mais un invariant : la mémoire qui ne s'audite pas pourrit, mais la mémoire qui s'audite reste un actif. Sans cet axe, les six autres se dissolvent dans l'oubli.
+The **success criterion** is testable. This doctrine will have succeeded the day another practitioner — semi-pro solo dev, entrepreneur, informed CEO — loads it into their project, ships a non-trivial module at comparable or better quality than they did before, and **names in their feedback** the axes of the doctrine that made the difference. No views, no audience as a metric. The operational adoption of a file as an artifact that changes outcomes.
 
 ---
 
-## Questions ouvertes pour v0.2
+## The seven operational axes
 
-Une doctrine mature liste ses incertitudes. Six points restent à trancher empiriquement avant figeage v1.
+### Axis 1 — Material verification
 
-**1. Quel est le bon dispositif d'adversarialité bidirectionnelle ?** Variantes connues : subagent challenger invoqué manuellement, deux sessions Claude Code parallèles, hook PostToolUse, custom agent SDK avec modèle hétérogène. Sous-question critique : l'hétérogénéité de modèle change-t-elle la donne ? Un challenger Claude-Opus contre un proposeur Claude-Opus partage 90 % des biais cognitifs ; un challenger Gemini ou GPT casserait davantage la sycophancy. Test à mener sur 4-8 semaines.
+**Thesis.** No declarative claim by an agent has evidentiary value. Only raw output, SQL count, EXPLAIN ANALYZE, visual rendering count as proof. The burden of proof is inverted relative to dominant usage: the solo presumes any claim false until materialized.
 
-**2. Quel est le critère quantitatif de péremption d'un ADR ?** Le seuil de 30 % d'ADRs périmés à 12 mois pour distinguer doctrine stable vs recherche en cours est plausible mais non validé empiriquement. Le vrai chiffre est probablement entre 15 % et 40 %, et il dépend du domaine.
+**Trade-off against the alternative.** The credible alternative is pragmatic declarative trust — accept what the agent says by default, verify only suspicious cases. A defensible and widely adopted position: verifying everything = paralysis, modern models are reliable 90% of the time, systematic friction kills the velocity that justifies AI use in the first place. This is the philosophy of dominant tools (Cursor, Devin, Copilot Workspace): autonomous agent + downstream human review at PR time.
 
-**3. Où s'arrête la transversalité, où commence la délégation à l'expert ?** Hypothèses concurrentes : délégation quand la décision est irréversible et asymétrique (un mauvais choix coûte 100×) ; délégation quand la responsabilité légale est en jeu ; délégation quand le temps de monter en compétence dépasse la valeur du gain d'autonomie. Probablement une combinaison des trois.
+The solo has no downstream PR reviewer — the solo *is* the PR reviewer. If verification isn't done in real time by them, it isn't done by anyone. The velocity trade-off is a long-horizon lie: the debt of undetected errors costs 10× what was gained 18 months later. The more asymmetric the consequence (a false negative costs little, a false positive much), the more systematic verification must be. For the solo, material verification isn't an architectural option — it's the survival condition of production.
 
-**4. Comment doser la friction pédagogique ?** L'agent ne doit pas faire à la place du solo ce que le solo doit apprendre à faire. Mais le seuil n'est pas opérant. Hypothèse de travail : règle des trois fois. Première fois : l'agent fait pour, le solo regarde. Deuxième fois : l'agent fait avec, le solo participe. Troisième fois : le solo fait, l'agent corrige. Au-delà, soit le solo est autonome, soit la zone est candidate à délégation.
+### Axis 2 — Bidirectional adversariality
 
-**5. Comment adresser le bus factor du solo IA-natif ?** La doctrine rend le solo plus solo. Elle n'adresse pas explicitement le bus factor : si le solo s'arrête, le projet s'arrête. Question structurelle : est-ce hors scope, ou la doctrine doit-elle prescrire une dimension de transmissibilité opérante ?
+**Thesis.** Complaisance is bidirectional. The agent is sycophantic by construction (RLHF), the solo is self-validating by humanity (confirmation bias, attachment to first formulation). The robust decision is fabricated through third-party protocol — parallel sessions, blank context, quantified confidence — not soft dialogue. The solo challenges the agent, the agent challenges the solo, an external dispositive decides.
 
-**6. Quelle est la forme d'adoption opérante de la doctrine ?** Un fichier markdown chargeable suffit-il ? Faut-il une stack complète (CLAUDE.md + skills + agent challenger + hooks) ? La forme conditionne directement l'adoption — mais aussi la rigidité. Le test empirique distingue ce qui change vraiment le résultat.
+**Trade-off against the alternative.** The alternative is open dialogue and mutual trust — the humanist position, cognitively cheaper, cultivating a cooperative mode judged more productive. The suspicion projected onto the agent costs you cognitively; authentic trust between humans holds well, why not imitate it?
+
+Because authentic trust between humans holds thanks to *friction* of interests: each has their own agenda, reputation, time to defend. The agent has no proper interests, hence no natural friction, hence no basis for robust trust. Without a human peer in the loop, open dialogue with a sycophantic agent *systematically* produces complaisant decisions — it's mechanical, not affective. Bidirectional adversariality is not a moral posture, it's the mechanic that produces the missing intersubjectivity. You manufacture friction by protocol.
+
+### Axis 3 — Data taxonomy and single source
+
+**Thesis.** Every stored value derivable from other data must declare its nature: *Live* (computed on the fly, never stored), *Snapshot* (frozen at a business event, never retroactively recomputed), or *Cache* (stored for performance, with an explicit refresher declared in the same commit). Every dispersed rule is a drift waiting to happen. Every irrevocable business invariant must be protected at the DB level, not just in TypeScript.
+
+**Trade-off against the alternative.** The alternative is tolerated synchronization — duplications allowed with periodic sync scripts, point fixes when drift is detected. Faster to code, more flexible, doesn't constrain architecture with rigid invariants. Eventual-consistency position: in modern distributed systems, transient drift is accepted in the name of performance and resilience.
+
+For the solo, silent drift isn't detected in time — there's no team developer who one morning notices the divergence. The *Live / Snapshot / Cache* taxonomy is more precise than naive "single source": it acknowledges that not all duplications are illegitimate, but that none should exist without a **declared coherence contract**. Precision is what saves: the solo who strictly adopts "single source" blocks legitimate Caches; the solo who adopts "tolerated synchronization" suffers silent drift. The taxonomy decides between the two and provides the vocabulary that prevents ambiguity.
+
+### Axis 4 — Session discipline
+
+**Thesis.** The AI-native solo structures work before writing, archives while working, closes cleanly before moving on. ADR before code on any project > 2 files. Phase 0 exhaustive grep of existing symbols before any spec. Lots whose recap fits in 5 lines. Strict FIFO on open projects. Calendar event for self-validation post-deploy when effects manifest at D+1/D+2. Organizational friction saves hours of catch-up.
+
+**Trade-off against the alternative.** The alternative is flow and vibe coding — organizational friction kills creativity, good code emerges from flow, ADR before code = bureaucracy that stifles invention. The startup move-fast position: ship first, formalize later. A position defended by the entire lean culture.
+
+For the AI-native solo, velocity is no longer the bottleneck — the agent produces 1000 lines in 10 minutes. The bottleneck has shifted to your capacity to **find why you took a decision 3 months ago**. Session discipline is no longer an opportunity cost against creativity — it's an investment in your external memory, and it's what allows the solo to *remain solo* without becoming captive to their undocumented past.
+
+### Axis 5 — Root cause, not patch
+
+**Thesis.** Before any fix, identify the root cause. A workaround is legitimate *provided it is explicitly assumed* (commit message, ADR, feedback memory). It is the absence of explicit assumption that is forbidden, not the workaround itself. Widen before acting: 1 confirmed case → grep the complete pattern. Drift identified on an object → scoped ticket, not cascading patches. Dispersed rule → complete refactor + ADR, never minimal option.
+
+**Trade-off against the alternative.** The alternative is the shortest fix that resolves the observed symptom. Pragmatic position: you can't redesign the system at every bug, the well-placed patch frees time for real work, root cause is a luxury. YAGNI position: digging deeper than necessary = over-engineering.
+
+The AI-native solo lacks the team memory that allows tracking 3 recurrences of the same bug. A workaround placed without explicit assumption returns with a different face 6 months later, and the solo will have forgotten encountering it. The agent won't remind them — it has no long-term cross-session memory without a dispositive. So either dig now, or pay three times.
+
+### Axis 6 — Implicit pedagogy and business transversality
+
+**Thesis.** The solo learns by doing — both technical skills (PostgreSQL, EXPLAIN, schema structures) and business vocabularies (regulator-specific terminology, regulatory codes, compliance frameworks). The agent transmits continuously, provided the solo refuses to let it do in their place what they must learn to do. Regulated business vocabulary > vendor technical vocabulary. No price without obligation cited — every mention of a norm verifies by citation of the exact text.
+
+**Trade-off against the alternative.** The alternative is domain specialization + delegation to experts. Classical position: the solo is a developer, not a fiscal expert. For tax, you call an accountant. Division of labor = an organizing principle of economies since Adam Smith. Wanting to master everything = bad allocation: better to be excellent in one domain than mediocre in ten.
+
+The agent transmits in the course of real work — near-zero marginal cost to become competent in PostgreSQL while optimizing an RPC, in eIDAS while framing an electronic timestamp. Specialization-by-division-of-labor held in an economy where knowledge was costly to mobilize. In an economy where it can be mobilized on demand, the AI-native solo no longer specializes *by discipline* but *by posture* — being the one who knows how to ask the agent what needs to be known when it comes up, and who can challenge the human expert with vocabulary sufficient not to suffer them. Delegation to experts remains useful in high-stakes zones, but it happens with peer vocabulary, not passive client posture.
+
+### Axis 7 — Long-term auditability
+
+**Thesis.** The solo's individual memory is insufficient. The archive — ADR, session logs, MEMORY.md, doctrine itself — is the external organ that holds them, provided it is itself audited regularly. Mandatory quarterly audit: re-read the memory index line by line, ask for each entry "is this still true?". ADRs with > 30% obsolescence at 12 months = research in progress, not stable doctrine. The doctrine applies to itself.
+
+**Trade-off against the alternative.** The alternative is individual memory + git history — git log + good commit messages suffice, the classical engineering position. ADRs are ceremony that will become obsolete. Maintaining archived artifacts (ADR, sessions, MEMORY) = double work that ends up rotting if not audited. Move-fast position: readable code + clean git history is more durable than a documentation cathedral.
+
+Git history answers *what was changed* — not *why*. For the solo, the why exists only in their head, hence nowhere outside, hence lost upon fatigue, vacation, or context shift. ADRs and session logs are the external organ that makes the solo truly solo: capable of functioning 12 months later without reconstructing their reasoning. The rot risk is real — that's precisely why the **quarterly audit** isn't optional but invariant: memory that isn't audited rots, but memory that is audited remains an asset. Without this axis, the other six dissolve into oblivion.
 
 ---
 
-*Doctrine v0.1 — sujette à révision en v0.2 après tests empiriques.*
+## Open questions for v0.3
+
+A mature doctrine lists its uncertainties. Six points remain to be settled empirically before v1 freeze.
+
+**1. What is the right dispositive for bidirectional adversariality?** Known variants: subagent challenger invoked manually, two parallel Claude Code sessions, PostToolUse hook, custom agent SDK with heterogeneous model. Critical sub-question: does model heterogeneity change the game? A Claude-Opus challenger against a Claude-Opus proposer shares 90% of cognitive biases; a Gemini or GPT challenger would break sycophancy more. Test to run over 4-8 weeks.
+
+**2. What is the quantitative obsolescence criterion for an ADR?** The 30% obsolescence-at-12-months threshold for distinguishing stable doctrine from research-in-progress is plausible but empirically unvalidated. The real number probably sits between 15% and 40%, and varies by domain.
+
+**3. Where does transversality stop, where does delegation to experts begin?** Competing hypotheses: delegation when the decision is irreversible and asymmetric (a wrong choice costs 100×); delegation when legal responsibility is at stake; delegation when the cost of skilling up exceeds the value of autonomy gained. Likely a combination of the three.
+
+**4. How to dose pedagogical friction?** The agent must not do in the solo's place what the solo must learn to do. But the threshold isn't operational. Working hypothesis: the rule of three. First time: agent does it for them, solo watches. Second time: agent does it with them, solo participates. Third time: solo does it, agent corrects. Beyond that, either the solo is autonomous, or the zone is a candidate for delegation.
+
+**5. How to address the bus factor of the AI-native solo?** The doctrine makes the solo more solo. It doesn't explicitly address bus factor: if the solo stops, the project stops. Structural question: is this out of scope, or should the doctrine prescribe an operational dimension of transmissibility?
+
+**6. What is the operational form of doctrine adoption?** Does a single loadable markdown file suffice? Does it require a complete stack (CLAUDE.md + skills + challenger agent + hooks)? The form directly conditions adoption — but also rigidity. Empirical testing distinguishes what truly changes outcomes.
+
+---
+
+*Doctrine v0.2 — subject to revision in v0.3 after empirical testing.*
