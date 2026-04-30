@@ -66,11 +66,18 @@ mkdir -p "$TARGET/.claude/agents"
 # Skills
 for skill_dir in "$SOURCE_DIR/.claude/skills"/*/; do
   skill_name=$(basename "$skill_dir")
-  if [[ -d "$TARGET/.claude/skills/$skill_name" ]]; then
+  target_skill_dir="$TARGET/.claude/skills/$skill_name"
+  if [[ -d "$target_skill_dir" ]]; then
     echo "  ⊘ skip $skill_name (already exists)"
   else
-    cp -r "$skill_dir" "$TARGET/.claude/skills/"
-    echo "  ✓ skill $skill_name installed"
+    # Copy the entire skill directory (not its contents).
+    # Trailing slash on source matters: keep it stripped so cp -r creates the subdir.
+    cp -r "${skill_dir%/}" "$target_skill_dir"
+    if [[ -f "$target_skill_dir/SKILL.md" ]]; then
+      echo "  ✓ skill $skill_name installed"
+    else
+      echo "  ❌ skill $skill_name FAILED (SKILL.md missing in target)"
+    fi
   fi
 done
 
