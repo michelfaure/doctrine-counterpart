@@ -1,6 +1,6 @@
 # counterpart-doctrine/
 
-The eight-axis discipline that emerged after 60 effective days of solo coding with Claude Code on a production ERP. Each axis was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. v0.3 is the result of a hybrid method: empirical extraction of patterns, philosophical confrontation, external repo audit, then a 3-incident filter before any candidate was inscribed.
+The eight-axis discipline that emerged after 60 effective days of solo coding with Claude Code on a production ERP. Each axis was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.3.3** (amended from v0.3 through two external critiques and one instrumentation pass — see *Critiques received* and *What v0.2 prescribed and v0.3 retracted* in `doctrine.md`). v0.3 is the result of a hybrid method: empirical extraction of patterns, philosophical confrontation, external repo audit, then a 3-incident filter before any candidate was inscribed.
 
 **Source article series**: *Building the Counterpart Doctrine v0.3 in public* — 30 satellite articles + pillar (May–July 2026) on [DEV.to](https://dev.to/michelfaure). The v0.2 closing pillar is [*The Counterpart Doctrine: a seven-axis spec for working with an AI coding agent*](https://dev.to/michelfaure) (May 18, 2026). The v0.3 closing pillar follows in mid-July, after the 30-article arc lands.
 
@@ -25,10 +25,11 @@ The eight axes:
 
 | File | Role |
 |---|---|
-| [`CLAUDE.md`](./CLAUDE.md) | v0.3 prescriptive rules, drop-in for project root. **8 axes**, full operational |
-| [`doctrine.md`](./doctrine.md) | v0.3 long-form theory, read by humans (~22k characters) |
+| [`CLAUDE.md`](./CLAUDE.md) | v0.3.3 prescriptive rules, drop-in for project root. **8 axes**, full operational |
+| [`doctrine.md`](./doctrine.md) | v0.3.3 long-form theory, read by humans (~50k characters, including retractations and critiques received) |
 | [`install.sh`](./install.sh) | Interactive installer. Default `[Y/n]` for hooks in v0.3 (was `[y/N]` in v0.2) |
 | [`verify-install.sh`](./verify-install.sh) | *(new v0.3)* — checks installation integrity, signals drift |
+| [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) | *(new v0.3.3)* — five scripts (M1–M5) + measured baseline values from 60 days of Rembrandt. The empirical half of the doctrine's auto-application. |
 | [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (axis 4) |
 | [`anti-patterns-checklist.md`](./anti-patterns-checklist.md) | 16 anti-patterns *(was 8 in v0.2)* — paste into PR review |
 | [`.claude/skills/`](./.claude/skills/) | 9 skills *(was 7 in v0.2)*. Two new: `parsimony`, `success-criteria-first` |
@@ -96,7 +97,7 @@ The doctrine trades a small amount of upfront friction (ADRs, success criteria, 
 
 ---
 
-*Counterpart Doctrine v0.3 — released July 14, 2026 after 60 days of public construction.*
+*Counterpart Doctrine v0.3.3 — released July 14, 2026 after 60 days of public construction. Amended from v0.3 through v0.3.1 (first external critique), v0.3.2 (second external critique), v0.3.3 (M1–M5 instrumented).*
 *Tested on 60+ days of solo ERP coding (35k+ lines, 65+ ADRs).*
 *Source repo: github.com/michelfaure/doctrine-counterpart*
 *Companion samples: github.com/michelfaure/rembrandt-samples/counterpart-doctrine*
