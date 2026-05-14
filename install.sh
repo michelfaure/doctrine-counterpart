@@ -14,7 +14,7 @@ TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
 echo "=================================================="
-echo "  Counterpart Doctrine v0.3 — install"
+echo "  Counterpart Doctrine v0.3.3 — install"
 echo "=================================================="
 echo ""
 echo "Source: $SOURCE_DIR"
@@ -105,7 +105,7 @@ else
   echo "  ⊘ skip"
 fi
 
-# --- 4. Hooks (recommended by default in v0.3) ---
+# --- 4. Hooks (recommended by default in v0.3.3) ---
 echo ""
 echo "→ Step 4/6: Hooks (material enforcement — recommended)"
 echo "  Hooks block commit/push if invariants are violated. Explicit bypass documented:"
@@ -114,7 +114,7 @@ echo "    - secret-scanner        : commits with literal secrets blocked"
 echo "    - audit-memory-reminder : quarterly memory audit reminder (SessionStart, non-blocking)"
 echo "    - check-workaround-assumed : workaround commits without [workaround-assumed] tag blocked"
 echo ""
-echo "  Default in v0.3: Y (was N in v0.2). The doctrine's value relies on these guards."
+echo "  Default in v0.3.3: Y (was N in v0.2). The doctrine's value relies on these guards."
 echo "  Decline only if you have an incompatible setup."
 read -r -p "  Activate hooks? [Y/n] " choice
 choice="${choice:-Y}"
