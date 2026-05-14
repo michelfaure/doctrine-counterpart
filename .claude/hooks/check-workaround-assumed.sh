@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 # Hook: PreToolUse, matcher: Bash
-# Rejects a commit containing a workaround marker without explicit assumption.
+# Rejects a commit containing an explicit workaround marker without explicit assumption.
 # Bypass: add [workaround-assumed] to the commit message.
+#
+# v0.3 reformulation: pattern narrowed to actual workaround vocabulary.
+# v0.2 included "fix" and "temp" — empirically too broad (60% false positives
+# on conventional-commits `fix:` prefix and template/tempdir collisions).
+# Test against the author's last 50 commits before promoting to error.
 
 set -euo pipefail
 
@@ -18,8 +23,8 @@ if echo "$COMMAND" | grep -q '\[workaround-assumed\]'; then
   exit 0
 fi
 
-# Workaround markers
-WORKAROUND_PATTERN='\b(fix|hack|workaround|quick fix|quick-fix|band-aid|bandaid|temp|tempfix|kludge)\b'
+# Workaround markers (v0.3 — narrowed, see header)
+WORKAROUND_PATTERN='\b(workaround|hack|band-aid|bandaid|tempfix|kludge|quick.fix|quick-fix)\b'
 ASSUMPTION_PATTERN='(workaround|temporary|to investigate|TODO root cause|TODO ROOT|cf\.? ADR|see ADR|tech debt|tech-debt)'
 
 if echo "$COMMAND" | grep -qiE "$WORKAROUND_PATTERN"; then

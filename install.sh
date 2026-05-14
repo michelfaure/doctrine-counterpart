@@ -14,7 +14,7 @@ TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
 echo "=================================================="
-echo "  Counterpart Doctrine v0.2 — install"
+echo "  Counterpart Doctrine v0.3 — install"
 echo "=================================================="
 echo ""
 echo "Source: $SOURCE_DIR"
@@ -27,7 +27,7 @@ if [[ ! -d "$TARGET" ]]; then
 fi
 
 # --- 1. CLAUDE.md ---
-echo "→ Step 1/5: CLAUDE.md (operational rules)"
+echo "→ Step 1/6: CLAUDE.md (operational rules)"
 if [[ -f "$TARGET/CLAUDE.md" ]]; then
   echo "  A CLAUDE.md already exists in $TARGET."
   read -r -p "  [m]anual merge after / [a]ppend doctrine to end / [s]kip / [o]verwrite? [m] " choice
@@ -59,7 +59,7 @@ fi
 
 # --- 2. .claude/ (skills + agents) ---
 echo ""
-echo "→ Step 2/5: .claude/skills + .claude/agents"
+echo "→ Step 2/6: .claude/skills + .claude/agents"
 mkdir -p "$TARGET/.claude/skills"
 mkdir -p "$TARGET/.claude/agents"
 
@@ -94,7 +94,7 @@ done
 
 # --- 3. doctrine.md (readable manifesto) ---
 echo ""
-echo "→ Step 3/5: doctrine.md (manifesto, human reading)"
+echo "→ Step 3/6: doctrine.md (manifesto, human reading)"
 read -r -p "  Copy doctrine.md to $TARGET/docs/doctrine.md? [Y/n] " choice
 choice="${choice:-Y}"
 if [[ "$choice" =~ ^[Yy]$ ]]; then
@@ -105,13 +105,19 @@ else
   echo "  ⊘ skip"
 fi
 
-# --- 4. Hooks (optional) ---
+# --- 4. Hooks (recommended by default in v0.3) ---
 echo ""
-echo "→ Step 4/5: Hooks (material enforcement — optional but recommended)"
-echo "  Hooks block commit/push if invariants are violated. Explicit bypass documented."
-echo "  List: check-workaround-assumed, deploy-safeguard, secret-scanner, audit-memory-reminder"
-read -r -p "  Activate hooks? [y/N] " choice
-choice="${choice:-N}"
+echo "→ Step 4/6: Hooks (material enforcement — recommended)"
+echo "  Hooks block commit/push if invariants are violated. Explicit bypass documented:"
+echo "    - deploy-safeguard      : pushes to main require [deploy-ok]"
+echo "    - secret-scanner        : commits with literal secrets blocked"
+echo "    - audit-memory-reminder : quarterly memory audit reminder (SessionStart, non-blocking)"
+echo "    - check-workaround-assumed : workaround commits without [workaround-assumed] tag blocked"
+echo ""
+echo "  Default in v0.3: Y (was N in v0.2). The doctrine's value relies on these guards."
+echo "  Decline only if you have an incompatible setup."
+read -r -p "  Activate hooks? [Y/n] " choice
+choice="${choice:-Y}"
 if [[ "$choice" =~ ^[Yy]$ ]]; then
   mkdir -p "$TARGET/.claude/hooks"
 
@@ -145,7 +151,16 @@ else
   echo "  ⊘ Hooks not activated (can be activated later via settings.json.template)"
 fi
 
-# --- 5. Recap ---
+# --- 5. Verify install ---
+echo ""
+echo "→ Step 5/6: Verify install (axis 1 — material verification)"
+if [[ -x "$SOURCE_DIR/verify-install.sh" ]]; then
+  "$SOURCE_DIR/verify-install.sh" "$TARGET"
+else
+  echo "  ⊘ verify-install.sh not found or not executable. Skipped."
+fi
+
+# --- 6. Recap ---
 echo ""
 echo "=================================================="
 echo "  Install complete"
@@ -160,10 +175,12 @@ echo "  4. The challenger agent invokes manually:"
 echo "     'Run agent-challenger on this rec before locking.'"
 echo ""
 echo "  To reread the manifesto: $TARGET/docs/doctrine.md"
+echo "  To re-verify install:    $SOURCE_DIR/verify-install.sh $TARGET"
 echo ""
 echo "Test request (if testing for someone else):"
-echo "  After 2-3 weeks of use, answer the 3 questions in the README:"
+echo "  After 2-3 weeks of use, answer the 4 questions in the README:"
 echo "  (a) what did you load / use?"
 echo "  (b) what concretely changed?"
 echo "  (c) which axes can you name without rereading?"
+echo "  (d) which axis is missing for your stack? (v0.4 candidates)"
 echo ""
