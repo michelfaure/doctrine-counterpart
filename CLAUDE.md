@@ -1,8 +1,9 @@
-# Instructions for Claude Code — Counterpart Doctrine v0.3
+# Instructions for Claude Code — Counterpart Doctrine v0.3.3
 
-This file formulates the operational rules of the Counterpart Doctrine v0.3.
+This file formulates the operational rules of the Counterpart Doctrine v0.3.3.
 It orients Claude Code's behavior on this project. The full theory is in
-`doctrine.md` (read by humans). Here, only actionable prescriptions.
+`doctrine.md` (read by humans); the measured baseline for M1–M5 is in
+`rembrandt-samples/falsifiable-metrics/`. Here, only actionable prescriptions.
 
 ## Style and posture
 
@@ -87,7 +88,7 @@ It orients Claude Code's behavior on this project. The full theory is in
 - **Monthly light audit**: on the 1st of each month, walk `.claude/rules/*.md` and any doctrine doc — grep each cited column, route, function against the current code; remove or requalify dead pointers. A rule that points to `notes_internes` while the column has been renamed `notes` is a 24-day drift waiting to misfire.
 - The doctrine itself is versioned and audited like an ADR. A doctrine that believes itself outside time betrays its own auditability principle.
 
-## Axis 8 — Discursive adversariality against harness sclerosis (new v0.3)
+## Axis 8 — Three modes of the brief (new in v0.3, reformulated v0.3.2)
 
 The collaboration is an attelage: two pulling the same load. The better-rodé the attelage, the more it tends toward habitus (Bourdieu) — pulling always in the same rail, losing the capacity to pull off-rail. The form of the brief is the lever that keeps the attelage exploratory. Three modes, never collapsed:
 
@@ -126,6 +127,7 @@ If the conversation drifts into one of these patterns, flag it explicitly:
 
 ---
 
-*This doctrine is v0.3 (full stack: 9 skills + challenger agent + 4 hooks).*
-*Bugs and blind spots expected. Feedback welcome via the 3 questions in the README.*
+*This doctrine is v0.3.3 (full stack: 9 skills + challenger agent + 4 hooks, M1–M5 instrumented with measured baseline).*
+*Bugs and blind spots expected. Feedback welcome via the 4 questions in the README.*
 *Tested on 60+ days of solo ERP coding with Claude Code (35k+ lines, 65+ ADRs).*
+*Amendment history: v0.3 (initial), v0.3.1 (response to first external critique), v0.3.2 (response to second), v0.3.3 (M1–M5 instrumented).*
