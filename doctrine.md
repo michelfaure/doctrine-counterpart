@@ -1,6 +1,6 @@
-# Counterpart Doctrine — v0.3
+# Counterpart Doctrine — v0.3.3
 
-*Version 0.3 — July 2026*
+*Version 0.3.3 — July 2026 (amendment history at the bottom of this file: v0.3 → v0.3.1 → v0.3.2 → v0.3.3)*
 
 ---
 
