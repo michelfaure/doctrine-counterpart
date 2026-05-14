@@ -2,7 +2,7 @@
 
 The eight-axis discipline that emerged after 60 effective days of solo coding with Claude Code on a production ERP. Each axis was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.3.3** (amended from v0.3 through two external critiques and one instrumentation pass — see *Critiques received* and *What v0.2 prescribed and v0.3 retracted* in `doctrine.md`). v0.3 is the result of a hybrid method: empirical extraction of patterns, philosophical confrontation, external repo audit, then a 3-incident filter before any candidate was inscribed.
 
-**Source article series**: *Building the Counterpart Doctrine v0.3 in public* — 30 satellite articles + pillar (May–July 2026) on [DEV.to](https://dev.to/michelfaure). The v0.2 closing pillar is [*The Counterpart Doctrine: a seven-axis spec for working with an AI coding agent*](https://dev.to/michelfaure) (May 18, 2026). The v0.3 closing pillar follows in mid-July, after the 30-article arc lands.
+**Source article series**: *Building the Counterpart Doctrine v0.3 in public* — 31 satellite articles + pillar (May–July 2026) on [DEV.to](https://dev.to/michelfaure). The v0.2 closing pillar is [*The Counterpart Doctrine: a seven-axis spec for working with an AI coding agent*](https://dev.to/michelfaure) (May 18, 2026). The v0.3 closing pillar follows on July 15, 2026, after the 31-article arc lands.
 
 ## Invariant rule
 
@@ -51,7 +51,7 @@ This is not a drift. It is a deliberate editorial dispositif, documented as debt
 | Hook trigger | Pre-commit | Pre-edit (Write/Edit/MultiEdit) on critical paths |
 | Block patterns | Generic dangerous commands | Stack-specific (`vercel --prod`, `supabase db push`) |
 | Skills | 9 universal | 9 universal + project-specific rules in `.claude/rules/` |
-| Memory layer | Empty `MEMORY.md` scaffold | 60+ feedback memories + sessions index |
+| Memory layer | Empty `MEMORY.md` scaffold | 114 feedback memories + 27 session logs |
 
 The dispositif means: do not expect the published version to match the author's lived practice exactly. The published version is the doctrine; the lived version is its application. Each tier audits the other — the published tier prevents the lived one from drifting into project-specific lore that doesn't generalise, the lived tier prevents the published one from drifting into abstraction that no incident has tested.
 
@@ -93,11 +93,11 @@ Coding alone with an AI agent collapses two roles into one — you are both the 
 
 The doctrine trades a small amount of upfront friction (ADRs, success criteria, raw-output proofs, brief-form discipline) against a much larger amount of downstream drift. It does not assume the agent is hostile. It assumes the attelage will sclerose if its form is left to inertia, and that the only sustainable counterweight is a versioned, dated, falsifiable discipline that applies to both the agent's outputs and the solo's own habits.
 
-60 days of public construction produced v0.3. v0.4 will follow the same method, in the open.
+60 days of public construction produced v0.3 (May 14, 2026). Within the first 24 hours of release, two external critiques arrived and v0.3 was amended through v0.3.1 (theoretical over-armour cut), v0.3.2 (axis-8 detheorised, retractions section added), and v0.3.3 (M1–M5 instrumented with measured baseline). The amendment trail — *Critiques received* and *What v0.2 prescribed and v0.3 retracted* in `doctrine.md` — is itself the first material application of the doctrine to itself: revise on new fact, never on pushback alone, publish the cicatrices. v0.4 will follow the same method in the open, with multi-substrate validation slated for end of arc 2 (October 2026).
 
 ---
 
-*Counterpart Doctrine v0.3.3 — released July 14, 2026 after 60 days of public construction. Amended from v0.3 through v0.3.1 (first external critique), v0.3.2 (second external critique), v0.3.3 (M1–M5 instrumented).*
+*Counterpart Doctrine v0.3.3 — v0.3 released May 14, 2026 after 60 days of public construction; amended within 24 h through v0.3.1 (first external critique), v0.3.2 (second external critique), v0.3.3 (M1–M5 instrumented with measured baseline). v0.3 closing pillar on DEV.to: July 15, 2026.*
 *Tested on 60+ days of solo ERP coding (35k+ lines, 65+ ADRs).*
 *Source repo: github.com/michelfaure/doctrine-counterpart*
 *Companion samples: github.com/michelfaure/rembrandt-samples/counterpart-doctrine*
