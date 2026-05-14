@@ -140,7 +140,19 @@ The dispositive installs via `install.sh` at the root of the repository. Each of
 
 Falsifiability is itself part of the offer. Five quantified metrics, all measurable on a working project, are proposed for v0.3 self-evaluation. M1: anti-pattern recurrence per session — a target below one recurrence per session across a seven-day window. M2: ratio of multi-file commits without an accompanying ADR — a target below 5%. M3: median window between drift introduction and detection by probe — a target below seven days. M4: time within a session before the first database audit — a target below ninety minutes. M5 (new in v0.3, axis 8): ratio of pure commands over total briefs across a seven-day window — alarm above 80%, requalification expected below 60% sustained.
 
-The five metrics are **declared but not yet instrumented** in v0.3. No script computes them on a running repo, no measured values from the sixty days of Rembrandt are published. This is the open work item the second external critique correctly identified (see *Critiques received*). The arc-2 plan inserts a dedicated article (#69) that codes the probes and publishes the values measured on Rembrandt — *before* the v0.3 closing pillar lands. Until that article, the thresholds above are working hypotheses; readers should not treat them as established.
+The five metrics are **instrumented in v0.3.3** and a baseline measurement is published. Five standalone scripts (`m1-feedback-recidive.ts`, `m2-adr-coverage.ts`, `m3-drift-window.ts`, `m4-session-audit-delay.ts`, `m5-brief-mode-ratio.ts`) compute the metrics on any repo that matches the source layout. They live in [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) with their measured values, raw JSON, and a `README.md` that interprets each result honestly.
+
+**Baseline values measured on Rembrandt, 14 May 2026 (sixty-day window for M3, narrower windows for the others):**
+
+| Metric | Measured | Target | Verdict |
+|---|---|---|---|
+| M1 | 12.33 recurrences / session (7-day window) | ≤ 1 | Overshoot — instrumentation flagged as over-sensitive |
+| M2 | 2.3 % multi-file commits without ADR (28-day window) | ≤ 5 % | **Target met** |
+| M3 | 35.3 days median apparition → detection (90-day window) | ≤ 7 days | Overshoot — threshold was an intuition |
+| M4 | 34 % position of first DB probe (~41 min on 120-min proxy) | ≤ 90 min | **Target met** |
+| M5 | 0 % pure-command ratio (90 % unclassified) | alarm > 80 % | Instrumentation insufficient |
+
+Two of five targets are met empirically (M2, M4). Two reveal the threshold was an intuition the practice does not honour (M1, M3). One exposes its instrumentation as the bottleneck (M5). The detailed reading is in the sample's README; the headline is that **doctrinal targets and empirical practice diverge enough to matter**. v0.3.3 has not retro-fitted the targets to fit the measurements; the targets remain doctrinal, the measurements remain factual, and v0.4 will either tighten the practice or recalibrate the targets — with the data in hand, not by intuition.
 
 The expected return from a practitioner who adopts the doctrine is articulated in the three questions of the README. Did you ship a non-trivial module at comparable or better quality than before? Which axes made the operational difference? Which axes did not pay off, and why? Negative answers are as informative as positive ones — they feed the v0.4 falsifiability filter directly. The doctrine will have succeeded the day another practitioner — semi-pro solo developer, entrepreneur, informed CEO — loads it into their project, ships, and *names in their feedback* the axes that made the difference. No views, no audience as a metric. The operational adoption of a file as an artefact that changes outcomes.
 
@@ -240,4 +252,4 @@ The second critic's framing — *"the doctrine self-applies in declaration, not 
 
 ---
 
-*Counterpart Doctrine v0.3.2 — released July 2026 after sixty days of public construction, amended in the days following two successive external critiques. Companion samples at `rembrandt-samples/counterpart-doctrine/`. ADR-driven, falsifiable, versioned. M1–M5 instrumentation and A/B-test article scheduled for arc 2. v0.4 scheduled by axis 8 itself, multi-substrate falsifiability filter slated for end of arc 2 (October 2026).*
+*Counterpart Doctrine v0.3.3 — released July 2026 after sixty days of public construction, amended in the days following two successive external critiques. M1–M5 instrumentation published with measured baseline values on 14 May 2026 ([rembrandt-samples/falsifiable-metrics/](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics)). Companion samples at `rembrandt-samples/counterpart-doctrine/`. ADR-driven, falsifiable, versioned. A/B-test article scheduled for arc 2 (#70, 13 July 2026). v0.4 scheduled by axis 8 itself, multi-substrate falsifiability filter slated for end of arc 2 (October 2026).*
