@@ -1,6 +1,6 @@
-# Anti-patterns checklist — Counterpart Doctrine v0.3.3
+# Anti-patterns checklist — Counterpart Doctrine v0.4
 
-Sixteen anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
+Seventeen anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
 
 The list is the densest doctrine-payload-per-line in the repo. If you have ten minutes to absorb the doctrine, read this file.
 
@@ -8,6 +8,7 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 - [ ] **Anthropomorphising the agent** — *"it thinks," "it prefers," "it wants to."* The agent has no preferences; it has a sampling distribution. Stating its outputs as intentions hides what is actually being decided.
 - [ ] **Validating a build on declaration without raw output** — *"build green"* without the exact command and its raw output in the same message. Axis 1: no claim has evidentiary value without the proof in the same message.
+- [ ] **Reading a summary file before checking `git log` / filesystem** *(new v0.4)* — answering *"where are we / what's the count / is X done"* from `backlog.md`, `MEMORY.md`, or session notes without first running `git log --since='7d'` and `ls docs/adr/ \| wc -l`. Summaries are Cache without a declared refresher; they decay silently. Filesystem is authority. Axis 1 (sub-rule *filesystem over summary*).
 - [ ] **Accepting a fix without the full input → output pipeline** — the symptom is described, the fix is proposed; the chain from the input that triggered the failure to the output that should now succeed is not exhibited. Axis 5.
 
 ## Data and architecture
@@ -40,4 +41,4 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 ---
 
-*Counterpart Doctrine v0.3.3 — 16 anti-patterns (was 8 in v0.2). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*
+*Counterpart Doctrine v0.4 — 17 anti-patterns (was 8 in v0.2, 16 in v0.3.3, +1 in v0.4 for *filesystem over summary*). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*

@@ -14,7 +14,7 @@ TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
 echo "=================================================="
-echo "  Counterpart Doctrine v0.3.3 — install"
+echo "  Counterpart Doctrine v0.4 — install (toolkit + manifesto)"
 echo "=================================================="
 echo ""
 echo "Source: $SOURCE_DIR"
@@ -27,7 +27,7 @@ if [[ ! -d "$TARGET" ]]; then
 fi
 
 # --- 1. CLAUDE.md ---
-echo "→ Step 1/6: CLAUDE.md (operational rules)"
+echo "→ Step 1/6: CLAUDE.md (toolkit — 11 operational rules)"
 if [[ -f "$TARGET/CLAUDE.md" ]]; then
   echo "  A CLAUDE.md already exists in $TARGET."
   read -r -p "  [m]anual merge after / [a]ppend doctrine to end / [s]kip / [o]verwrite? [m] " choice
@@ -36,7 +36,7 @@ if [[ -f "$TARGET/CLAUDE.md" ]]; then
     a)
       echo "" >> "$TARGET/CLAUDE.md"
       echo "" >> "$TARGET/CLAUDE.md"
-      echo "<!-- ===== Counterpart Doctrine v0.2 (append) ===== -->" >> "$TARGET/CLAUDE.md"
+      echo "<!-- ===== Counterpart Toolkit v0.4 (append) ===== -->" >> "$TARGET/CLAUDE.md"
       cat "$SOURCE_DIR/CLAUDE.md" >> "$TARGET/CLAUDE.md"
       echo "  ✓ Doctrine appended to existing CLAUDE.md"
       ;;
@@ -92,15 +92,15 @@ for agent_file in "$SOURCE_DIR/.claude/agents"/*.md; do
   fi
 done
 
-# --- 3. doctrine.md (readable manifesto) ---
+# --- 3. manifesto.md (readable long-form theory) ---
 echo ""
-echo "→ Step 3/6: doctrine.md (manifesto, human reading)"
-read -r -p "  Copy doctrine.md to $TARGET/docs/doctrine.md? [Y/n] " choice
+echo "→ Step 3/6: manifesto.md (long-form theory, human reading)"
+read -r -p "  Copy manifesto.md to $TARGET/docs/manifesto.md? [Y/n] " choice
 choice="${choice:-Y}"
 if [[ "$choice" =~ ^[Yy]$ ]]; then
   mkdir -p "$TARGET/docs"
-  cp "$SOURCE_DIR/doctrine.md" "$TARGET/docs/doctrine.md"
-  echo "  ✓ doctrine.md placed in docs/"
+  cp "$SOURCE_DIR/manifesto.md" "$TARGET/docs/manifesto.md"
+  echo "  ✓ manifesto.md placed in docs/"
 else
   echo "  ⊘ skip"
 fi
@@ -114,7 +114,7 @@ echo "    - secret-scanner        : commits with literal secrets blocked"
 echo "    - audit-memory-reminder : quarterly memory audit reminder (SessionStart, non-blocking)"
 echo "    - check-workaround-assumed : workaround commits without [workaround-assumed] tag blocked"
 echo ""
-echo "  Default in v0.3.3: Y (was N in v0.2). The doctrine's value relies on these guards."
+echo "  Default in v0.4 (unchanged since v0.3): Y. The doctrine's value relies on these guards."
 echo "  Decline only if you have an incompatible setup."
 read -r -p "  Activate hooks? [Y/n] " choice
 choice="${choice:-Y}"
@@ -174,13 +174,13 @@ echo "  3. Skills auto-invoke on triggers (see description in frontmatter)"
 echo "  4. The challenger agent invokes manually:"
 echo "     'Run agent-challenger on this rec before locking.'"
 echo ""
-echo "  To reread the manifesto: $TARGET/docs/doctrine.md"
+echo "  To reread the manifesto: $TARGET/docs/manifesto.md"
 echo "  To re-verify install:    $SOURCE_DIR/verify-install.sh $TARGET"
 echo ""
 echo "Test request (if testing for someone else):"
 echo "  After 2-3 weeks of use, answer the 4 questions in the README:"
 echo "  (a) what did you load / use?"
 echo "  (b) what concretely changed?"
-echo "  (c) which axes can you name without rereading?"
-echo "  (d) which axis is missing for your stack? (v0.4 candidates)"
+echo "  (c) which of the 11 rules can you name without rereading?"
+echo "  (d) which rule is missing for your stack? (v0.5 candidates)"
 echo ""

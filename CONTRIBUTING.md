@@ -1,27 +1,31 @@
 # Contributing to the Counterpart Doctrine
 
-This doctrine is at v0.2 — under empirical testing. Feedback is precious and will structure v0.3.
+This doctrine is at **v0.4** (toolkit/manifesto split, 15 May 2026). Feedback is precious and will structure v0.5 (15 July 2026, after the thirty-article arc decants what survives empirically).
 
 ## If you're testing the doctrine on a project
 
-The most useful feedback format follows the **three questions in the README**:
+The most useful feedback format follows the **four questions in the README**:
 
 **(a) What did you actually load / use?**
 
-Full or partial CLAUDE.md, which skills triggered, challenger agent invoked or not, hooks activated, doctrine.md read in full or in part.
+Toolkit `CLAUDE.md` full or partial, which skills triggered, challenger agent invoked or not, hooks activated, `manifesto.md` read in full or in part.
 
 **(b) What concretely changed in your practice?**
 
 A decision taken differently, a bug avoided, useless friction, the net feeling (notable / marginal / negative).
 
-**(c) Which axes can you name without rereading?**
+**(c) Which of the 11 rules can you name without rereading?**
 
-Critical integration test: if the answer is weak (1-2 axes after 3 weeks), the loadable format has an intrinsic limit that v0.3 will need to address.
+Critical integration test: if the answer is weak (1-3 rules after 3 weeks), the loadable format has an intrinsic limit that v0.5 will need to address.
+
+**(d) Which rule is missing for your stack?**
+
+Candidates for v0.5. The doctrine grew by one axis between v0.2 and v0.3, separated toolkit from manifesto between v0.3.3 and v0.4 — real practice may reveal what the eleven rules still miss.
 
 ## Feedback formats
 
-- **GitHub Issue** on this repo, tag `feedback-test-v0.2`
-- **DEV.to comment** under the *Call for testing* article
+- **GitHub Issue** on this repo, tag `feedback-test-v0.4`
+- **DEV.to comment** under the relevant arc-2 article
 - **Email** to the address listed on the GitHub profile
 
 No required format. Three paragraphs is enough. Raw feedback (transcribed audio, voice notes) is welcome — polished writing isn't necessary.
@@ -34,36 +38,29 @@ No required format. Three paragraphs is enough. Raw feedback (transcribed audio,
 
 ## If you want to propose a patch
 
-Pull requests welcome, but for v0.2 prefer **discussion issues** first. The doctrine is still forming — an isolated patch may conflict with a larger upcoming refactor.
+Pull requests welcome, but for v0.4 prefer **discussion issues** first. The doctrine is still actively decanting — an isolated patch may conflict with a larger upcoming refactor scheduled for v0.5 or the multi-substrate filter (October 2026).
 
 Useful PR format:
 - Short title
-- Description: which axis / which skill / which rule is touched
+- Description: which rule (R1–R11) / which skill / which hook is touched
 - Justification: a concrete case that motivated the patch
 - Test if applicable
 
+## Counter-examples to the singularity hypotheses
+
+The manifesto lists five hypotheses where the doctrine appears singular within the three audited public frameworks (Karpathy's *autoresearch*, multica-ai Karpathy-skills, SuperClaude). Any documented counter-example from another framework (Aider, Cursor, OpenHands, Devin, Cline, Continue, RooCode, or others) is welcome via GitHub issue tagged `[singularity-counter-example]`. The next falsifiability filter (end of arc 2, October 2026) will integrate every documented counter-example.
+
 ## Substantive critique
 
-The doctrine explicitly refuses four dominant positions (see `doctrine.md` — position section). Critiques on these choices are the most precious:
+The doctrine explicitly refuses four dominant positions (see `manifesto.md` — Preface section). Critiques on these choices are the most precious:
 
 - Is *AI as counterpart* truly superior to *AI as tool* / *AI as colleague* in your experience?
-- Is bidirectional adversariality practicable, or too cognitively costly?
-- Is the Live/Snapshot/Cache taxonomy useful or over-engineered for a solo?
-- Does long-term auditability hold, or rot in practice despite the invariants?
+- Is bidirectional adversariality (R3, R4) practicable, or too cognitively costly?
+- Is the Live/Snapshot/Cache taxonomy (R5) useful or over-engineered for a solo?
+- Does long-term auditability (R11) hold, or rot in practice despite the invariants?
 
-These questions will structure v0.3.
-
-## Six open questions
-
-See end of `doctrine.md`. Any empirical data, testimony, or argument that illuminates one of these six open questions accelerates their resolution:
-
-1. What is the right dispositive for bidirectional adversariality?
-2. What quantitative obsolescence criterion for an ADR?
-3. Where does transversality stop, where does delegation to experts begin?
-4. How to dose pedagogical friction?
-5. How to address the bus factor of the AI-native solo?
-6. What is the operational form of doctrine adoption?
+These questions will structure v0.5.
 
 ---
 
-*v0.2 — under CC-BY-4.0 — Michel Faure*
+*v0.4 — under CC-BY-4.0 — Michel Faure*

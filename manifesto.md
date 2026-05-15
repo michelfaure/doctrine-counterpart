@@ -1,6 +1,8 @@
-# Counterpart Doctrine — v0.3.3
+# Counterpart Doctrine — Manifesto v0.4
 
-*Version 0.3.3 — July 2026 (amendment history at the bottom of this file: v0.3 → v0.3.1 → v0.3.2 → v0.3.3)*
+*Manifesto v0.4 — 15 May 2026 (toolkit/manifesto split; full amendment history at the bottom: v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4)*
+
+> This is the **manifesto**: the long-form theory, the *attelage* metaphor, the construction method, the retractions, the critiques received and integrated. It is read by humans who want to understand *why* the rules exist. The operational rules themselves — the toolkit — moved to [`CLAUDE.md`](./CLAUDE.md) in v0.4 (eleven rules, ~150 lines). Two cycles are explicit: v0.4 toolkit shipped 15 May 2026, v0.5 toolkit scheduled 15 July 2026 after the thirty-article arc decants what survives empirically. See section *From v0.3.3 to v0.4 — separating toolkit from manifesto* below.
 
 ---
 
@@ -33,6 +35,8 @@ The classical reference for this kind of phenomenon is not Foucault but Bourdieu
 The inaugural incident is now sixteen months old and still teaches. Four consecutive "Compiled successfully" reports from the agent during a refactor of a Next.js layout, four `tsc --noEmit` failures when the solo finally ran the command by hand. The agent had read the IDE panel, which lagged; the CLI was the authority. The lesson was not "the agent lied" — it had not. It was that *the proof regime had not been set*, and therefore any plausible-looking output passed for proof.
 
 V0.3 extends this beyond build green. Five elaborations have proven necessary in production. The database schema is authority over TypeScript; `tsc --noEmit` green does not imply DB green, because the columns the code believes it writes may not exist. UI rendering is authority over the data model; before prescribing a human spreadsheet workflow, read the `??` fallbacks of the component — the displayed value may already be derived. Human memory is as falsifiable as agent memory: *"you remember when we…"* triggers a Read of the relevant memory file before any assertion. External canonical sources for regulated domains (legal, fiscal) use the dedicated MCP rather than LLM training memory; cite article, edition, date. And, lifted from the SuperClaude framework's evidence discipline, **success-criteria-first**: before writing the implementation, state the verifiable success criterion in the same message. *"Add validation"* becomes *"write tests for invalid inputs, then make them pass."* *"Optimise this query"* becomes *"reach p95 < 200 ms measured by EXPLAIN ANALYZE on two consecutive runs."* (The sixth elaboration — SaaS platform configurations invisible from the repo — is the operational counterpart of axis 6's vendor-dependency materialisation; treated there to avoid duplication.)
+
+**V0.4 adds a seventh elaboration: filesystem over summary.** An auto-analysis report produced by Anthropic on twenty-four days of the author's Claude Code usage (17 April – 14 May 2026, 3 341 messages, 193 sessions) surfaced three documented incidents where the agent trusted a stale summary file (`backlog.md` six days old, `MEMORY.md` reporting fifty ADRs while `ls docs/adr/ | wc -l` returned fifty-four, an `ERRATUM` commit for work the solo had committed three days earlier) instead of querying the filesystem. The pattern is a special case of axis 3's *Live / Snapshot / Cache* taxonomy applied to the artefacts of observability themselves: `backlog.md`, `MEMORY.md`, session notes, `PILOTAGE-IA.md` are *Cache* by construction — derived from `git log`, the filesystem, the running app — and they decay without a declared refresher. The rule that fell out: before any status report, run `git log --since='7d'`, `git status --porcelain`, and `ls docs/adr/ | wc -l` against the filesystem **first**. The written summary is consulted only after. The reading is the standard Bourdieusian one of *habitus* applied to documents — summaries are produced fast and maintained slowly, so the longer the project runs, the more the cache diverges silently from its source. *Authority over summary* is a sub-rule of axis 1 but functionally a consequence of axis 3.
 
 The trade-off against the alternative — pragmatic declarative trust, the philosophy of Cursor and Devin and Copilot Workspace — has not moved since v0.2: the solo has no downstream PR reviewer. If verification is not done in real time by them, it is done by no one. The velocity gain is a long-horizon lie; the debt of undetected errors costs ten times what was gained eighteen months later.
 
@@ -178,7 +182,7 @@ The expected return from a practitioner who adopts the doctrine is articulated i
 
 ### Annexe B — Load-bearing references
 
-Two references are load-bearing for the doctrine: their conceptual work is materially used in the formulation. They are the only ones a reader strictly needs to engage with to read v0.3.
+Two references are load-bearing for the doctrine: their conceptual work is materially used in the formulation. They are the only ones a reader strictly needs to engage with to read v0.4.
 
 Bourdieu, Pierre. *Le Sens pratique*. Paris: Minuit, 1980 — chapter on *habitus*, pp. 87–109. The structural mechanic of axis-8 sclerosis. Without Bourdieu's notion of *structure structurante structurée*, the diagnosis of well-rodé attelage drift has no name and no operational handle.
 
@@ -219,6 +223,24 @@ These retractions and watch-items will continue to accumulate. They are themselv
 
 ---
 
+## From v0.3.3 to v0.4 — separating toolkit from manifesto
+
+V0.3.3 had two structural problems the day it shipped, both flagged in the second external critique and confirmed by an auto-analysis report Anthropic produced on the author's twenty-four days of Claude Code usage (17 April – 14 May 2026, 3 341 messages over 193 sessions). The two problems pulled in opposite directions and the v0.3.3 dispositive could not resolve them simultaneously.
+
+**Problem one.** The `CLAUDE.md` shipped with v0.3.3 carried 132 lines structured around eight theoretical axes with ~59 sub-rules. As an agent-loaded file, it was too dense for fast operational lookup; as a manifesto, it was too imperative and too dry. The file occupied an intermediate genre that fit neither use. The second critic's verdict — *"the doctrine self-applies in declaration, not in verifiable practice"* — pointed at the same gap from another angle: a `CLAUDE.md` of eight theoretical axes is read by the agent as theory, not as a checklist.
+
+**Problem two.** The Anthropic auto-analysis report converged with the second critic on a class of incidents the eight axes did not isolate: the agent trusted stale summary files (`backlog.md` six days old, an `ERRATUM` commit for work already merged, a count of fifty ADRs while the filesystem held fifty-four) instead of querying the filesystem. The phenomenon is well captured by axis 3's *Live / Snapshot / Cache* taxonomy applied to the artefacts of observability themselves — summaries are derived from `git log`, the filesystem, the running app, and they decay without a refresher. But it was nowhere named in the axes.
+
+V0.4 resolves both with one structural move: **separate the toolkit from the manifesto**. The toolkit (`CLAUDE.md`) becomes eleven falsifiable rules in ~150 lines, each anchored in at least one documented incident, each actionable at decision time. The manifesto (`manifesto.md`, this file) keeps the eight theoretical axes, the *attelage* metaphor, the construction method, the retractions, the critiques. The toolkit is what the agent loads. The manifesto is what a human reads to understand *why*. The two cycles are explicit: v0.4 toolkit shipped 15 May 2026 with the rules that 60+ days and three external readings (two critiques + Anthropic report) converge on, and **v0.5 toolkit is scheduled 15 July 2026** at the end of the thirty-article arc that will empirically decant which of the eleven rules survive practice and which need re-formulation.
+
+The sub-axis *filesystem over summary* (problem two) is integrated into the manifesto as a seventh elaboration of axis 1 (see above) and into the toolkit as the first sub-bullet of R1 (*Raw output, not declaration*). The full reading is Bourdieusian: documents produced fast and maintained slowly become *habitus* — the agent and the solo read them by reflex rather than by check. The toolkit makes the reflex falsifiable.
+
+The two-iteration strategy itself is an application of the doctrine to its own production. V0.3 shipped on day sixty after a phase-A empirical extraction, a phase-B philosophical confrontation, a phase-B2 external audit, and a phase-C falsifiability filter. V0.3.1 and v0.3.2 amended on external critique within twenty-four hours. V0.3.3 instrumented M1–M5 with measured baseline values. V0.4 separates toolkit from manifesto on day sixty-one, integrating the third external reading (Anthropic auto-analysis). V0.5 will decant on day 122, after thirty satellite articles have been published at J+2 cadence and after the practice has had two months to test the eleven rules. Each cycle is itself a documented application of axis 2 (revision on new fact, not on pushback alone) and axis 7 (the doctrine is versioned and audited like an ADR).
+
+The risk of this cadence is recognised. Five iterations in thirty days could be read as instability; the reading is reframed by the fact that each iteration carries a named *fait nouveau* and a documented retraction. A doctrine that bumps four times for one external critique and a self-analysis report is applying axis 2 to itself, not contradicting it. A doctrine that bumps without new fact would be the failure mode.
+
+---
+
 ## Critiques received
 
 The doctrine applies axis 2 (bidirectional adversariality, *never revise on pushback without a new fact*) to itself. Two external critiques were received on the published v0.3 within the first days of its release; both made points the doctrine took seriously enough to amend.
@@ -252,4 +274,4 @@ The second critic's framing — *"the doctrine self-applies in declaration, not 
 
 ---
 
-*Counterpart Doctrine v0.3.3 — released July 2026 after sixty days of public construction, amended in the days following two successive external critiques. M1–M5 instrumentation published with measured baseline values on 14 May 2026 ([rembrandt-samples/falsifiable-metrics/](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics)). Companion samples at `rembrandt-samples/counterpart-doctrine/`. ADR-driven, falsifiable, versioned. A/B-test article scheduled for arc 2 (#70, 13 July 2026). v0.4 scheduled by axis 8 itself, multi-substrate falsifiability filter slated for end of arc 2 (October 2026).*
+*Counterpart Doctrine — Manifesto v0.4 — released 15 May 2026. Toolkit/manifesto split: eleven operational rules now live in [`CLAUDE.md`](./CLAUDE.md), the long-form theory remains here. Five iterations in thirty days (v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4), each carrying a named fait nouveau and a documented retraction. M1–M5 instrumentation with measured baseline values published 14 May 2026 ([rembrandt-samples/falsifiable-metrics/](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics)). Companion samples at `rembrandt-samples/counterpart-doctrine/`. ADR-driven, falsifiable, versioned. v0.5 toolkit scheduled 15 July 2026 after the thirty-article arc decants what survives empirically. Multi-substrate falsifiability filter slated for end of arc 2 (October 2026).*

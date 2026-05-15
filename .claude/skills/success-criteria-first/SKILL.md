@@ -82,5 +82,5 @@ Before any implementation:
 - multica-ai, `karpathy-guidelines/SKILL.md`: *"Transform tasks into verifiable goals: 'Add validation' → 'Write tests for invalid inputs, then make them pass.' Strong success criteria let you loop independently. Weak criteria require constant clarification."*
 - Karpathy, *autoresearch* (2026): metric-driven loops (val_bpb < threshold) as canonical command-with-oracle pattern.
 - SuperClaude_Framework, `confidence.ts`: 90 % confidence threshold computed from declared criteria, before execution.
-- Counterpart Doctrine v0.3, axis 1 (material verification, *a priori* half).
-- Counterpart Doctrine v0.3, axis 8 (discursive adversariality, command-with-oracle mode).
+- Counterpart Doctrine v0.4, axis 1 (material verification, *a priori* half).
+- Counterpart Doctrine v0.4, axis 8 (discursive adversariality, command-with-oracle mode).

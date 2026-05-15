@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# verify-install.sh — Counterpart Doctrine v0.3
+# verify-install.sh — Counterpart Doctrine v0.4
 #
 # Verify that the doctrine is materially installed in the target project.
 # Compare source (this repo) against deployed (target project + ~/.claude/).
@@ -23,7 +23,7 @@ if [[ ! -d "$TARGET" ]]; then
 fi
 
 echo ""
-echo "  Counterpart Doctrine v0.3 — verify install"
+echo "  Counterpart Doctrine v0.4 — verify install"
 echo "  Source : $SOURCE_DIR"
 echo "  Target : $TARGET"
 echo ""
@@ -35,17 +35,17 @@ echo "→ CLAUDE.md"
 if [[ ! -f "$TARGET/CLAUDE.md" ]]; then
   echo "  ❌ missing"
   DRIFTS=$((DRIFTS + 1))
-elif grep -q "Counterpart Doctrine v0.3" "$TARGET/CLAUDE.md"; then
-  echo "  ✓ contains v0.3 marker"
+elif grep -q "Counterpart Doctrine v0.4" "$TARGET/CLAUDE.md"; then
+  echo "  ✓ contains v0.4 marker"
 elif grep -q "Counterpart Doctrine" "$TARGET/CLAUDE.md"; then
-  echo "  ⚠ contains Counterpart marker but not v0.3 (older version, manual merge expected)"
+  echo "  ⚠ contains Counterpart marker but not v0.4 (older version, manual merge expected)"
 else
   echo "  ⚠ exists but no Counterpart Doctrine marker — manual merge presumed"
 fi
 
 # --- 2. Skills ---
 echo ""
-echo "→ Skills (9 expected in v0.3)"
+echo "→ Skills (9 expected in v0.4)"
 SOURCE_SKILLS=$(find "$SOURCE_DIR/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 TARGET_SKILLS=$(find "$TARGET/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 echo "  source: $SOURCE_SKILLS skills"
@@ -72,7 +72,7 @@ fi
 
 # --- 4. Hooks ---
 echo ""
-echo "→ Hooks (4 expected in v0.3)"
+echo "→ Hooks (4 expected in v0.4)"
 EXPECTED_HOOKS=("deploy-safeguard.sh" "secret-scanner.sh" "audit-memory-reminder.sh" "check-workaround-assumed.sh")
 HOOKS_DIR_TARGET="$TARGET/.claude/hooks"
 
@@ -100,17 +100,19 @@ else
   echo "  ⚠ no .claude/settings.json — hooks present but not activated"
 fi
 
-# --- 5. doctrine.md (manifesto) ---
+# --- 5. manifesto.md (long-form theory) ---
 echo ""
-echo "→ doctrine.md (manifesto)"
-if [[ -f "$TARGET/docs/doctrine.md" ]]; then
-  if grep -q "Counterpart Doctrine — v0.3" "$TARGET/docs/doctrine.md"; then
-    echo "  ✓ v0.3 installed in docs/"
+echo "→ manifesto.md (long-form theory)"
+if [[ -f "$TARGET/docs/manifesto.md" ]]; then
+  if grep -q "Manifesto v0.4" "$TARGET/docs/manifesto.md"; then
+    echo "  ✓ v0.4 installed in docs/"
   else
-    echo "  ⚠ exists but not v0.3 — older version"
+    echo "  ⚠ exists but not v0.4 — older version"
   fi
+elif [[ -f "$TARGET/docs/doctrine.md" ]]; then
+  echo "  ⚠ docs/doctrine.md present (pre-v0.4 layout). Renamed to manifesto.md in v0.4."
 else
-  echo "  ⊘ docs/doctrine.md not installed (optional step)"
+  echo "  ⊘ docs/manifesto.md not installed (optional step)"
 fi
 
 # --- 6. Drift between source and target on installed files ---
