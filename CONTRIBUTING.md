@@ -1,6 +1,6 @@
 # Contributing to the Counterpart Doctrine
 
-This doctrine is at **v0.4** (toolkit/manifesto split, 15 May 2026). Feedback is precious and will structure v0.5 (15 July 2026, after the thirty-article arc decants what survives empirically).
+This doctrine is at **v0.4.1** (R1/R7 refactor + R14 escape hatch + LOC correction + M1–M5 propagation, 17 May 2026, two days after v0.4). Feedback is precious and will structure v0.5 (15 July 2026, after the thirty-article arc decants what survives empirically).
 
 ## If you're testing the doctrine on a project
 
@@ -14,17 +14,17 @@ Toolkit `CLAUDE.md` full or partial, which skills triggered, challenger agent in
 
 A decision taken differently, a bug avoided, useless friction, the net feeling (notable / marginal / negative).
 
-**(c) Which of the 11 rules can you name without rereading?**
+**(c) Which of the 14 rules can you name without rereading?**
 
-Critical integration test: if the answer is weak (1-3 rules after 3 weeks), the loadable format has an intrinsic limit that v0.5 will need to address.
+Critical integration test: if the answer is weak (1-4 rules after 3 weeks), the loadable format has an intrinsic limit that v0.5 will need to address.
 
 **(d) Which rule is missing for your stack?**
 
-Candidates for v0.5. The doctrine grew by one axis between v0.2 and v0.3, separated toolkit from manifesto between v0.3.3 and v0.4 — real practice may reveal what the eleven rules still miss.
+Candidates for v0.5. The doctrine grew by one axis between v0.2 and v0.3, separated toolkit from manifesto between v0.3.3 and v0.4, refactored to fourteen rules in v0.4.1 — real practice may reveal what those rules still miss.
 
 ## Feedback formats
 
-- **GitHub Issue** on this repo, tag `feedback-test-v0.4`
+- **GitHub Issue** on this repo, tag `feedback-test-v0.4.1`
 - **DEV.to comment** under the relevant arc-2 article
 - **Email** to the address listed on the GitHub profile
 
@@ -38,11 +38,11 @@ No required format. Three paragraphs is enough. Raw feedback (transcribed audio,
 
 ## If you want to propose a patch
 
-Pull requests welcome, but for v0.4 prefer **discussion issues** first. The doctrine is still actively decanting — an isolated patch may conflict with a larger upcoming refactor scheduled for v0.5 or the multi-substrate filter (October 2026).
+Pull requests welcome, but for v0.4.1 prefer **discussion issues** first. The doctrine is still actively decanting — an isolated patch may conflict with a larger upcoming refactor scheduled for v0.5 or the multi-substrate filter (October 2026).
 
 Useful PR format:
 - Short title
-- Description: which rule (R1–R11) / which skill / which hook is touched
+- Description: which rule (R1–R14) / which skill / which hook is touched
 - Justification: a concrete case that motivated the patch
 - Test if applicable
 
@@ -55,12 +55,12 @@ The manifesto lists five hypotheses where the doctrine appears singular within t
 The doctrine explicitly refuses four dominant positions (see `manifesto.md` — Preface section). Critiques on these choices are the most precious:
 
 - Is *AI as counterpart* truly superior to *AI as tool* / *AI as colleague* in your experience?
-- Is bidirectional adversariality (R3, R4) practicable, or too cognitively costly?
-- Is the Live/Snapshot/Cache taxonomy (R5) useful or over-engineered for a solo?
-- Does long-term auditability (R11) hold, or rot in practice despite the invariants?
+- Is bidirectional adversariality (R4, R5) practicable, or too cognitively costly?
+- Is the Live/Snapshot/Cache taxonomy (R6) useful or over-engineered for a solo?
+- Does long-term auditability (R13) hold, or rot in practice despite the invariants?
 
 These questions will structure v0.5.
 
 ---
 
-*v0.4 — under CC-BY-4.0 — Michel Faure*
+*v0.4.1 — under CC-BY-4.0 — Michel Faure*

@@ -1,6 +1,6 @@
-# Anti-patterns checklist — Counterpart Doctrine v0.4
+# Anti-patterns checklist — Counterpart Doctrine v0.4.1
 
-Seventeen anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
+Eighteen anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
 
 The list is the densest doctrine-payload-per-line in the repo. If you have ten minutes to absorb the doctrine, read this file.
 
@@ -31,8 +31,9 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 ## Workarounds and silencing
 
-- [ ] **Silent error swallowing** — `catch (e) { /* silent */ }`, `await mutation()` without destructuring `{ error }`, `2>/dev/null` in committed scripts, silent strip of a forbidden value, server action that throws without surfacing the failure in the UI. Silencing the signal is never a fix. Axis 5.
-- [ ] **Untagged workaround** — a temporary fix in the codebase without the `[workaround-assumed]` tag in the commit and a corresponding ADR or feedback memory. The unowned workaround returns six months later under a different mask. Axis 5.
+- [ ] **Silent error swallowing** — `catch (e) { /* silent */ }`, `await mutation()` without destructuring `{ error }`, `2>/dev/null` in committed scripts, silent strip of a forbidden value, server action that throws without surfacing the failure in the UI. Silencing the signal is never a fix. Axis 5 (R10).
+- [ ] **Untagged workaround** — a temporary fix in the codebase without the `[workaround-assumed]` tag in the commit and a corresponding ADR or feedback memory. The unowned workaround returns six months later under a different mask. Axis 5 (R10).
+- [ ] **Spike commit older than 7 days without conversion to permanent + ADR** *(new v0.4.1)* — a commit tagged `[spike]` whose code is still on disk or in a live branch beyond 7 days. R14 makes the escape hatch time-bounded; an orphan spike beyond the window is a violation that requires either deletion or retroactive ADR + conversion under R6/R7/R8. Audit via `git log --grep '\[spike\]' --since='7 days ago'`.
 
 ## Discursive disposition
 
@@ -41,4 +42,4 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 ---
 
-*Counterpart Doctrine v0.4 — 17 anti-patterns (was 8 in v0.2, 16 in v0.3.3, +1 in v0.4 for *filesystem over summary*). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*
+*Counterpart Doctrine v0.4.1 — 18 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4 with *filesystem over summary*, +1 in v0.4.1 for the *orphan spike* of R14). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*

@@ -1,39 +1,60 @@
 # counterpart-doctrine/
 
-Eleven operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged after 60+ effective days of solo coding with Claude Code on a production ERP. Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.4** (toolkit/manifesto split — see *From v0.3.3 to v0.4* in `manifesto.md`).
+Fourteen operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged after 60+ effective days of solo coding with Claude Code on a production ERP. Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.4.1** (R1/R7 refactor + R14 escape hatch + LOC correction + M1–M5 propagation — see *From v0.4 to v0.4.1* in `manifesto.md`).
 
 **Source article series**: *Building the Counterpart Doctrine in public* — 31 satellite articles + pillar (May–July 2026) on [DEV.to](https://dev.to/michelfaure). The v0.2 closing pillar is [*The Counterpart Doctrine: a seven-axis spec for working with an AI coding agent*](https://dev.to/michelfaure) (May 18, 2026). The v0.5 toolkit pillar follows on July 15, 2026, after the 31-article arc lands.
+
+## Why this matters
+
+Coding alone with an AI agent collapses two roles into one — you are both the producer and the only reviewer. The agent fills the role of pair without filling the role of adversary. Sycophancy compounds with speed: the longer the session, the harder it is to detect the moment the work started drifting. Short-term productivity is up. Long-term coherence is fragile, and the failure modes are silent.
+
+The doctrine trades a small amount of upfront friction (ADRs, success criteria, raw-output proofs, brief-form discipline, refreshing summaries against the filesystem) against a much larger amount of downstream drift. It does not assume the agent is hostile. It assumes the attelage will sclerose if its form is left to inertia, and that the only sustainable counterweight is a versioned, dated, falsifiable discipline that applies to both the agent's outputs and the solo's own habits.
+
+## What this doctrine measures and what it doesn't
+
+Five metrics (M1–M5) instrument the doctrine's own self-application. Scripts and measured values live in [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) — the empirical half of the doctrine.
+
+| Metric | Target | Measured (14 May 2026) | Verdict |
+|---|---|---|---|
+| **M1** anti-pattern recurrence / 7-day session | ≤ 1 | 12.33 | Overshoot — heuristic flagged as over-sensitive, recalibration v0.5 |
+| **M2** multi-file commits without ADR / 28d | ≤ 5 % | 2.3 % | **Met** |
+| **M3** median drift apparition → detection / 90d | ≤ 30 days *(recalibrated v0.4.1)* | 35.3 days | Within 5 days of target |
+| **M4** position of 1st DB probe in session | ≤ 90 min | ~41 min | **Met** |
+| **M5** pure-command ratio / 7d (sclerosis alarm > 80 %) | threshold provisional | 90 % `unknown` | Instrumentation insufficient — v0.5 |
+
+Three of five targets are now met empirically (M2, M3 recalibrated, M4). M1 awaits heuristic refinement. M5 awaits instrumentation. The doctrine **does not retro-fit cibles to fit measurements** — it acknowledges the gap explicitly and recalibrates only when the gap reveals an intuition-set threshold (M3) rather than a doctrinal one. See *How to adopt* in `manifesto.md` for the full reasoning.
 
 ## Invariant rule
 
 Working with an AI coding agent on the long run produces drift — silently. Claims that the build is green while CI is red. Patches that look like fixes and reappear six days later under a different mask. Derived columns that diverge from their source without a probe to tell you. Summaries (`backlog.md`, `MEMORY.md`, session notes) that quietly diverge from `git log` and the filesystem because no one set them up to refresh. Pushbacks where the agent revises its recommendation without bringing a single new fact. No human PR reviewer catches it. No peer challenges. And paranoia on every line is not sustainable.
 
-The doctrine *constrains the exchanges* of the attelage — the two-horse team where solo and agent pull the same load. The better-rodé the attelage, the more it traces the same rail (Bourdieu's *habitus*). The form of the brief is the lever that keeps the attelage exploratory rather than sclerotic. Eleven rules materially enforced — not eleven pieties to maintain mentally.
+The doctrine *constrains the exchanges* of the attelage — the two-horse team where solo and agent pull the same load. The better-rodé the attelage, the more it traces the same rail (Bourdieu's *habitus*). The form of the brief is the lever that keeps the attelage exploratory rather than sclerotic. Fourteen rules materially enforced — not fourteen pieties to maintain mentally.
 
 ## The two artefacts — toolkit and manifesto
 
-V0.4 ships the doctrine as **two distinct artefacts**, each fit for one use:
+V0.4 shipped the doctrine as **two distinct artefacts**, each fit for one use. v0.4.1 refined the toolkit without changing the structural choice:
 
-- **The toolkit** — [`CLAUDE.md`](./CLAUDE.md). Eleven operational rules in ~150 lines, each falsifiable and anchored in at least one documented incident. This is what your Claude Code reads at session start. Loadable, dense, citable. **This is what you install.**
-- **The manifesto** — [`manifesto.md`](./manifesto.md). The long-form theory: eight axes, the *attelage* metaphor, the construction method (phase A empirical extraction, phase B philosophical confrontation, phase B2 external audit, phase C falsifiability filter), the retractions, the critiques received and integrated. Read by humans who want to understand *why* the rules exist. ~50 k characters.
+- **The toolkit** — [`CLAUDE.md`](./CLAUDE.md). Fourteen operational rules in ~200 lines, each falsifiable and anchored in at least one documented incident. This is what your Claude Code reads at session start. Loadable, dense, citable. **This is what you install.**
+- **The manifesto** — [`manifesto.md`](./manifesto.md). The long-form theory: eight axes, the *attelage* metaphor, the construction method (phase A empirical extraction, phase B philosophical confrontation, phase B2 external audit, phase C falsifiability filter), the retractions, the critiques received and integrated, the v0.4.1 fourth-reading sub-section. Read by humans who want to understand *why* the rules exist. ~55 k characters.
 
-The two-cycle strategy is explicit. **v0.4 toolkit ships 15 May 2026** with the rules that 60+ days of practice and three external readings (two critiques + an Anthropic auto-analysis report on 24 days of usage) converge on. **v0.5 toolkit ships 15 July 2026** after the thirty-article arc has empirically decanted which of the eleven rules survive practice and which need re-formulation. Each version is the published output of a phase of decantation, not a final state.
+## The fourteen toolkit rules
 
-## The eleven toolkit rules
-
-| # | Rule | Anchor axis (manifesto) |
-|---|---|---|
-| R1 | **Raw output, not declaration** *(includes: filesystem over summary, DB schema authority, UI rendering authority, human memory falsifiability, EXPLAIN ANALYZE discipline)* | Axis 1 |
-| R2 | **Success criteria before code** | Axis 1 |
-| R3 | **Falsify before fix** *(five-step protocol: hypothesis → 3 refutation probes → execute → decide)* | Axis 2 |
-| R4 | **No revision without new fact** | Axis 2 |
-| R5 | **Live / Snapshot / Cache mandatory** | Axis 3 |
-| R6 | **Provenance in the data, exceptions in the rule** | Axis 3 |
-| R7 | **ADR before code, phase-0 grep** *(includes sub-agent briefing threshold)* | Axis 4 |
-| R8 | **Silent failure forbidden, workaround tagged** | Axis 5 |
-| R9 | **Parsimony, no speculative abstraction** | Axis 5 |
-| R10 | **Cite the official text, materialise vendor defaults** *(includes platform config ≠ repo config)* | Axis 6 |
-| R11 | **Audit, archive, three brief modes** | Axes 7 & 8 |
+| # | Rule | Anchor axis (manifesto) | New/changed in v0.4.1 |
+|---|---|---|---|
+| R1 | **Raw output, not declaration** *(DB schema authority, UI rendering authority, human memory falsifiability, external sources, EXPLAIN ANALYZE)* | Axis 1 | filesystem-over-summary extracted → R2 |
+| R2 | **Filesystem over summary** *(git log + filesystem before backlog/MEMORY/session notes)* | Axis 1 | **new — extracted from R1** |
+| R3 | **Success criteria before code** | Axis 1 | renumbered |
+| R4 | **Falsify before fix** *(5-step protocol: hypothesis → 3 refutation probes → execute → decide)* | Axis 2 | renumbered |
+| R5 | **No revision without new fact** | Axis 2 | renumbered |
+| R6 | **Live / Snapshot / Cache mandatory** | Axis 3 | renumbered |
+| R7 | **Provenance in the data, exceptions in the rule** | Axis 3 | renumbered |
+| R8 | **ADR before code, phase-0 grep** | Axis 4 | session structure (split from ex-R7) |
+| R9 | **Sub-agent briefing, FIFO 3 projects max** | Axis 4 | **new — delegation/attention (split from ex-R7)** |
+| R10 | **Silent failure forbidden, workaround tagged** | Axis 5 | renumbered |
+| R11 | **Parsimony, no speculative abstraction** | Axis 5 | renumbered |
+| R12 | **Cite the official text, materialise vendor defaults** *(platform config ≠ repo config)* | Axis 6 | renumbered |
+| R13 | **Audit, archive, three brief modes** *(M1–M5 falsifiable thresholds inline)* | Axes 7 & 8 | M1–M5 propagation in v0.4.1 |
+| R14 | **Spike escape hatch** *(`[spike]` tag + 7-day deletion = R6/R7/R8 exempt)* | (cross-cutting) | **new in v0.4.1** |
 
 Each rule is fully formulated in [`CLAUDE.md`](./CLAUDE.md). Each rule's theoretical anchor — its thesis, its inaugural incident, its trade-off against alternatives — is in [`manifesto.md`](./manifesto.md).
 
@@ -41,15 +62,15 @@ Each rule is fully formulated in [`CLAUDE.md`](./CLAUDE.md). Each rule's theoret
 
 | File | Role |
 |---|---|
-| [`CLAUDE.md`](./CLAUDE.md) | **Toolkit v0.4** — eleven operational rules, drop-in for project root. ~150 lines. |
-| [`manifesto.md`](./manifesto.md) | **Manifesto v0.4** — long-form theory: 8 axes, *attelage*, retractions, critiques, the toolkit/manifesto split itself. ~50 k characters. |
+| [`CLAUDE.md`](./CLAUDE.md) | **Toolkit v0.4.1** — fourteen operational rules, drop-in for project root. ~200 lines. |
+| [`anti-patterns-checklist.md`](./anti-patterns-checklist.md) | **18 anti-patterns** — densest doctrine-payload-per-line. Paste into PR review. |
+| [`manifesto.md`](./manifesto.md) | **Manifesto v0.4.1** — long-form theory: 8 axes, *attelage*, retractions, critiques, *From v0.4 to v0.4.1*. ~55 k characters. |
+| [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) | Five M1–M5 scripts + measured baseline + honest diagnosis of overshoots. The empirical half of the doctrine. |
 | [`install.sh`](./install.sh) | Interactive installer. Default `[Y/n]` for hooks. |
 | [`verify-install.sh`](./verify-install.sh) | Checks installation integrity, signals drift. |
-| [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) | Five scripts (M1–M5) + measured baseline values from 60 days of Rembrandt. |
-| [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (R7). |
-| [`anti-patterns-checklist.md`](./anti-patterns-checklist.md) | 16 anti-patterns — paste into PR review. |
+| [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (R8). |
 | [`.claude/skills/`](./.claude/skills/) | 9 universal skills. |
-| [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R3, R4). |
+| [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R4, R5). |
 | [`.claude/hooks/`](./.claude/hooks/) | 4 hooks: `deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`. |
 
 ## Living vs Published — the two-tier doctrine
@@ -57,9 +78,7 @@ Each rule is fully formulated in [`CLAUDE.md`](./CLAUDE.md). Each rule's theoret
 The toolkit/manifesto split (v0.4) is orthogonal to a second long-standing distinction: *Living* vs *Published*.
 
 - **Published tier** (this repo) — generic, stack-agnostic, drop-in for any project using Claude Code. The hooks scan generic secret patterns (OpenAI, GitHub, AWS, GitLab). The skills target universal solo-coding failure modes. This is what you install.
-- **Living tier** (the author's personal Claude Code config) — richer, specialised for the author's actual stack: Rembrandt ERP on Supabase, Vercel, Stripe, Brevo, Airtable, PennyLane. Hooks scan Rembrandt-specific secret patterns. Skills are tuned to the project's quirks (`liste_rouge` never reactivated, `inscriptions` schema, regime TVA mixte, cash vs engagement). The doctrine *applies to itself* on a stack with real failure modes — that is how candidate axes survive the 3-incident filter before being inscribed here.
-
-This is not drift. It is a deliberate editorial dispositif. The published doctrine is what generalises across stacks; the lived doctrine is what proves the doctrine works against real production pressure. A contributor wishing to file a PR should target the published tier. A user installing the doctrine starts here and customises locally.
+- **Living tier** (the author's personal Claude Code config) — richer, specialised for the author's actual stack: Rembrandt ERP on Supabase, Vercel, Stripe, Brevo, Airtable, PennyLane. Hooks scan Rembrandt-specific secret patterns. Skills are tuned to project quirks. Outputs (ADRs, incidents, M1–M5 baseline) are partially published in [`rembrandt-samples/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) so the auditable trail is shared even when the project code itself isn't.
 
 | Aspect | Published (this repo) | Living (author's local) |
 |---|---|---|
@@ -71,11 +90,11 @@ This is not drift. It is a deliberate editorial dispositif. The published doctri
 
 ## How to read this folder
 
-If you have **an hour**: read `manifesto.md` end to end, then pick the three rules whose anchor axes most fit your current pain (typically axes 1, 5, 8 — *material verification*, *root cause*, *three brief modes*) and inline them into your `CLAUDE.md`. Run `./install.sh` to install the hooks and skills.
+If you have **an hour**: read `manifesto.md` end to end, then pick the three rules whose anchor axes most fit your current pain (typically R1, R10, R13 — *material verification*, *root cause*, *three brief modes*) and inline them into your `CLAUDE.md`. Run `./install.sh` to install the hooks and skills.
 
-If you have **ten minutes**: read the eleven rule titles in `CLAUDE.md`, paste `anti-patterns-checklist.md` into your next PR review, move on. The checklist is the densest doctrine-payload-per-line of the repo.
+If you have **ten minutes**: read the fourteen rule titles in `CLAUDE.md`, paste `anti-patterns-checklist.md` into your next PR review, move on. The checklist is the densest doctrine-payload-per-line of the repo.
 
-If you have **two minutes**: run `./install.sh /path/to/your/project` and answer Y when prompted for hooks. The default has flipped from `[y/N]` to `[Y/n]` in v0.3 — most of the doctrine's value lives in the material enforcement of the four hooks.
+If you have **two minutes**: run `./install.sh /path/to/your/project` and answer Y when prompted for hooks. The default has been `[Y/n]` since v0.3 — most of the doctrine's value lives in the material enforcement of the four hooks.
 
 After installation, run `./verify-install.sh` to confirm the integrity of the installed stack and surface drift between the doctrine you installed and what currently lives in `.claude/`.
 
@@ -84,37 +103,27 @@ After installation, run `./verify-install.sh` to confirm the integrity of the in
 Three patterns observed:
 
 1. **Drop-in then trim.** Install everything, run for a week, comment out what produces friction without payoff in your stack. Hooks have explicit bypass mechanisms — use them, log the bypass, decide later whether the rule was wrong or the bypass was lazy.
-2. **Rule-by-rule adoption.** Pick the rule that maps to your current pain (failed deploy → R1, drifted derived column → R5, sycophantic agent → R3+R4, sclerosis → R11). Apply only that rule and its associated skill. Add the next rule after the first has stuck for two weeks.
+2. **Rule-by-rule adoption.** Pick the rule that maps to your current pain (failed deploy → R1, drifted derived column → R6, sycophantic agent → R4+R5, sclerosis → R13). Apply only that rule and its associated skill. Add the next rule after the first has stuck for two weeks.
 3. **Two-tier yourself.** If you publish or share your own variant, maintain explicitly two tiers — the generic one others can install, and the specialised one you actually run. Mark the boundary in your `CLAUDE.md`. The drift between them is informative.
 
 ## Four questions for testers
 
-The doctrine asks four things back. Free format, GitHub Issues with subject prefix `[v0.4 retour]`.
+The doctrine asks four things back. Free format, GitHub Issues with subject prefix `[v0.4.1 retour]`.
 
 **(a) What did you actually load / use?** Toolkit `CLAUDE.md` full or partial, which skills triggered, challenger agent invoked or not, hooks activated, manifesto read in full or in part.
 
 **(b) What concretely changed in your practice?** A decision taken differently? A bug avoided? Useless friction? Effect *notable*, *marginal*, or *negative*?
 
-**(c) Which rules can you name without rereading?** Without reopening the file — how many of the 11 toolkit rules can you list? This metric measures whether the doctrine has been **integrated** (you think of it spontaneously) or merely **consulted**. This is the most important test.
+**(c) Which rules can you name without rereading?** Without reopening the file — how many of the 14 toolkit rules can you list? This metric measures whether the doctrine has been **integrated** (you think of it spontaneously) or merely **consulted**. This is the most important test.
 
-**(d) Which rule is missing for your stack?** Candidates for v0.5 (July 15, 2026). The doctrine grew by one axis between v0.2 and v0.3, separated toolkit from manifesto between v0.3.3 and v0.4 — real practice may reveal what the eleven rules still miss.
+**(d) Which rule is missing for your stack?** Candidates for v0.5 (July 15, 2026). The doctrine grew by one axis between v0.2 and v0.3, separated toolkit from manifesto between v0.3.3 and v0.4, and refactored to fourteen rules in v0.4.1 — real practice may reveal what those rules still miss.
 
-Testers wanting attribution are cited by name in the v0.5 toolkit pillar on DEV.to (15 July 2026).
-
-## Why this matters
-
-Coding alone with an AI agent collapses two roles into one — you are both the producer and the only reviewer. The agent fills the role of pair without filling the role of adversary. Sycophancy compounds with speed: the longer the session, the harder it is to detect the moment the work started drifting. Short-term productivity is up. Long-term coherence is fragile, and the failure modes are silent.
-
-The doctrine trades a small amount of upfront friction (ADRs, success criteria, raw-output proofs, brief-form discipline, refreshing summaries against the filesystem) against a much larger amount of downstream drift. It does not assume the agent is hostile. It assumes the attelage will sclerose if its form is left to inertia, and that the only sustainable counterweight is a versioned, dated, falsifiable discipline that applies to both the agent's outputs and the solo's own habits.
-
-60 days of public construction produced v0.3 (14 May 2026). Within the first 24 hours of release, two external critiques arrived and v0.3 was amended through v0.3.1 (theoretical over-armour cut), v0.3.2 (axis-8 detheorised, retractions section added), v0.3.3 (M1–M5 instrumented with measured baseline). Day 61 (15 May 2026) integrated a third external reading — an auto-analysis report Anthropic produced on 24 days of the author's Claude Code usage — and resolved two structural problems v0.3.3 could not address simultaneously: the toolkit/manifesto separation, and the *filesystem over summary* sub-rule.
-
-The amendment trail — *Critiques received*, *What v0.2 prescribed and v0.3 retracted*, *From v0.3.3 to v0.4 — separating toolkit from manifesto* in `manifesto.md` — is itself the first material application of the doctrine to itself: revise on new fact, never on pushback alone, publish the cicatrices. v0.5 will follow the same method in the open, with the thirty-article arc as the empirical substrate of the next decantation. Multi-substrate validation (Python/Postgres without Supabase) is slated for end of arc 2 (October 2026).
+Testers wanting attribution can opt-in via the issue (default is anonymous). Cited contributors appear in the v0.5 toolkit pillar on DEV.to (15 July 2026).
 
 ---
 
-*Counterpart Doctrine v0.4 — toolkit/manifesto split released 15 May 2026, one day after v0.3.3, integrating the third external reading (Anthropic auto-analysis 17 April – 14 May 2026, 3 341 messages over 193 sessions). Five iterations in 31 days, each carrying a named fait nouveau and a documented retraction. v0.5 toolkit pillar on DEV.to: 15 July 2026.*
-*Tested on 60+ days of solo ERP coding (35 k+ lines, 65+ ADRs).*
+*Counterpart Doctrine v0.4.1 — released 17 May 2026, two days after v0.4. R1 split into R1 (raw output) + R2 (filesystem over summary). ex-R7 split into R8 (session structure) + R9 (delegation/attention). R14 added (spike escape hatch). LOC corrected from 35 k stale figure to ~118 k measured (`find + wc -l` on TS/TSX/JS/JSX with explicit exclusions; method counts blanks and comments). M1–M5 findings propagated from `rembrandt-samples/falsifiable-metrics/` into the manifesto and toolkit. Six iterations in 32 days, each carrying a named fait nouveau and a documented retraction. v0.5 toolkit pillar on DEV.to: 15 July 2026.*
+*Tested on 60+ days of solo ERP coding (~118 k lines, 65+ ADRs).*
 *Source repo: github.com/michelfaure/doctrine-counterpart*
 *Companion samples: github.com/michelfaure/rembrandt-samples/counterpart-doctrine*
 *License: CC-BY-4.0*

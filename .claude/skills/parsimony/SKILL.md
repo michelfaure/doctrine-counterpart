@@ -80,4 +80,4 @@ Before committing an implementation:
 - Karpathy, *autoresearch* (2026), `program.md`: *"A 0.001 improvement that adds 20 lines of hacky code? Probably not worth it."*
 - multica-ai, `karpathy-guidelines/SKILL.md`: *"No abstractions for single-use code. No flexibility that wasn't requested. If you write 200 lines and it could be 50, rewrite it."*
 - SuperClaude_Framework, `PRINCIPLES.md`: *"Efficiency > verbosity."*
-- Counterpart Doctrine v0.4, axis 5 / R9 (parsimony as qualification of a correct fix).
+- Counterpart Doctrine v0.4.1, axis 5 / R11 (parsimony as qualification of a correct fix).

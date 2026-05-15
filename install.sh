@@ -14,7 +14,7 @@ TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
 echo "=================================================="
-echo "  Counterpart Doctrine v0.4 — install (toolkit + manifesto)"
+echo "  Counterpart Doctrine v0.4.1 — install (toolkit + manifesto)"
 echo "=================================================="
 echo ""
 echo "Source: $SOURCE_DIR"
@@ -27,7 +27,7 @@ if [[ ! -d "$TARGET" ]]; then
 fi
 
 # --- 1. CLAUDE.md ---
-echo "→ Step 1/6: CLAUDE.md (toolkit — 11 operational rules)"
+echo "→ Step 1/6: CLAUDE.md (toolkit — 14 operational rules)"
 if [[ -f "$TARGET/CLAUDE.md" ]]; then
   echo "  A CLAUDE.md already exists in $TARGET."
   read -r -p "  [m]anual merge after / [a]ppend doctrine to end / [s]kip / [o]verwrite? [m] " choice
@@ -36,7 +36,7 @@ if [[ -f "$TARGET/CLAUDE.md" ]]; then
     a)
       echo "" >> "$TARGET/CLAUDE.md"
       echo "" >> "$TARGET/CLAUDE.md"
-      echo "<!-- ===== Counterpart Toolkit v0.4 (append) ===== -->" >> "$TARGET/CLAUDE.md"
+      echo "<!-- ===== Counterpart Toolkit v0.4.1 (append) ===== -->" >> "$TARGET/CLAUDE.md"
       cat "$SOURCE_DIR/CLAUDE.md" >> "$TARGET/CLAUDE.md"
       echo "  ✓ Doctrine appended to existing CLAUDE.md"
       ;;
@@ -114,7 +114,7 @@ echo "    - secret-scanner        : commits with literal secrets blocked"
 echo "    - audit-memory-reminder : quarterly memory audit reminder (SessionStart, non-blocking)"
 echo "    - check-workaround-assumed : workaround commits without [workaround-assumed] tag blocked"
 echo ""
-echo "  Default in v0.4 (unchanged since v0.3): Y. The doctrine's value relies on these guards."
+echo "  Default in v0.4.1 (unchanged since v0.3): Y. The doctrine's value relies on these guards."
 echo "  Decline only if you have an incompatible setup."
 read -r -p "  Activate hooks? [Y/n] " choice
 choice="${choice:-Y}"
@@ -181,6 +181,6 @@ echo "Test request (if testing for someone else):"
 echo "  After 2-3 weeks of use, answer the 4 questions in the README:"
 echo "  (a) what did you load / use?"
 echo "  (b) what concretely changed?"
-echo "  (c) which of the 11 rules can you name without rereading?"
+echo "  (c) which of the 14 rules can you name without rereading?"
 echo "  (d) which rule is missing for your stack? (v0.5 candidates)"
 echo ""
