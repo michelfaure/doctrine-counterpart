@@ -2,6 +2,20 @@
 
 Fourteen operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged after 60+ effective days of solo coding with Claude Code on a production ERP. Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.4.1** (R1/R7 refactor + R14 escape hatch + LOC correction + M1–M5 propagation — see *From v0.4 to v0.4.1* in `manifesto.md`).
 
+## Quick install (one command)
+
+```bash
+git clone https://github.com/michelfaure/doctrine-counterpart.git && \
+  cd doctrine-counterpart && \
+  ./install.sh --yes /path/to/your/project
+```
+
+This installs the **toolkit** (`CLAUDE.md`, 14 rules, ~200 lines), the **10 skills**, the **agent-challenger**, the **4 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`), and the optional `manifesto.md` (in `docs/`) — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
+
+**Interactive install** (control each step) : `./install.sh /path/to/your/project` — same components, prompts on each one.
+
+After install : open Claude Code in your project. The toolkit is loaded automatically; skills auto-invoke on triggers; hooks block dangerous commands unless bypassed with `[deploy-ok]` / `[workaround-assumed]`. **You do not need to read `manifesto.md` for the doctrine to operate** — it is optional long-form theory for humans who want to understand the *why*.
+
 **Source article series**: *Building the Counterpart Doctrine in public* — 31 satellite articles + pillar (May–July 2026) on [DEV.to](https://dev.to/michelfaure). The v0.2 closing pillar is [*The Counterpart Doctrine: a seven-axis spec for working with an AI coding agent*](https://dev.to/michelfaure) (May 18, 2026). The v0.5 toolkit pillar follows on July 15, 2026, after the 31-article arc lands.
 
 ## Why this matters

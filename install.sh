@@ -1,15 +1,43 @@
 #!/usr/bin/env bash
-# Interactive install of the Counterpart Doctrine into a target project.
-# Usage: ./install.sh [path/to/project]
-#        (if omitted: uses the pwd at invocation time)
+# Install the Counterpart Doctrine into a target project.
+#
+# Usage:
+#   ./install.sh                          # interactive, target = pwd
+#   ./install.sh [path/to/project]        # interactive, target = path
+#   ./install.sh --yes                    # non-interactive (defaults Y), target = pwd
+#   ./install.sh --yes [path/to/project]  # non-interactive, target = path
+#
+# One-line install from a clone (non-interactive):
+#   git clone https://github.com/michelfaure/doctrine-counterpart.git && cd doctrine-counterpart && ./install.sh --yes /path/to/your/project
 
 set -euo pipefail
+
+# Parse --yes / -y flag (non-interactive, all prompts default to Y)
+AUTO_YES=0
+ARGS=()
+for arg in "$@"; do
+  case "$arg" in
+    --yes|-y) AUTO_YES=1 ;;
+    *) ARGS+=("$arg") ;;
+  esac
+done
+
+# Helper: prompt, or return Y if --yes
+ask() {
+  if [[ "$AUTO_YES" -eq 1 ]]; then
+    echo "Y"
+  else
+    local reply
+    read -r -p "$1" reply
+    echo "${reply:-Y}"
+  fi
+}
 
 # Detect source directory (where this script lives)
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Target
-TARGET="${1:-$(pwd)}"
+# Target (first non-flag arg, or pwd)
+TARGET="${ARGS[0]:-$(pwd)}"
 TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
@@ -30,8 +58,12 @@ fi
 echo "→ Step 1/6: CLAUDE.md (toolkit — 14 operational rules)"
 if [[ -f "$TARGET/CLAUDE.md" ]]; then
   echo "  A CLAUDE.md already exists in $TARGET."
-  read -r -p "  [m]anual merge after / [a]ppend doctrine to end / [s]kip / [o]verwrite? [m] " choice
-  choice="${choice:-m}"
+  if [[ "$AUTO_YES" -eq 1 ]]; then
+    choice="m"  # safe default: place alongside, manual merge
+  else
+    read -r -p "  [m]anual merge after / [a]ppend doctrine to end / [s]kip / [o]verwrite? [m] " choice
+    choice="${choice:-m}"
+  fi
   case "$choice" in
     a)
       echo "" >> "$TARGET/CLAUDE.md"
@@ -94,9 +126,8 @@ done
 
 # --- 3. manifesto.md (readable long-form theory) ---
 echo ""
-echo "→ Step 3/6: manifesto.md (long-form theory, human reading)"
-read -r -p "  Copy manifesto.md to $TARGET/docs/manifesto.md? [Y/n] " choice
-choice="${choice:-Y}"
+echo "→ Step 3/6: manifesto.md (long-form theory, OPTIONAL human reading)"
+choice=$(ask "  Copy manifesto.md to $TARGET/docs/manifesto.md? [Y/n] ")
 if [[ "$choice" =~ ^[Yy]$ ]]; then
   mkdir -p "$TARGET/docs"
   cp "$SOURCE_DIR/manifesto.md" "$TARGET/docs/manifesto.md"
@@ -116,8 +147,7 @@ echo "    - check-workaround-assumed : workaround commits without [workaround-as
 echo ""
 echo "  Default in v0.4.1 (unchanged since v0.3): Y. The doctrine's value relies on these guards."
 echo "  Decline only if you have an incompatible setup."
-read -r -p "  Activate hooks? [Y/n] " choice
-choice="${choice:-Y}"
+choice=$(ask "  Activate hooks? [Y/n] ")
 if [[ "$choice" =~ ^[Yy]$ ]]; then
   mkdir -p "$TARGET/.claude/hooks"
 

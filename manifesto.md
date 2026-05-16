@@ -1,8 +1,25 @@
 # Counterpart Doctrine — Manifesto v0.4.1
 
+> **📖 Optional reading — humans only, not loaded by Claude Code.**
+> To *use* the doctrine: run [`./install.sh --yes`](./install.sh) for a one-command install of the toolkit ([`CLAUDE.md`](./CLAUDE.md), 14 rules, ~200 lines) + the four hooks. This manifesto is the long-form theory you read if you want to understand *why* the rules exist — **it is not required for the doctrine to operate**. Two-minute path: install + skim the 14 rule titles in `CLAUDE.md`. Hour-long path: read this file end to end.
+
 *Manifesto v0.4.1 — 17 May 2026 (R1/R7 refactor + R14 escape hatch + LOC corrected; full amendment history at the bottom: v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1)*
 
-> This is the **manifesto**: the long-form theory, the *attelage* metaphor, the construction method, the retractions, the critiques received and integrated. It is read by humans who want to understand *why* the rules exist. The operational rules themselves — the toolkit — moved to [`CLAUDE.md`](./CLAUDE.md) in v0.4 (then refined to fourteen rules in v0.4.1, ~200 lines). Two cycles are explicit: v0.4.1 toolkit shipped 17 May 2026 integrating a fourth external review, v0.5 toolkit scheduled 15 July 2026 after the thirty-article arc decants what survives empirically. See section *From v0.3.3 to v0.4 — separating toolkit from manifesto* and its sub-section *From v0.4 to v0.4.1 — fourth external reading and toolkit refactor* below.
+## Table of contents
+
+1. [Preface](#preface) — addressee and central thesis
+2. [The attelage — central metaphor](#the-attelage--central-metaphor)
+3. [The eight axes](#the-eight-axes) — eight-axis theory (Axis 1 to Axis 8)
+4. [The material dispositive — six strata](#the-material-dispositive--six-strata)
+5. [The five falsifiable singularity hypotheses](#the-five-falsifiable-singularity-hypotheses)
+6. [The doctrine applies to itself](#the-doctrine-applies-to-itself)
+7. [**How to adopt**](#how-to-adopt) — install, M1–M5 measured table, return expected from adopters
+8. [Annexes](#annexes) — glossary, load-bearing references, consulted-not-load-bearing
+9. [What v0.2 prescribed and v0.3 retracted](#what-v02-prescribed-and-v03-retracted) — documented retractions (4 entries)
+10. [From v0.3.3 to v0.4 — separating toolkit from manifesto](#from-v033-to-v04--separating-toolkit-from-manifesto) — including v0.4 → v0.4.1
+11. [Critiques received](#critiques-received) — external critiques 1 & 2 (critiques 3 = Anthropic auto-analysis, 4 = Claude.ai web are folded into section 10)
+
+The toolkit/manifesto split shipped in v0.4. v0.5 toolkit scheduled 15 July 2026 after the thirty-article arc decants what survives empirically.
 
 ---
 
