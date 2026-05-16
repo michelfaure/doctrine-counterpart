@@ -45,7 +45,7 @@ fi
 
 # --- 2. Skills ---
 echo ""
-echo "→ Skills (9 expected in v0.4.1)"
+echo "→ Skills (10 expected in v0.4.1)"
 SOURCE_SKILLS=$(find "$SOURCE_DIR/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 TARGET_SKILLS=$(find "$TARGET/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 echo "  source: $SOURCE_SKILLS skills"
