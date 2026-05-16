@@ -1,47 +1,47 @@
 #!/usr/bin/env bash
-# Hook: PreToolUse, matcher: Bash
-# Blocks any push to main if the last commit does not contain [deploy-ok].
-# Forces conscious re-verification before deployment.
+# Deploy safeguard hook — PreToolUse on Bash
+# Exit 0 = allow, exit 2 = block (stderr shown to Claude + user)
+# Blocks dangerous commands unless the literal string '[deploy-ok]' appears
+# anywhere in the command (trailing comment, token, etc).
+# Reads JSON payload from stdin: .tool_input.command
 
 set -euo pipefail
 
-INPUT=$(cat)
-COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null || echo "")
+payload="$(cat)"
+cmd="$(printf '%s' "$payload" | jq -r '.tool_input.command // empty')"
 
-# Only acts on push to main / master / production
-if [[ ! "$COMMAND" =~ git[[:space:]]+push.*\b(main|master|production|prod)\b ]]; then
+[[ -z "$cmd" ]] && exit 0
+
+# Explicit bypass marker
+if printf '%s' "$cmd" | grep -qF -- '[deploy-ok]'; then
   exit 0
 fi
 
-# Force-push forbidden without additional explicit tag
-if echo "$COMMAND" | grep -qE '\b(--force|-f)\b' && ! echo "$COMMAND" | grep -q '\[force-ok\]'; then
-  cat <<EOF >&2
-⚠ [Counterpart Doctrine — axis 4] Force-push to production branch detected.
+# Pattern table: label|extended-regex
+# Target shell command strings; matches meant to be conservative (better false
+# positive than false negative, bypass is one token).
+patterns=(
+  "git push to main/master|git[[:space:]]+push([[:space:]]+[^;&|]+)?[[:space:]](origin[[:space:]]+)?(main|master)([[:space:]]|$|:)"
+  "git push --force|git[[:space:]]+push([[:space:]]+[^;&|]+)?[[:space:]](-f|--force|--force-with-lease)([[:space:]]|$)"
+  "vercel --prod|vercel([[:space:]]+[a-z]+)?([[:space:]]+[^;&|]+)?[[:space:]]--prod([[:space:]]|$)"
+  "supabase db push|supabase[[:space:]]+db[[:space:]]+push"
+  "git reset --hard main|git[[:space:]]+reset[[:space:]]+--hard[[:space:]]+([^;&|]+[[:space:]])?(main|master|origin/main|origin/master)([[:space:]]|$)"
+  "rm -rf rembrandt|rm[[:space:]]+(-[a-zA-Z]*r[a-zA-Z]*f[a-zA-Z]*|-[a-zA-Z]*f[a-zA-Z]*r[a-zA-Z]*)[[:space:]]+[^;&|]*rembrandt"
+)
 
-  Force-push rewrites shared history. To bypass:
-    - tag "[force-ok]" in the command
-    - or use --force-with-lease (safer)
-EOF
-  exit 2
-fi
-
-# Verify the last commit contains [deploy-ok]
-LAST_MSG=$(git log -1 --pretty=%B 2>/dev/null || echo "")
-
-if [[ ! "$LAST_MSG" =~ \[deploy-ok\] ]]; then
-  cat <<EOF >&2
-⚠ [Counterpart Doctrine — axis 4] Push to production branch blocked.
-
-  The last commit does not contain [deploy-ok].
-  This forces conscious re-verification before deployment:
-    - build green?
-    - migration tested?
-    - rollback planned in case of failure?
-
-  Add "[deploy-ok]" to the commit message if you confirm (git commit --amend
-  or new commit). Tag visible in git log = traceability of the go/no-go.
-EOF
-  exit 2
-fi
+for entry in "${patterns[@]}"; do
+  label="${entry%%|*}"
+  regex="${entry#*|}"
+  if printf '%s' "$cmd" | grep -E -q -e "$regex"; then
+    {
+      echo "BLOCKED: deploy-safeguard matched '$label'"
+      echo "Command: $cmd"
+      echo ""
+      echo "Add '[deploy-ok]' in the command to bypass (e.g. trailing comment)."
+      echo "Example: git push origin main  # [deploy-ok]"
+    } >&2
+    exit 2
+  fi
+done
 
 exit 0
