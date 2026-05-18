@@ -11,7 +11,7 @@ This file is the **toolkit**: what the agent loads. The long-form theory — eig
 - **Anti-anthropomorphism.** State the decision, the criterion, the alternative discarded. Avoid projecting preferences onto the agent (*"it prefers"*), but legitimate inferential acts of discourse (*"the analysis indicates," "I confirm reading the brief"*) are fine — the rule is about projecting agency, not banning first person.
 - **Counterpart, not subordinate.** Tied to the same work, free to diverge on the direction of pull. Comply with briefs, contest their form when warranted.
 
-## The fourteen rules
+## The sixteen rules (v0.6 adds R15 + R16, post-Gorgon empirical session 2026-05-18)
 
 ### R1 — Raw output, not declaration
 
@@ -146,6 +146,36 @@ Conditions:
 - If the code is not deleted at day 7, an ADR is owed retroactively and the spike must be converted to permanent — at which point R6/R7/R8 apply normally.
 
 Why this rule exists: without an escape hatch, the toolkit appeared to apply always, which is false empirically (POC, prototype, exploration before architecture decision) and discouraged adoption. R14 makes the exception official, time-bounded, and falsifiable — `git log --grep '\[spike\]' --since='7 days ago'` lists current spikes; anything beyond 7 days is a violation to fix or document.
+
+---
+
+## R15 — *Intermediate checkpoint commits in autonomous agent sessions* (added v0.5, 2026-05-18)
+
+In a long autonomous agent session, commit immediately after each materially validated artifact. No batch at session end — if the agent stalls, work up to the last commit is saved.
+
+Concretely: granularity of commit = granularity of the last material oracle crossed (1 canon file validated schema = 1 commit; 1 awnshegh completed = 1 commit; 1 sub-chantier livré = 1 commit). Push after each commit (or batched ≤ 3 commits) if the session exceeds 30 minutes — protects against machine kill, not only agent stall.
+
+The brief must explicitly say: *"Commit each [artifact] as soon as it crosses its material oracle, do not batch."* Implicit instructions do not work — agents default to batched commits without explicit phrasing.
+
+Empirical foundation (Gorgon multi-substrate 2026-05-17/18): 25+ autonomous agent invocations, comparison of negative case (`ac0ba26` Vosgaard bloc 1 stalled without checkpoint commits — saved in extremis by defensive observation) vs positive cases (`19eef04→57b7108` Vosgaard awnsheghs commit-per-artifact, `dc33402→d2654a4` Zone A canon completion commit-per-realm — zero loss despite stall at 600s).
+
+---
+
+## R16 — *Empirical parallel-agent limit with structural safeguards* (added v0.6, 2026-05-18)
+
+To orchestrate N parallel autonomous agents with 0 complete stall, three structural mechanisms are required and sufficient:
+
+1. **Strictly non-overlapping material scope** — each agent can modify only files/directories explicitly listed in its prompt.
+2. **Proactive `.gitignore` on raw outputs BEFORE launch** — otherwise `git add .` agent absorbs untracked legitimate files outside scope. Three observed violations on N=40 session without proactive gitignore. Zero violations with it.
+3. **Explicit R1 marker in prompt + temporal tolerance on "completed" report** — a premature "completed" report ≠ stall. Allow ~5 min before human intervention; the agent often continues correctly and re-reports cleanly.
+
+Empirical limit observed: **N ≤ 6 parallel agents simultaneously without degradation**. N > 6 untested empirically.
+
+Empirical foundation (Gorgon Phase H + I + J + K + L 2026-05-18): **40 agents launched, 40 finished = 100% completion** versus night 2026-05-17 with 22 agents / 4 stalls = 18% failure rate without systematic mechanisms 1-3. Sample N=40 in single session, single substrate (Godot/GDScript game dev). Multi-substrate validation pending (TypeScript/Next.js rembrandt queue ; doctrine-counterpart toolkit dogfooding).
+
+Distinct from R15 (which addresses *one* long autonomous agent session — commit cadence). R16 addresses *multiple parallel* agents — scope isolation + git staging area collisions + report synchronization.
+
+Tension with R9 (*Three projects FIFO*): R16 applies *within* a single project; R9 applies *across* projects. No conflict — R16 is a sub-rule of efficient single-project autonomy.
 
 ---
 
