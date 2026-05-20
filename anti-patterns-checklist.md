@@ -1,6 +1,6 @@
-# Anti-patterns checklist — Counterpart Doctrine v0.4.1
+# Anti-patterns checklist — Counterpart Doctrine v0.7
 
-Eighteen anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
+Twenty-one anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
 
 The list is the densest doctrine-payload-per-line in the repo. If you have ten minutes to absorb the doctrine, read this file.
 
@@ -40,6 +40,13 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 - [ ] **Question whose form contains the answer** — *"you asked X, wouldn't you rather Y?"* is a disguised command — own it as a command. A real question lists at least two concrete alternatives the interrogator had not named. Axis 8.
 - [ ] **Speculative abstraction or factoring not required by the success criterion** — extracting a function called once, adding configuration knobs nobody requested, error-handling impossible scenarios, defining a base class "in case we need it later." If 50% of the code reaches 100% of the criterion, the other 50% is debt. Axis 5 (parsimony).
 
+## Multi-substrate consolidation (v0.7 additions)
+
+- [ ] **Bulk DELETE/UPDATE relying on a stale count** *(new v0.7)* — using a count probe older than ~30 minutes as the size estimate for a bulk mutation on a live system. Cron jobs, webhooks, concurrent writers invalidate counts silently. Re-run the count immediately before the mutation; abort if delta > 5%. The first probe scopes the work; the second probe is the gate. R7.
+- [ ] **Sub-agent invoked without inlining load-bearing parent feedbacks** *(new v0.7)* — delegating a sub-agent task > 30 min while assuming it will transitively load the user-scope feedbacks the parent treats as load-bearing. Sub-agents operate in their own rule sandbox — what is not in the brief is operationally absent. Silent doctrine violation by delegation gap. R9.
+- [ ] **External AI claim adopted without material test** *(new v0.7)* — accepting a claim from ChatGPT / another Claude / sparring AI about a concrete tool, an external resource, or a system structure you can probe, without testing it first. Test cost ≈ 1 shell command. Two AI reviews converging = one source, not two. R12.
+- [ ] **5+ autonomous commits without session log or self-critique** *(new v0.7)* — the human has effectively left the loop ; doctrine triggers (`close-session`, `falsify-before-fix`) are not invoked because they depend on human invocation. Silent autonomy drift — discipline holds when the human invokes, falls when autonomy takes over. R15.
+
 ---
 
-*Counterpart Doctrine v0.4.1 — 18 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4 with *filesystem over summary*, +1 in v0.4.1 for the *orphan spike* of R14). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*
+*Counterpart Doctrine v0.7 — 22 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14, +4 in v0.7 for multi-substrate consolidation). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*

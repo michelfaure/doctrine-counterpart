@@ -1,8 +1,8 @@
-# Counterpart Toolkit — v0.4.1
+# Counterpart Toolkit — v0.7
 
-Fourteen operational rules for working with Claude Code on a long-running solo project. Each rule is falsifiable, anchored in at least one documented incident, and actionable at decision time — not in deferred review.
+Sixteen operational rules for working with Claude Code on a long-running solo project. Each rule is falsifiable, anchored in at least one documented incident, and actionable at decision time — not in deferred review.
 
-This file is the **toolkit**: what the agent loads. The long-form theory — eight axes, the *attelage* metaphor, the construction method, retractions and critiques received — moved to [`manifesto.md`](./manifesto.md). Read the manifesto if you want the *why*; load this file if you want the *how*. The two cycles are explicit: **v0.4.1 ships 17 May 2026 (R1/R7 refactor, R2 extraction, R14 escape hatch, falsifiable-metrics propagation, LOC corrected), v0.5 toolkit scheduled 15 July 2026** after the thirty-article arc decants what survives empirically.
+This file is the **toolkit**: what the agent loads. The long-form theory — eight axes, the *attelage* metaphor, the construction method, retractions and critiques received — moved to [`manifesto.md`](./manifesto.md). Read the manifesto if you want the *why*; load this file if you want the *how*. The publication cadence is explicit: **v0.7 ships 20 May 2026** (multi-substrate consolidation — amendments to R7, R9, R12, R15 + 2 new skills + 1 user-scope hook), after `/challenger` self-falsification (3 redundant proposals retracted) + gorgon multi-substrate exploration (2 patterns added, H6 + H7). Six iterations in 35 days (v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7) — each carrying a named *new fact* and an acknowledged *retraction*.
 
 ## Style and posture
 
@@ -11,7 +11,7 @@ This file is the **toolkit**: what the agent loads. The long-form theory — eig
 - **Anti-anthropomorphism.** State the decision, the criterion, the alternative discarded. Avoid projecting preferences onto the agent (*"it prefers"*), but legitimate inferential acts of discourse (*"the analysis indicates," "I confirm reading the brief"*) are fine — the rule is about projecting agency, not banning first person.
 - **Counterpart, not subordinate.** Tied to the same work, free to diverge on the direction of pull. Comply with briefs, contest their form when warranted.
 
-## The sixteen rules (v0.6 adds R15 + R16, post-Gorgon empirical session 2026-05-18)
+## The sixteen rules (v0.7 amends R7, R9, R12, R15 — multi-substrate consolidation 2026-05-20)
 
 ### R1 — Raw output, not declaration
 
@@ -64,6 +64,8 @@ No declared category → reject the commit. Never retroactively recompute a Snap
 
 Every imported, derived, or asserted row carries a `source` column with a controlled vocabulary. Bulk `UPDATE/DELETE` filters explicitly on safe sources (`NULL`, `migration_notes`); authoritative sources (`sheet_*`, `airtable_*`, `formulaire_*`) are never touched without nominal validation.
 
+**For bulk DELETE/UPDATE on a live system: re-run the count query immediately before the mutation. Abort if delta > 5 % from the initial probe — counts older than ~30 minutes are stale in active systems (cron jobs, webhooks, concurrent writers). The first probe scopes the work; the second probe is the gate.** *(amended v0.7 from N=2 incidents — bulk count drift between probe and mutation)*
+
 Every rule states its canonical exceptions **in the same file** that states the rule. Format: a final section *"Exceptions tolerated."* An absolute without listed exceptions is a future drift waiting to happen — the first uncovered case becomes a silent inline workaround or an unreviewed rule disable. A new exception = an ADR child of the rule.
 
 Multi-file invariants (DB CHECK + TS constant + doctrine doc + tests) are guarded by a contract test that includes a **negative case** (`.rejects.toThrow(/Drift/)`). A contract suite that only asserts the happy path is tautological.
@@ -74,7 +76,7 @@ For any module > 2 files: produce a one-page ADR (decision + alternatives + cons
 
 ### R9 — Sub-agent briefing, FIFO 3 projects max
 
-**Sub-agent briefing.** For any sub-agent task > 30 min of work: write a brief with named deliverables, an explicit phase-0 command list, and demand an item-by-item report. Cheap briefs return plausible prose, not verified work.
+**Sub-agent briefing.** For any sub-agent task > 30 min of work: write a brief with named deliverables, an explicit phase-0 command list, and demand an item-by-item report. Cheap briefs return plausible prose, not verified work. **The brief must inline (or path-reference) the user-scope feedbacks the parent treats as load-bearing for this task. Sub-agents do not transitively inherit the parent's memory index — what is not in the brief is operationally absent. A feedback worth its retrieval cost for the parent must be worth its briefing cost for the delegate.** *(amended v0.7 — silent doctrine violation by delegation gap observed on agent committing to main directly while parent treated branch-check feedback as load-bearing)*
 
 **FIFO 3 projects max.** Context fragmentation crosses a threshold above 3 parallel projects and quality drops on each. Open a new project = close an old one (shipped or explicitly deferred). Distinct from R8 — this is human attention discipline, not session structure.
 
@@ -106,6 +108,8 @@ Parsimony is not shortcut: deleting 100 lines while preserving the invariant is 
 ### R12 — Cite the official text, materialise vendor defaults
 
 Any claim of legal norm / obligation / compliance (*"you need eIDAS Advanced," "VAT 20 % mandatory here"*) cites the exact official text + edition + date. Without citation, it is marketing.
+
+**Any claim formulated by an external AI (other Claude, ChatGPT, conversational sparring) about (a) the behavior of a concrete tool you can probe, (b) the content of an external resource, (c) the structure of a system whose ground truth you can sample — must be tested materially before being taken as input for an architectural decision. Test cost ≈ 1 shell command. Cost of believing without testing = pipeline entirely based on a non-existent mechanism. Two external AI reviews converging on the same diagnostic = one source for R5 purposes, not two — cross-substrate independent corroboration requires one human or one mechanically distinct probe (logs, metrics, sample run).** *(amended v0.7 from N=3 multi-substrate — WebFetch hallucination + Kiran Welle phantom content + two-AI review convergence on doctrine review)*
 
 Any silent default of a SaaS / SDK / library that shapes the system is **materialised** as a lint rule, an ADR, or a `.claude/rules/<topic>.md`. Canonical examples: PostgREST `ORDER BY ctid` LIMIT 1000, Supabase anon GRANTs on `CREATE TABLE`, Gmail 2FA binding the SMTP app password, Vercel's ignored build step.
 
@@ -159,6 +163,8 @@ The brief must explicitly say: *"Commit each [artifact] as soon as it crosses it
 
 Empirical foundation (Gorgon multi-substrate 2026-05-17/18): 25+ autonomous agent invocations, comparison of negative case (`ac0ba26` Vosgaard bloc 1 stalled without checkpoint commits — saved in extremis by defensive observation) vs positive cases (`19eef04→57b7108` Vosgaard awnsheghs commit-per-artifact, `dc33402→d2654a4` Zone A canon completion commit-per-realm — zero loss despite stall at 600s).
 
+**R15 enforces commit cadence within an autonomous session. It does not detect when the human has effectively left the loop. Complement: a meta-hook (PostToolUse on agent invocation tools) counts consecutive autonomous `/goal` or sub-agent invocations without human intervention and triggers a self-critique skill (`falsify-before-fix` or equivalent) after N=5. The session log produced by the self-critique is gating — no further autonomous commits until logged. The meta-hook addresses the asymmetry validated empirically: doctrine discipline holds when the human invokes triggers, falls when autonomy takes over.** *(amended v0.7 from gorgon overnight session 2026-05-18 — 9 autonomous commits without session log because `close-session` trigger never fired ; meta-hook prototype pending user-scope)*
+
 ---
 
 ## R16 — *Empirical parallel-agent limit with structural safeguards* (added v0.6, 2026-05-18)
@@ -204,7 +210,8 @@ If the conversation drifts into one of these, flag it explicitly:
 
 ---
 
-*Counterpart Toolkit v0.4.1 — released 17 May 2026, two days after v0.4.*
-*Fourteen rules in ~200 lines. v0.4.1 integrates a fourth external review (Claude.ai web) that flagged three actionable refactors plus the unmeasured LOC: R1 split (filesystem over summary extracted as R2), R7 split into R8 (session structure) and R9 (delegation/attention), R14 escape hatch added, LOC corrected from 35 k stale figure to ~118 k measured by `find + wc -l` on TS/TSX/JS/JSX excluding node_modules/.next/dist/build/coverage/.turbo/.claude (method counts blanks and comments; a `cloc` code-only figure would be lower).*
-*Two-iteration strategy preserved: v0.4.1 ships now with refactors that 60+ days and four external readings converge on. v0.5 scheduled 15 July 2026, after the thirty-article arc decants what survives empirically.*
-*Tested on 60+ days of solo ERP coding with Claude Code (~118 k lines, 65+ ADRs, M1–M5 baseline in [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics)).*
+*Counterpart Toolkit v0.7 — released 20 May 2026, two days after v0.6.*
+*Sixteen rules in ~220 lines. v0.7 consolidates multi-substrate practice (Next.js/Supabase ERP + Godot/GDScript game dev) through 4 amendments: R7 (bulk re-count before mutation, N=2), R9 (sub-agent brief inlines load-bearing feedbacks, N=1 structural), R12 (external AI claims require material test, N=3 multi-substrate), R15 (long autonomous session human checkpoint meta-hook, N=1+1).*
+*Three initial proposals retracted after `/challenger` self-falsification: Am.R1 redundant with existing R1 *"count = N / drift detected"* text + skill `material-verification` ; Am.R4 marginal vs R4 step 5 + skill `root-cause` ; skill `parsimony-1day-check` duplicates existing skill `parsimony`.*
+*Two patterns added after gorgon multi-substrate exploration: H6 (external AI claims testing, became Am.R12) + H7 (LLM time-estimate biased without pilot benchmark, deferred as v0.7-candidate pending 5-10 additional measurements).*
+*Tested on 70+ days of solo ERP coding with Claude Code (~118 k lines, 76+ ADRs, M1–M5 baseline in [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics)) + 5 days of game dev dogfooding (Godot/GDScript, 24 ADRs, 676 tests).*

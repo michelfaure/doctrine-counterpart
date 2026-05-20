@@ -1,9 +1,9 @@
-# Counterpart Doctrine — Manifesto v0.4.1
+# Counterpart Doctrine — Manifesto v0.7
 
 > **📖 Optional reading — humans only, not loaded by Claude Code.**
-> To *use* the doctrine: run [`./install.sh --yes`](./install.sh) for a one-command install of the toolkit ([`CLAUDE.md`](./CLAUDE.md), 14 rules, ~200 lines) + the four hooks. This manifesto is the long-form theory you read if you want to understand *why* the rules exist — **it is not required for the doctrine to operate**. Two-minute path: install + skim the 14 rule titles in `CLAUDE.md`. Hour-long path: read this file end to end.
+> To *use* the doctrine: run [`./install.sh --yes`](./install.sh) for a one-command install of the toolkit ([`CLAUDE.md`](./CLAUDE.md), 16 rules, ~220 lines) + the four hooks. This manifesto is the long-form theory you read if you want to understand *why* the rules exist — **it is not required for the doctrine to operate**. Two-minute path: install + skim the 16 rule titles in `CLAUDE.md`. Hour-long path: read this file end to end.
 
-*Manifesto v0.4.1 — 17 May 2026 (R1/R7 refactor + R14 escape hatch + LOC corrected; full amendment history at the bottom: v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1)*
+*Manifesto v0.7 — 20 May 2026 (multi-substrate consolidation — R7/R9/R12/R15 amendments + 2 new skills + 1 user-scope hook ; full amendment history at the bottom: v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7)*
 
 ## Table of contents
 
@@ -19,7 +19,7 @@
 10. [From v0.3.3 to v0.4 — separating toolkit from manifesto](#from-v033-to-v04--separating-toolkit-from-manifesto) — including v0.4 → v0.4.1
 11. [Critiques received](#critiques-received) — external critiques 1 & 2 (critiques 3 = Anthropic auto-analysis, 4 = Claude.ai web are folded into section 10)
 
-The toolkit/manifesto split shipped in v0.4. v0.5 toolkit scheduled 15 July 2026 after the thirty-article arc decants what survives empirically.
+The toolkit/manifesto split shipped in v0.4. v0.6 added R15 + R16 post-Gorgon empirical session (2026-05-18). v0.7 ships 20 May 2026 — multi-substrate consolidation through 4 amendments (R7, R9, R12, R15) after `/challenger` self-falsification (3 redundant proposals retracted) and gorgon exploration (2 patterns added).
 
 ---
 

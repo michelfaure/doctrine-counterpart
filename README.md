@@ -1,6 +1,6 @@
 # counterpart-doctrine/
 
-Fourteen operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged after 60+ effective days of solo coding with Claude Code on a production ERP. Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.4.1** (R1/R7 refactor + R14 escape hatch + LOC correction + M1–M5 propagation — see *From v0.4 to v0.4.1* in `manifesto.md`).
+Sixteen operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged after 70+ effective days of solo coding with Claude Code on a production ERP + 5 days of game dev dogfooding (Godot/GDScript multi-substrate test). Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.7** (R7/R9/R12/R15 amendments + 2 new skills `ask-3-options-before-code` + `pre-push-inventory` + 1 user-scope hook `pre-bulk-mutation-count-staleness` — multi-substrate consolidation after `/challenger` self-falsification and gorgon exploration ; see [`v0.7-candidates.md`](./v0.7-candidates.md) for the full audit).
 
 ## Quick install (one command)
 
@@ -10,13 +10,13 @@ git clone https://github.com/michelfaure/doctrine-counterpart.git && \
   ./install.sh --yes /path/to/your/project
 ```
 
-This installs the **toolkit** (`CLAUDE.md`, 14 rules, ~200 lines), the **10 skills**, the **agent-challenger**, the **4 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`), and the optional `manifesto.md` (in `docs/`) — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
+This installs the **toolkit** (`CLAUDE.md`, 16 rules, ~220 lines), the **12 skills**, the **agent-challenger**, the **4 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`), and the optional `manifesto.md` (in `docs/`) — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
 
 **Interactive install** (control each step) : `./install.sh /path/to/your/project` — same components, prompts on each one.
 
 After install : open Claude Code in your project. The toolkit is loaded automatically; skills auto-invoke on triggers; hooks block dangerous commands unless bypassed with `[deploy-ok]` / `[workaround-assumed]`. **You do not need to read `manifesto.md` for the doctrine to operate** — it is optional long-form theory for humans who want to understand the *why*.
 
-**Source article series**: *Building the Counterpart Doctrine in public* — 31 satellite articles + pillar (May–July 2026) on [DEV.to](https://dev.to/michelfaure). The v0.2 closing pillar is [*The Counterpart Doctrine: a seven-axis spec for working with an AI coding agent*](https://dev.to/michelfaure) (May 18, 2026). The v0.5 toolkit pillar follows on July 15, 2026, after the 31-article arc lands.
+**Source article series**: *Building the Counterpart Doctrine in public* — 31 satellite articles + pillar (May–July 2026) on [DEV.to](https://dev.to/michelfaure). The v0.2 closing pillar is [*The Counterpart Doctrine: a seven-axis spec for working with an AI coding agent*](https://dev.to/michelfaure) (May 18, 2026). v0.6 added R15+R16 post-Gorgon empirical session (May 18). v0.7 ships May 20, 2026 — multi-substrate consolidation after `/challenger` self-falsification.
 
 ## Why this matters
 
@@ -42,48 +42,52 @@ Three of five targets are now met empirically (M2, M3 recalibrated, M4). M1 awai
 
 Working with an AI coding agent on the long run produces drift — silently. Claims that the build is green while CI is red. Patches that look like fixes and reappear six days later under a different mask. Derived columns that diverge from their source without a probe to tell you. Summaries (`backlog.md`, `MEMORY.md`, session notes) that quietly diverge from `git log` and the filesystem because no one set them up to refresh. Pushbacks where the agent revises its recommendation without bringing a single new fact. No human PR reviewer catches it. No peer challenges. And paranoia on every line is not sustainable.
 
-The doctrine *constrains the exchanges* of the attelage — the two-horse team where solo and agent pull the same load. The better-rodé the attelage, the more it traces the same rail (Bourdieu's *habitus*). The form of the brief is the lever that keeps the attelage exploratory rather than sclerotic. Fourteen rules materially enforced — not fourteen pieties to maintain mentally.
+The doctrine *constrains the exchanges* of the attelage — the two-horse team where solo and agent pull the same load. The better-rodé the attelage, the more it traces the same rail (Bourdieu's *habitus*). The form of the brief is the lever that keeps the attelage exploratory rather than sclerotic. Sixteen rules materially enforced — not sixteen pieties to maintain mentally.
 
 ## The two artefacts — toolkit and manifesto
 
-V0.4 shipped the doctrine as **two distinct artefacts**, each fit for one use. v0.4.1 refined the toolkit without changing the structural choice:
+V0.4 shipped the doctrine as **two distinct artefacts**, each fit for one use. v0.4.1 refined the toolkit. v0.6 added R15 + R16 post-Gorgon empirical session. v0.7 ships multi-substrate consolidation (R7/R9/R12/R15 amendments) without changing the structural choice:
 
-- **The toolkit** — [`CLAUDE.md`](./CLAUDE.md). Fourteen operational rules in ~200 lines, each falsifiable and anchored in at least one documented incident. This is what your Claude Code reads at session start. Loadable, dense, citable. **This is what you install.**
-- **The manifesto** — [`manifesto.md`](./manifesto.md). The long-form theory: eight axes, the *attelage* metaphor, the construction method (phase A empirical extraction, phase B philosophical confrontation, phase B2 external audit, phase C falsifiability filter), the retractions, the critiques received and integrated, the v0.4.1 fourth-reading sub-section. Read by humans who want to understand *why* the rules exist. ~55 k characters.
+- **The toolkit** — [`CLAUDE.md`](./CLAUDE.md). Sixteen operational rules in ~220 lines, each falsifiable and anchored in at least one documented incident. This is what your Claude Code reads at session start. Loadable, dense, citable. **This is what you install.**
+- **The manifesto** — [`manifesto.md`](./manifesto.md). The long-form theory: eight axes, the *attelage* metaphor, the construction method (phase A empirical extraction, phase B philosophical confrontation, phase B2 external audit, phase C falsifiability filter), the retractions, the critiques received and integrated. Read by humans who want to understand *why* the rules exist. ~55 k characters.
+- **v0.7 candidates audit** — [`v0.7-candidates.md`](./v0.7-candidates.md). The full audit material that produced the v0.7 amendments: `/challenger` self-falsification (3 redundant proposals retracted), gorgon multi-substrate exploration (2 patterns added), final scope (4 amendments + 1 candidate + 5 artifacts).
 
-## The fourteen toolkit rules
+## The sixteen toolkit rules
 
-| # | Rule | Anchor axis (manifesto) | New/changed in v0.4.1 |
+| # | Rule | Anchor axis (manifesto) | Status / change |
 |---|---|---|---|
-| R1 | **Raw output, not declaration** *(DB schema authority, UI rendering authority, human memory falsifiability, external sources, EXPLAIN ANALYZE)* | Axis 1 | filesystem-over-summary extracted → R2 |
-| R2 | **Filesystem over summary** *(git log + filesystem before backlog/MEMORY/session notes)* | Axis 1 | **new — extracted from R1** |
-| R3 | **Success criteria before code** | Axis 1 | renumbered |
-| R4 | **Falsify before fix** *(5-step protocol: hypothesis → 3 refutation probes → execute → decide)* | Axis 2 | renumbered |
-| R5 | **No revision without new fact** | Axis 2 | renumbered |
-| R6 | **Live / Snapshot / Cache mandatory** | Axis 3 | renumbered |
-| R7 | **Provenance in the data, exceptions in the rule** | Axis 3 | renumbered |
-| R8 | **ADR before code, phase-0 grep** | Axis 4 | session structure (split from ex-R7) |
-| R9 | **Sub-agent briefing, FIFO 3 projects max** | Axis 4 | **new — delegation/attention (split from ex-R7)** |
-| R10 | **Silent failure forbidden, workaround tagged** | Axis 5 | renumbered |
-| R11 | **Parsimony, no speculative abstraction** | Axis 5 | renumbered |
-| R12 | **Cite the official text, materialise vendor defaults** *(platform config ≠ repo config)* | Axis 6 | renumbered |
-| R13 | **Audit, archive, three brief modes** *(M1–M5 falsifiable thresholds inline)* | Axes 7 & 8 | M1–M5 propagation in v0.4.1 |
-| R14 | **Spike escape hatch** *(`[spike]` tag + 7-day deletion = R6/R7/R8 exempt)* | (cross-cutting) | **new in v0.4.1** |
+| R1 | **Raw output, not declaration** *(DB schema authority, UI rendering authority, human memory falsifiability, external sources, EXPLAIN ANALYZE)* | Axis 1 | stable since v0.4.1 |
+| R2 | **Filesystem over summary** *(git log + filesystem before backlog/MEMORY/session notes)* | Axis 1 | extracted from R1 in v0.4.1 |
+| R3 | **Success criteria before code** | Axis 1 | stable |
+| R4 | **Falsify before fix** *(5-step protocol)* | Axis 2 | stable |
+| R5 | **No revision without new fact** | Axis 2 | stable |
+| R6 | **Live / Snapshot / Cache mandatory** | Axis 3 | stable |
+| R7 | **Provenance + bulk re-count before mutation** | Axis 3 | **amended v0.7 — bulk re-count <30min** |
+| R8 | **ADR before code, phase-0 grep** | Axis 4 | session structure (split in v0.4.1) |
+| R9 | **Sub-agent briefing inlines load-bearing feedbacks, FIFO 3 projects max** | Axis 4 | **amended v0.7 — inline feedbacks** |
+| R10 | **Silent failure forbidden, workaround tagged** | Axis 5 | stable |
+| R11 | **Parsimony, no speculative abstraction** | Axis 5 | stable |
+| R12 | **Cite the official text, materialise vendor defaults, test external AI claims** | Axis 6 | **amended v0.7 — external AI material test** |
+| R13 | **Audit, archive, three brief modes** *(M1–M5 inline)* | Axes 7 & 8 | M1–M5 propagation in v0.4.1 |
+| R14 | **Spike escape hatch** *(`[spike]` tag + 7-day deletion = R6/R7/R8 exempt)* | (cross-cutting) | new in v0.4.1 |
+| R15 | **Long autonomous session checkpoint + meta-hook autonomy detection** | (autonomy) | **amended v0.7 — meta-hook complement to R15 commit cadence** ; new in v0.6 |
+| R16 | **Empirical parallel-agent limit with structural safeguards** *(3 mechanisms)* | (autonomy) | new in v0.6 |
 
-Each rule is fully formulated in [`CLAUDE.md`](./CLAUDE.md). Each rule's theoretical anchor — its thesis, its inaugural incident, its trade-off against alternatives — is in [`manifesto.md`](./manifesto.md).
+Each rule is fully formulated in [`CLAUDE.md`](./CLAUDE.md). Each rule's theoretical anchor is in [`manifesto.md`](./manifesto.md). The v0.7 amendment material is in [`v0.7-candidates.md`](./v0.7-candidates.md).
 
 ## Files
 
 | File | Role |
 |---|---|
-| [`CLAUDE.md`](./CLAUDE.md) | **Toolkit v0.4.1** — fourteen operational rules, drop-in for project root. ~200 lines. |
-| [`anti-patterns-checklist.md`](./anti-patterns-checklist.md) | **18 anti-patterns** — densest doctrine-payload-per-line. Paste into PR review. |
-| [`manifesto.md`](./manifesto.md) | **Manifesto v0.4.1** — long-form theory: 8 axes, *attelage*, retractions, critiques, *From v0.4 to v0.4.1*. ~55 k characters. |
+| [`CLAUDE.md`](./CLAUDE.md) | **Toolkit v0.7** — sixteen operational rules, drop-in for project root. ~220 lines. |
+| [`anti-patterns-checklist.md`](./anti-patterns-checklist.md) | **22 anti-patterns** — densest doctrine-payload-per-line. Paste into PR review. |
+| [`manifesto.md`](./manifesto.md) | **Manifesto v0.7** — long-form theory: 8 axes, *attelage*, retractions, critiques. ~55 k characters. |
+| [`v0.7-candidates.md`](./v0.7-candidates.md) | **v0.7 audit material** — `/challenger` self-falsification + gorgon multi-substrate exploration. Source for the 4 v0.7 amendments. |
 | [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) | Five M1–M5 scripts + measured baseline + honest diagnosis of overshoots. The empirical half of the doctrine. |
 | [`install.sh`](./install.sh) | Interactive installer. Default `[Y/n]` for hooks. |
 | [`verify-install.sh`](./verify-install.sh) | Checks installation integrity, signals drift. |
 | [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (R8). |
-| [`.claude/skills/`](./.claude/skills/) | 9 universal skills. |
+| [`.claude/skills/`](./.claude/skills/) | 12 universal skills. |
 | [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R4, R5). |
 | [`.claude/hooks/`](./.claude/hooks/) | 4 hooks: `deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`. |
 

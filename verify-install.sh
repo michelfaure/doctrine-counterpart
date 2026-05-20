@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# verify-install.sh — Counterpart Doctrine v0.4.1
+# verify-install.sh — Counterpart Doctrine v0.7
 #
 # Verify that the doctrine is materially installed in the target project.
 # Compare source (this repo) against deployed (target project + ~/.claude/).
@@ -23,7 +23,7 @@ if [[ ! -d "$TARGET" ]]; then
 fi
 
 echo ""
-echo "  Counterpart Doctrine v0.4.1 — verify install"
+echo "  Counterpart Doctrine v0.7 — verify install"
 echo "  Source : $SOURCE_DIR"
 echo "  Target : $TARGET"
 echo ""
@@ -35,17 +35,17 @@ echo "→ CLAUDE.md"
 if [[ ! -f "$TARGET/CLAUDE.md" ]]; then
   echo "  ❌ missing"
   DRIFTS=$((DRIFTS + 1))
-elif grep -q "Counterpart Doctrine v0.4.1" "$TARGET/CLAUDE.md"; then
-  echo "  ✓ contains v0.4.1 marker"
-elif grep -q "Counterpart Doctrine" "$TARGET/CLAUDE.md"; then
-  echo "  ⚠ contains Counterpart marker but not v0.4.1 (older version, manual merge expected)"
+elif grep -q "Counterpart Toolkit — v0.7" "$TARGET/CLAUDE.md"; then
+  echo "  ✓ contains v0.7 marker"
+elif grep -q "Counterpart" "$TARGET/CLAUDE.md"; then
+  echo "  ⚠ contains Counterpart marker but not v0.7 (older version, manual merge expected)"
 else
   echo "  ⚠ exists but no Counterpart Doctrine marker — manual merge presumed"
 fi
 
 # --- 2. Skills ---
 echo ""
-echo "→ Skills (10 expected in v0.4.1)"
+echo "→ Skills (12 expected in v0.7)"
 SOURCE_SKILLS=$(find "$SOURCE_DIR/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 TARGET_SKILLS=$(find "$TARGET/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 echo "  source: $SOURCE_SKILLS skills"
@@ -72,7 +72,7 @@ fi
 
 # --- 4. Hooks ---
 echo ""
-echo "→ Hooks (4 expected in v0.4.1)"
+echo "→ Hooks (4 expected in v0.7, user-scope canonical)"
 EXPECTED_HOOKS=("deploy-safeguard.sh" "secret-scanner.sh" "audit-memory-reminder.sh" "check-workaround-assumed.sh")
 HOOKS_DIR_TARGET="$TARGET/.claude/hooks"
 
@@ -104,10 +104,10 @@ fi
 echo ""
 echo "→ manifesto.md (long-form theory)"
 if [[ -f "$TARGET/docs/manifesto.md" ]]; then
-  if grep -q "Manifesto v0.4.1" "$TARGET/docs/manifesto.md"; then
-    echo "  ✓ v0.4.1 installed in docs/"
+  if grep -q "Manifesto v0.7" "$TARGET/docs/manifesto.md"; then
+    echo "  ✓ v0.7 installed in docs/"
   else
-    echo "  ⚠ exists but not v0.4.1 — older version"
+    echo "  ⚠ exists but not v0.7 — older version"
   fi
 elif [[ -f "$TARGET/docs/doctrine.md" ]]; then
   echo "  ⚠ docs/doctrine.md present (pre-v0.4.1 layout). Renamed to manifesto.md in v0.4.1."
