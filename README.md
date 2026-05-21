@@ -26,17 +26,21 @@ The doctrine trades a small amount of upfront friction (ADRs, success criteria, 
 
 ## What this doctrine measures and what it doesn't
 
-Five metrics (M1–M5) instrument the doctrine's own self-application. Scripts and measured values live in [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) — the empirical half of the doctrine.
+Seven metrics (M1–M7) instrument the doctrine's own self-application, and a single-script orchestrator (`doctrine-metrics.ts`) runs all of them at once. Scripts and measured values live in [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) — the empirical half of the doctrine.
 
-| Metric | Target | Measured (14 May 2026) | Verdict |
-|---|---|---|---|
-| **M1** anti-pattern recurrence / 7-day session | ≤ 1 | 12.33 | Overshoot — heuristic flagged as over-sensitive, recalibration v0.5 |
-| **M2** multi-file commits without ADR / 28d | ≤ 5 % | 2.3 % | **Met** |
-| **M3** median drift apparition → detection / 90d | ≤ 30 days *(recalibrated v0.4.1)* | 35.3 days | Within 5 days of target |
-| **M4** position of 1st DB probe in session | ≤ 90 min | ~41 min | **Met** |
-| **M5** pure-command ratio / 7d (sclerosis alarm > 80 %) | threshold provisional | 90 % `unknown` | Instrumentation insufficient — v0.5 |
+| Metric | Rule | Target | Measured (21 May 2026) | Verdict |
+|---|---|---|---|---|
+| **M1** anti-pattern recurrence / 7-day session | R13 | ≤ 1 | 14.63 | Overshoot — heuristic over-sensitive, recalibration v0.5 |
+| **M2** multi-file commits without ADR / 28d | R8 | ≤ 5 % | 0.8 % | **Met** |
+| **M3** median drift apparition → detection / 90d | R13 | ≤ 30 days *(recalibrated v0.4.1)* | 35.7 days | Within 6 days of target |
+| **M4** position of 1st DB probe in session | R13 | ≤ 90 min | ~58 min | **Met** |
+| **M5** pure-command ratio / 7d (sclerosis alarm > 80 %) | R13 | threshold provisional | 94 % `unknown` | Instrumentation insufficient — v0.5 |
+| **M6** spike orphans > 7 days *(new v0.7)* | R14 | 0 | 0 (1 spike valid < 7d) | **Met** |
+| **M7** runs > 5 uncheckpointed commits *(new v0.7)* | R15 | 0 | 4 runs (longest = 92) | Miss — R15 meta-hook not yet active |
 
-Three of five targets are now met empirically (M2, M3 recalibrated, M4). M1 awaits heuristic refinement. M5 awaits instrumentation. The doctrine **does not retro-fit cibles to fit measurements** — it acknowledges the gap explicitly and recalibrates only when the gap reveals an intuition-set threshold (M3) rather than a doctrinal one. See *How to adopt* in `manifesto.md` for the full reasoning.
+**4/7 targets met empirically** (M2, M4, M5 alarm-side, M6). M1 awaits heuristic refinement, M3 is within 6 days of the recalibrated target. M5 awaits instrumentation (currently 94 % unclassified). **M7 confirms matériellement that R15's autonomous-session meta-hook is not yet operational** — the metric exposed 4 commit chains > 5 in the last 30 days, the longest being 92 commits without a session log. The amendment that R15 v0.7 prescribes is empirically necessary, not yet enforced.
+
+The doctrine **does not retro-fit cibles to fit measurements** — it acknowledges the gap explicitly and recalibrates only when the gap reveals an intuition-set threshold (M3) rather than a doctrinal one. Of 16 toolkit rules, 7 are instrumented (R8, R13 partial, R14, R15) and 9 remain qualitative or candidate for future metrics (R6, R7, R10, R11 instrumentable in principle, see `doctrine-metrics.ts` for the full coverage map). See *How to adopt* in `manifesto.md` for the full reasoning.
 
 ## Invariant rule
 
