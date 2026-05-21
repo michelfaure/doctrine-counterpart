@@ -60,6 +60,53 @@ for skill_dir in "$SOURCE_DIR/.claude/skills"/*/; do
   fi
 done
 
+# --- 2bis. Frontmatter YAML parse (material check) ---
+# A SKILL.md present but with broken frontmatter is not loaded by the official
+# Anthropic skills mechanism. The presence check above is not sufficient — the
+# frontmatter must parse and expose `name` + `description`. Added v0.7.1 after
+# the audit revealed that the existing presence check missed broken YAML.
+echo ""
+echo "→ Skills frontmatter (yaml.safe_load + required keys)"
+if command -v python3 >/dev/null 2>&1 && python3 -c "import yaml" >/dev/null 2>&1; then
+  TARGET_SKILLS_DIR="$TARGET/.claude/skills" python3 <<'PYEOF'
+import yaml, re, os, sys, glob
+target_dir = os.environ.get('TARGET_SKILLS_DIR', '')
+if not os.path.isdir(target_dir):
+    print(f"  ⊘ {target_dir} not found — skipped")
+    sys.exit(0)
+broken = []
+ok_count = 0
+for f in sorted(glob.glob(os.path.join(target_dir, '*/SKILL.md'))):
+    skill_name = os.path.basename(os.path.dirname(f))
+    with open(f) as fh:
+        content = fh.read()
+    m = re.match(r'^---\n(.*?)\n---\n', content, re.DOTALL)
+    if not m:
+        broken.append((skill_name, 'no --- delimiters'))
+        continue
+    try:
+        parsed = yaml.safe_load(m.group(1))
+        if not isinstance(parsed, dict):
+            broken.append((skill_name, f'frontmatter is {type(parsed).__name__}, not dict'))
+        elif 'name' not in parsed or 'description' not in parsed:
+            broken.append((skill_name, f'missing required keys (has: {list(parsed.keys())})'))
+        else:
+            ok_count += 1
+    except yaml.YAMLError as e:
+        broken.append((skill_name, str(e).split('\n')[0][:80]))
+for name, err in broken:
+    print(f"  ❌ {name}: {err}")
+print(f"  ✓ {ok_count} skill(s) parse cleanly" if ok_count else "")
+sys.exit(1 if broken else 0)
+PYEOF
+  YAML_RC=$?
+  if [[ $YAML_RC -ne 0 ]]; then
+    DRIFTS=$((DRIFTS + 1))
+  fi
+else
+  echo "  ⊘ python3+PyYAML not available — frontmatter parse skipped (install: pip install pyyaml)"
+fi
+
 # --- 3. Agent ---
 echo ""
 echo "→ Agent challenger"
