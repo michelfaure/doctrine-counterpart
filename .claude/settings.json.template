@@ -21,6 +21,27 @@
         ]
       }
     ],
+    "PostToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/r15-autonomous-counter.sh increment"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/r15-autonomous-counter.sh reset"
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [

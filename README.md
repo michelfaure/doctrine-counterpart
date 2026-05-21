@@ -10,7 +10,7 @@ git clone https://github.com/michelfaure/doctrine-counterpart.git && \
   ./install.sh --yes /path/to/your/project
 ```
 
-This installs the **toolkit** (`CLAUDE.md`, 16 rules, ~220 lines), the **12 skills**, the **agent-challenger**, the **4 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`), and the optional `manifesto.md` (in `docs/`) — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
+This installs the **toolkit** (`CLAUDE.md`, 16 rules, ~220 lines), the **12 skills**, the **agent-challenger**, the **5 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter`), and the optional `manifesto.md` (in `docs/`) — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
 
 **Interactive install** (control each step) : `./install.sh /path/to/your/project` — same components, prompts on each one.
 
@@ -93,7 +93,7 @@ Each rule is fully formulated in [`CLAUDE.md`](./CLAUDE.md). Each rule's theoret
 | [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (R8). |
 | [`.claude/skills/`](./.claude/skills/) | 12 universal skills. |
 | [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R4, R5). |
-| [`.claude/hooks/`](./.claude/hooks/) | 4 hooks: `deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`. |
+| [`.claude/hooks/`](./.claude/hooks/) | 5 hooks: `deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter` *(new v0.7.1 — meta-hook implementing R15 amendment)*. |
 
 ## Living vs Published — the two-tier doctrine
 

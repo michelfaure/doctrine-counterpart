@@ -119,8 +119,8 @@ fi
 
 # --- 4. Hooks ---
 echo ""
-echo "→ Hooks (4 expected in v0.7, user-scope canonical)"
-EXPECTED_HOOKS=("deploy-safeguard.sh" "secret-scanner.sh" "audit-memory-reminder.sh" "check-workaround-assumed.sh")
+echo "→ Hooks (5 expected in v0.7.1, user-scope canonical)"
+EXPECTED_HOOKS=("deploy-safeguard.sh" "secret-scanner.sh" "audit-memory-reminder.sh" "check-workaround-assumed.sh" "r15-autonomous-counter.sh")
 HOOKS_DIR_TARGET="$TARGET/.claude/hooks"
 
 for hook in "${EXPECTED_HOOKS[@]}"; do
