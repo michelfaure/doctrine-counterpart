@@ -1,6 +1,7 @@
 ---
 name: falsify-before-fix
-description: Activate this skill before writing the fix code on a bug or incident. Triggers on "fix", "bug", "patch", "hotfix", "workaround", "doesn't work", "diagnose", "hypothesis", "root cause", or any commit subject in `fix:` / `hotfix:` / `bugfix:` on a production incident. Distinct from `root-cause` (defensive checklist applied when *evaluating* a proposed fix): this skill is the invocable protocol the agent runs when it is about to *write* the fix. Enforces a single-sentence causal hypothesis and three material probes designed to refute it before any line of fix code is committed. Operational instance of R4 *Falsify before fix* of the Counterpart Toolkit.
+description: >-
+  Activate this skill before writing the fix code on a bug or incident. Triggers on "fix", "bug", "patch", "hotfix", "workaround", "doesn't work", "diagnose", "hypothesis", "root cause", or any commit subject in `fix:` / `hotfix:` / `bugfix:` on a production incident. Distinct from `root-cause` (defensive checklist applied when *evaluating* a proposed fix): this skill is the invocable protocol the agent runs when it is about to *write* the fix. Enforces a single-sentence causal hypothesis and three material probes designed to refute it before any line of fix code is committed. Operational instance of R4 *Falsify before fix* of the Counterpart Toolkit.
 ---
 
 # Falsify before fix — invocable protocol
