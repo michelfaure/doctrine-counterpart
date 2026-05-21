@@ -140,8 +140,8 @@ Testers wanting attribution can opt-in via the issue (default is anonymous). Cit
 
 ---
 
-*Counterpart Doctrine v0.4.1 — released 17 May 2026, two days after v0.4. R1 split into R1 (raw output) + R2 (filesystem over summary). ex-R7 split into R8 (session structure) + R9 (delegation/attention). R14 added (spike escape hatch). LOC corrected from 35 k stale figure to ~118 k measured (`find + wc -l` on TS/TSX/JS/JSX with explicit exclusions; method counts blanks and comments). M1–M5 findings propagated from `rembrandt-samples/falsifiable-metrics/` into the manifesto and toolkit. Six iterations in 32 days, each carrying a named fait nouveau and a documented retraction. v0.5 toolkit pillar on DEV.to: 15 July 2026.*
-*Tested on 60+ days of solo ERP coding (~118 k lines, 65+ ADRs).*
+*Counterpart Doctrine v0.7 — released 20 May 2026. Eight iterations in 35 days (v0.2 → v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7). v0.4.1 split R1 → R1+R2 (filesystem over summary), split ex-R7 → R8+R9 (session structure / delegation), added R14 (spike escape hatch). v0.6 added R15+R16 (autonomous session checkpoint, parallel-agent limit) post-Gorgon empirical session (40 agents / 40 finished). v0.7 amends R7 (bulk re-count <30 min before mutation), R9 (sub-agent brief inlines load-bearing feedbacks), R12 (external AI claims require material test), R15 (meta-hook autonomy detection) — multi-substrate consolidation after `/challenger` self-falsification (3 redundant proposals retracted) + gorgon multi-substrate exploration (2 patterns added). M1–M5 findings propagated from `rembrandt-samples/falsifiable-metrics/` into the manifesto and toolkit. Each iteration carries a named fait nouveau and a documented retraction. v0.5 toolkit pillar on DEV.to: 15 July 2026.*
+*Tested on 70+ days of solo ERP coding (~118 k lines, 76+ ADRs) + 5 days of game dev dogfooding (Godot/GDScript, 24 ADRs, 676 tests).*
 *Source repo: github.com/michelfaure/doctrine-counterpart*
 *Companion samples: github.com/michelfaure/rembrandt-samples/counterpart-doctrine*
 *License: CC-BY-4.0*
