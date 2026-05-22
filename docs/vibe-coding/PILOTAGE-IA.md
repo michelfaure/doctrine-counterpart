@@ -6,6 +6,32 @@ Pas de littérature, pas de théorie. Ce qui s'est passé matériellement.
 
 ---
 
+## 2026-05-22 matin — R15 V2 commit gate + refutation V3 amend par sonde matérielle (DRAFT à éditer)
+
+### Ce qui a marché
+
+La V2 du commit gate s'est écrite en moins d'une heure, parce que j'avais structuré la V1 hier avec une séparation propre counter/gate. Le contrat partagé est juste le state file JSON — pas besoin de toucher au counter pour ajouter le gate, et inversement. Le coût initial "deux scripts au lieu d'un" a été récupéré dès la première extension. Note pour plus tard : pour tout hook à logique évolutive, je vais préférer N petits scripts avec contrat minimal à 1 script monolithique avec argv branching. C'est exactement la single responsibility de fond, et là c'est vérifié empiriquement.
+
+Les 5 tests matériels avant push ont catché le bon comportement sur les 5 scénarios attendus (allow / block / bypass / non-git / threshold override). Le format "JSON payload simulé pipe au hook" est devenu une habitude qui marche — c'est le même pattern que deploy-safeguard et c'est facile à reproduire pour n'importe quel nouveau hook PreToolUse. Bon template à réutiliser pour V8+ ou autres.
+
+L'auto-application de R5 a été le moment fort. J'avais écrit hier soir en clôture "V3-candidate pour git commit --amend" sans la tester. Ce matin, demande de Michel Faure d'implémenter. Au lieu de coder, j'ai sondé : 6 variantes amend testées au regex existant, toutes matchent. Le claim "limite résiduelle" s'effondre, pas de V3 à écrire. J'ai corrigé la mémoire pour effacer le faux claim. Ça m'a évité une heure de code inutile + une fausse complexité ajoutée au hook.
+
+### Ce qui a foiré ou m'a surpris
+
+Que j'aie produit hier soir un claim faux en fin de session, c'est exactement ce que la doctrine prêche d'éviter — et le moment où c'est statistiquement plus probable, c'est la clôture. La fatigue post-session + le besoin de boucler "proprement" pousse à projeter des extensions futures qui n'ont pas été testées. La section "À suivre" d'un session log est une zone à risque, pas un fourre-tout libre. Si /close-session avait un cinquième artefact obligatoire — "tester ou taguer [unverified] chaque claim de limitation résiduelle" — ce claim n'aurait pas eu lieu. C'est un trou dans le protocole actuel.
+
+Surpris aussi que le skill `falsify-before-fix` ne se soit pas auto-invoqué quand j'écrivais "V3-candidate" hier soir. Le skill cible "fix" au sens correction de bug, mais une projection de feature future est conceptuellement le même type de claim non-testé — la sonde matérielle aurait dû s'imposer. Peut-être que le skill devrait élargir ses triggers à "todo", "candidate", "limite résiduelle", "v-suivante".
+
+### Ce que je veux essayer la prochaine fois
+
+Étendre les triggers du skill `falsify-before-fix` pour inclure les claims de feature future en fin de session ("V3-candidate", "todo: ", "limite résiduelle X", "amélioration possible Y"). Ces formulations sont des hypothèses non vérifiées qui méritent la même discipline que "fix bug X". L'extension de triggers est probablement 5 lignes dans le frontmatter du skill.
+
+Mesurer l'efficacité de la V2 dans 30 jours via rerun M7. Si `runs_exceeding_5` revient près de 0 sur 30-day window, la V2 a tenu sa promesse. Si non, soit le gate ne fire pas en pratique (matcher problem), soit le bypass `[autonomy-ack]` est sur-utilisé — dans les deux cas c'est une donnée empirique exploitable, pas un échec.
+
+Ajouter une section "À suivre — items testés vs hypothèses" au template `/close-session`. Chaque ligne dans "À suivre" doit être taguée `[tested]` ou `[hypothesis]`. Forcer cette distinction empêche les claims faibles de s'accumuler entre sessions. Si je fais ça, ça résout le trou pointé ci-dessus sans toucher au skill `falsify-before-fix`.
+
+---
+
 ## 2026-05-21 après-midi — Doctrine v0.7.1 : metrics M6/M7 + meta-hook R15 + cleanup rembrandt-samples (DRAFT à éditer)
 
 ### Ce qui a marché
