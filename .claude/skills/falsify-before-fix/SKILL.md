@@ -1,7 +1,7 @@
 ---
 name: falsify-before-fix
 description: >-
-  Activate this skill before writing the fix code on a bug or incident. Triggers on "fix", "bug", "patch", "hotfix", "workaround", "doesn't work", "diagnose", "hypothesis", "root cause", or any commit subject in `fix:` / `hotfix:` / `bugfix:` on a production incident. Distinct from `root-cause` (defensive checklist applied when *evaluating* a proposed fix): this skill is the invocable protocol the agent runs when it is about to *write* the fix. Enforces a single-sentence causal hypothesis and three material probes designed to refute it before any line of fix code is committed. Operational instance of R4 *Falsify before fix* of the Counterpart Toolkit.
+  Activate this skill before writing the fix code on a bug or incident, OR before posting an unverified claim of feature-future / residual limitation at the close of a session. Bug-side triggers: "fix", "bug", "patch", "hotfix", "workaround", "doesn't work", "diagnose", "hypothesis", "root cause", any commit subject in `fix:` / `hotfix:` / `bugfix:` on a production incident. Feature-future triggers: "V3-candidate", "v-suivante", "vN candidate", "next version will", "TODO:", "to-do:", "limite résiduelle", "residual limitation", "amélioration possible", "future enhancement", "à ajouter plus tard", "to be tested later", any "À suivre" / "Next steps" entry in a session log or PILOTAGE-IA draft. Distinct from `root-cause` (defensive checklist applied when *evaluating* a proposed fix): this skill is the invocable protocol the agent runs when it is about to *write* the fix OR *post* the unverified limitation. Enforces a single-sentence causal or descriptive hypothesis and three material probes designed to refute it before code is committed or claim is published. Operational instance of R4 *Falsify before fix* and R5 *No revision without new fact* of the Counterpart Toolkit.
 ---
 
 # Falsify before fix — invocable protocol
@@ -65,6 +65,27 @@ Raw output, not paraphrased (R1). If a probe returns ambiguous output, cite it a
 - The fix diff
 - The post-fix observation criterion (*"if X returns to Y, the fix holds"*)
 
+## Feature-future variant — claims of residual limitation
+
+The same protocol applies when, at the close of a session (or anywhere else), the agent is about to *post* a claim of the form:
+
+- *"V3 candidate: extend the gate to `git commit --amend`"*
+- *"Residual limitation: the parser does not handle nested quotes"*
+- *"À suivre: l'amend n'est pas couvert par V2"*
+- *"TODO: the cache invalidator probably misses event X"*
+
+Each of these is a hypothesis about a feature / system / regex behaviour that is not yet tested. Posting it without a probe is exactly the failure mode the doctrine condemns under R5 (*"no revision without new fact"*). The cost is doubled because such a claim typically survives until the next session, where it triggers code-writing on a hypothesis that may be false — wasting hours.
+
+Apply the same five steps:
+
+1. **Hypothesis in one sentence** — *"The gate regex `git[[:space:]]+commit([[:space:]]|$)` does not match `git commit --amend`."*
+2. **Three refutation probes** — for a regex claim: `for v in "git commit --amend" ...; do grep -qE 'regex' <<< "$v"; echo $?; done`. For a parser claim: feed three nested-quote samples to the parser and observe the output.
+3. **Execute, raw output in the same message.**
+4. **Decision** — if any probe refutes, the claim is false. Do not post it. If all probes are consistent with the hypothesis, post it WITH the probe output appended, tagged `[verified <date>]`.
+5. **If posting** — the published claim includes the probes that survived. An unverified claim never reaches `docs/sessions/*.md` or `PILOTAGE-IA.md` without the `[unverified]` tag.
+
+This applies in particular to the *À suivre* / *Next steps* section of session logs produced by `/close-session`. The closure of a session is statistically the moment of production of weak claims (fatigue + need to "wrap up cleanly"); this section is a risk zone, not a free-form notebook.
+
 ## When NOT to invoke this protocol
 
 The protocol costs roughly 5-10 minutes. The cost is not justified for:
@@ -74,8 +95,9 @@ The protocol costs roughly 5-10 minutes. The cost is not justified for:
 - Copy / content editing
 - Doc, memory or ADR update
 - Creating a new file from scratch (not a fix, a creation)
+- Proposing a genuinely new feature for which there is no claim of pre-existing limitation (a feature spec is a brief, not a hypothesis to refute — use `success-criteria-first` instead)
 
-The protocol is mandatory whenever there is a word *"bug"*, *"fix"*, *"doesn't work"*, *"unexpected behaviour"*, *"diagnose"*, or an incident surfaced by error monitoring (Sentry, log aggregator, alerting).
+The protocol is mandatory whenever there is a word *"bug"*, *"fix"*, *"doesn't work"*, *"unexpected behaviour"*, *"diagnose"*, or an incident surfaced by error monitoring (Sentry, log aggregator, alerting) — OR when an unverified limitation / V-candidate / TODO is about to be posted in a session log or in `PILOTAGE-IA.md`.
 
 ## Why refutation, not confirmation
 
