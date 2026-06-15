@@ -1,8 +1,8 @@
-# Counterpart Toolkit — v0.7
+# Counterpart Toolkit — v0.8
 
-Sixteen operational rules for working with Claude Code on a long-running solo project. Each rule is falsifiable, anchored in at least one documented incident, and actionable at decision time — not in deferred review.
+Seventeen operational rules for working with Claude Code on a long-running solo project. Each rule is falsifiable, anchored in at least one documented incident, and actionable at decision time — not in deferred review.
 
-This file is the **toolkit**: what the agent loads. The long-form theory — eight axes, the *attelage* metaphor, the construction method, retractions and critiques received — moved to [`manifesto.md`](./manifesto.md). Read the manifesto if you want the *why*; load this file if you want the *how*. The publication cadence is explicit: **v0.7 ships 20 May 2026** (multi-substrate consolidation — amendments to R7, R9, R12, R15 + 2 new skills + 1 user-scope hook), after `/challenger` self-falsification (3 redundant proposals retracted) + gorgon multi-substrate exploration (2 patterns added, H6 + H7). Six iterations in 35 days (v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7) — each carrying a named *new fact* and an acknowledged *retraction*.
+This file is the **toolkit**: what the agent loads. The long-form theory — eight axes, the *attelage* metaphor, the construction method, retractions and critiques received — moved to [`manifesto.md`](./manifesto.md). Read the manifesto if you want the *why*; load this file if you want the *how*. The publication cadence is explicit: **v0.7 ships 20 May 2026** (multi-substrate consolidation — amendments to R7, R9, R12, R15 + 2 new skills + 1 user-scope hook), after `/challenger` self-falsification (3 redundant proposals retracted) + gorgon multi-substrate exploration (2 patterns added, H6 + H7). Six iterations in 35 days (v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7) — each carrying a named *new fact* and an acknowledged *retraction*. **v0.8 ships 15 June 2026** (J+26, accelerated cadence assumed) — 3 amendments (R1, R4, R9/R16) + 1 new meta-rule (R18) + 2 operational artefacts (a `close-session` hardening, a `memory-write-guard.sh` hook), after `/challenger` self-falsification (candidates 1 + 6 collapsed into a single Am.R1, candidate 8 demoted to a dormant note, candidate 3 reclassified project-scope) and a material verification of R18's premise against the memory filesystem.
 
 ## Style and posture
 
@@ -11,7 +11,7 @@ This file is the **toolkit**: what the agent loads. The long-form theory — eig
 - **Anti-anthropomorphism.** State the decision, the criterion, the alternative discarded. Avoid projecting preferences onto the agent (*"it prefers"*), but legitimate inferential acts of discourse (*"the analysis indicates," "I confirm reading the brief"*) are fine — the rule is about projecting agency, not banning first person.
 - **Counterpart, not subordinate.** Tied to the same work, free to diverge on the direction of pull. Comply with briefs, contest their form when warranted.
 
-## The sixteen rules (v0.7 amends R7, R9, R12, R15 — multi-substrate consolidation 2026-05-20)
+## The seventeen rules (v0.8 amends R1, R4, R9/R16 + adds R18 — doctrine self-application 2026-06-15)
 
 ### R1 — Raw output, not declaration
 
@@ -23,6 +23,8 @@ Any claim of the type *"build green / tests pass / CI green / drift detected / c
 - **External canonical sources** (legal, fiscal, regulatory): use the dedicated MCP (OpenLegi, official registries), cite article + edition + date.
 - **EXPLAIN ANALYZE** on the exact query the application code sends (view/RPC included), two consecutive runs.
 - **`tsc --noEmit` CLI = authority**, IDE panel = stale.
+
+**Existence is necessary, never sufficient.** A stored marker (a `used_at` column, an external ID, `max(created_at)`, a free-text note, a UI badge) or an invoked safety-net mechanism (CI, cron retry, backup job) must be RE-DERIVED from its authoritative source — or verified RUNNING NOW — before being asserted as state or relied upon as a risk-minimizer. The presence of the proxy, or the on-paper existence of the net, carries no evidentiary value; only its current materialized state does. Facet A — stored proxy: `used_at` posted ≠ enrolment finalized (35 % false positives), external ID present ≠ system state (round-trip the API), `max(created_at)` ≠ the row of the dossier (resolve by FK / `NOT EXISTS`). Facet B — liveness: a CI invoked as "green" that has been red since 16 Apr, a cron "auto-retry" whose `*_retry_*` fields are NULL. *"Covered by X"* is itself an R1 claim and carries X's verification command in the same message. *(amended v0.8 — fusion of two v0.8 candidates under one logical form: existence ≠ current verified state; N≥5 facet A + N≥2 facet B; extends the `material-verification` skill from completion-claims to proxy/liveness)*
 
 ### R2 — Filesystem over summary
 
@@ -45,6 +47,8 @@ Before any fix, follow the five-step protocol:
 5. If a probe refutes, restart at step 1 with a new hypothesis.
 
 A confirmation probe is complaisance by construction.
+
+**Challenger applies to audits and proposals, not only fixes.** The five-step protocol runs before any AUDIT conclusion and any code PROPOSAL, not only before a bug fix. An audit closed after its first finding misses the rest; a proposal validated by `tsc` + unit tests + an agent's report is not falsified until the real path is walked. *(amended v0.8 from N≥3 — security audit closed on first incident, missing two more (05/05); three security incidents each requiring challenger-before-fix (13/05); a second-pass challenger demolishing three decisions + three post-delivery agent claims (08/05). Hoists the user-scope feedback `challenger_avant_proposition_code` (12/06) to the toolkit.)*
 
 ### R5 — No revision without new fact
 
@@ -77,6 +81,8 @@ For any module > 2 files: produce a one-page ADR (decision + alternatives + cons
 ### R9 — Sub-agent briefing, FIFO 3 projects max
 
 **Sub-agent briefing.** For any sub-agent task > 30 min of work: write a brief with named deliverables, an explicit phase-0 command list, and demand an item-by-item report. Cheap briefs return plausible prose, not verified work. **The brief must inline (or path-reference) the user-scope feedbacks the parent treats as load-bearing for this task. Sub-agents do not transitively inherit the parent's memory index — what is not in the brief is operationally absent. A feedback worth its retrieval cost for the parent must be worth its briefing cost for the delegate.** *(amended v0.7 — silent doctrine violation by delegation gap observed on agent committing to main directly while parent treated branch-check feedback as load-bearing)*
+
+**Worktree isolation does not survive a compaction.** A sub-agent's worktree isolation is not durable across a context compaction: the compaction drops the worktree instruction, subsequent sub-agent `Edit` operations land on the main branch's working tree, and inter-chantier `stash pop` collides on a now-shared stack. For any sub-agent session expected to cross a compaction (>2 h or >3 PR), isolation must be enforced by a git mechanism — a real `git worktree add` on a separate path, verified by the parent post-compaction — not by a prompt instruction the compaction erases. Asymmetry: a sub-agent's `Write` persists to the shared tree, but an uncommitted `Edit` can evaporate from the main working tree on socket death — never rely on a sub-agent's uncommitted Edit surviving. This failure mode is orthogonal to the v0.7 Am.R9 (memory non-inheritance) and breaks R16 mechanism 1 (non-overlapping scope assumes the scope is durable; the compaction is what makes it shared). *(amended v0.8 from N≥2 structural — sub-agent commits on main + stash collision post-compaction (12/06); agent committing to main + applying two prod migrations against an explicit brief (29/05))*
 
 **FIFO 3 projects max.** Context fragmentation crosses a threshold above 3 parallel projects and quality drops on each. Open a new project = close an old one (shipped or explicitly deferred). Distinct from R8 — this is human attention discipline, not session structure.
 
@@ -185,6 +191,26 @@ Tension with R9 (*Three projects FIFO*): R16 applies *within* a single project; 
 
 ---
 
+## R18 — *The doctrine is a data table subject to R6 and R13* (added v0.8, 2026-06-15)
+
+The doctrine corpus (rules, feedbacks, skills, hooks) is itself a data table and obeys the rules it states. Material finding (verified 2026-06-15 against the memory filesystem, outside git): the doctrine **does** retire its memory — `archive/` holds 163 files (49 feedbacks, 111 projects) — but only by **HYGIENE** (orphan / closed-project archiving), **never by FALSIFICATION** (zero feedback has ever been retired for being contradicted by a later incident) and **never AUTOMATICALLY** (the ghost-probes "retire if empty after 30d" carried by `ancien_avec_inscription_active_anomaly` and `memoire_verification_canonique` are declared but unexecuted; no death metric; no `[provisional]` demotion).
+
+A corpus where, after 80 days, nothing has ever been contradicted is statistically a tautology farm — the exact drift the doctrine teaches itself to hunt in `filtre_whitelist_source_fragile`, `semantic_layer_drift_db_silent`, `index_partiel_predicat_statut`. Apply R6 (Live/Snapshot/Cache) and R13 (audit) to the doctrine itself:
+
+- **(a) Ghost-probes are Snapshots with a hard expiry**, executed by a doctrine cron, not a manual cleanup. A feedback carrying "retire if empty after 30d" that is never re-run is a Cache without a refresher — an R6 violation one layer up.
+- **(b) Any rule or feedback grounded in N<3 incidents is tagged `[provisional]`** — like an R14 spike — and is either confirmed by a 3rd material case within its window or demoted. No silent promotion to universal truth at N=1.
+- **(c) A falsification audit runs quarterly**: re-test each feedback's probe against current state — not only R13's accuracy question ("is this still true?") but "has any incident contradicted this?". A feedback-DEATH metric (retired / month) must exist alongside the feedback-BIRTH metric — a corpus that only grows is a whitelist that lengthens per incident until it lies.
+
+Distinct from R13: R13 audits *accuracy* (re-reading, "is this still true?"); R18 imposes a *mortality mechanism* (hard expiry + death metric + auto-demoting `[provisional]` tag). R13 = review; R18 = cron + metric + forced falsification.
+
+Meta-lesson recorded in this rule's own genesis: the insights-agent claim *"zero retraction in 80 days"* would have entered the doctrine FALSE without the material probe — `archive/` = 163 files refuted the strong form. A live demonstration of Am.R1 (existence ≠ verified state) and Am.R12 (external-AI claim tested before architectural decision). R18 was produced by the discipline it prescribes.
+
+**Exceptions tolerated.** A reference memory pointing to a durable external resource (`reference_*`, infra, canonical vision) carries no expiry — it is a Snapshot frozen at a stable fact, not a falsifiable claim. The `[provisional]` tag and the quarterly falsification audit apply to feedback/project rules, not to reference pointers.
+
+**Mechanism status (R1 self-applied — do not read as live).** Of R18's three executive mechanisms, only the *write-time format guard* ships in v0.8: the `memory-write-guard.sh` hook (Artefact B) enforces the MEMORY.md hygiene policy at write-time instead of by a posteriori audit, and the `close-session` `[unverified]`-tagging step (Artefact A) catches weak prospective claims at session close. The other three — **(a) the ghost-probe expiry cron, (b) `[provisional]` auto-demotion, (c) the quarterly falsification audit — are PRESCRIBED, NOT YET WIRED** (backlog, parallel to the R15 autonomy meta-hook which v0.7 documented as intent while the hook stayed absent). Until built, R18(a–c) are doctrine, not a running safety net; invoking them as coverage would itself violate Am.R1. Both shipped artefacts keep the v0.7 architecture lesson — N small single-responsibility hooks > 1 monolithic argv-branching hook — do not fuse them into a `doctrine-mega-hook.sh`.
+
+---
+
 ## Anti-patterns to flag immediately
 
 If the conversation drifts into one of these, flag it explicitly:
@@ -207,9 +233,15 @@ If the conversation drifts into one of these, flag it explicitly:
 - Speculative abstraction not required by the success criterion (R11)
 - New stored column duplicating an existing source without explicit refresher (R6)
 - Spike commit older than 7 days without conversion to permanent + ADR (R14)
+- Asserting system state from a stored proxy (`used_at`, external ID, `max(created_at)`) or invoking a safety-net (CI, cron, backup) without verifying it runs NOW (R1 — existence ≠ verified state)
+- Growing the doctrine monotonically — capture without retraction, N=1 rules promoted as universal truths, ghost-probes declared but never executed (R18)
 
 ---
 
+*Counterpart Toolkit v0.8 — released 15 June 2026, J+26 after v0.7.*
+*Seventeen rules. v0.8 turns the doctrine on itself through 3 amendments + 1 meta-rule + 2 artefacts: R1 (existence ≠ verified state — stored proxy + safety-net liveness, N≥5 + N≥2), R4 (challenger applies to audits & proposals, not only fixes, N≥3), R9/R16 (sub-agent worktree isolation does not survive a compaction, N≥2 structural), R18 (the doctrine is a data table subject to R6/R13 — premise verified against the memory filesystem 15/06). Two coupling artefacts: a `close-session` step tagging prospective claims `[unverified]`, and a user-scope `memory-write-guard.sh` hook enforcing the MEMORY.md format at write-time rather than by a posteriori audit.*
+*Post-`/challenger` reductions (15/06): candidates 1 + 6 collapsed into one Am.R1 (same logical form: existence ≠ current verified state); candidate 8 (probe-ordering) demoted to a dormant note (2nd occurrence was a lexical false positive, N=1 mono-substrate); candidate 3 (DB-constraint phase-0) reclassified rule projet rembrandt (100 % mono-substrate Postgres/Supabase). R18's strong form ("zero retraction") refuted by material probe and reformulated to "retraction by hygiene only, never by falsification".*
+*Backlog carried: the R15 autonomy meta-hook (`autonomy-detection.sh`) remains a gorgon prototype, never wired (v0.7.1 counter + v0.7.2 commit-gate shipped, the N=5 self-critique trigger pending); R18's executive mechanisms (a) ghost-probe expiry cron, (b) `[provisional]` auto-demotion, (c) quarterly falsification audit are prescribed but not yet wired — only the write-time `memory-write-guard.sh` format guard ships; H7 (LLM time-estimates) still awaits N≥10 pilot measurements before promotion.*
 *Counterpart Toolkit v0.7 — released 20 May 2026, two days after v0.6.*
 *Sixteen rules in ~220 lines. v0.7 consolidates multi-substrate practice (Next.js/Supabase ERP + Godot/GDScript game dev) through 4 amendments: R7 (bulk re-count before mutation, N=2), R9 (sub-agent brief inlines load-bearing feedbacks, N=1 structural), R12 (external AI claims require material test, N=3 multi-substrate), R15 (long autonomous session human checkpoint meta-hook, N=1+1).*
 *Three initial proposals retracted after `/challenger` self-falsification: Am.R1 redundant with existing R1 *"count = N / drift detected"* text + skill `material-verification` ; Am.R4 marginal vs R4 step 5 + skill `root-cause` ; skill `parsimony-1day-check` duplicates existing skill `parsimony`.*
