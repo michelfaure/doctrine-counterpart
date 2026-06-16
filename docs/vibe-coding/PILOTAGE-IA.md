@@ -6,6 +6,22 @@ Pas de littérature, pas de théorie. Ce qui s'est passé matériellement.
 
 ---
 
+## 2026-06-16 nuit — v0.8 promue, et une fuite que mon « cleanup » de mai n'avait jamais vraiment réglée (DRAFT à éditer)
+
+### Ce qui a marché
+
+L'arbitrage de scope en 3 options avant d'écrire quoi que ce soit — j'ai tranché « les 4 + 2 artefacts » en connaissant le coût de chaque branche, pas à l'aveugle. Le `/challenger` final a payé son prix : il a vu que R18, figé tel quel, prescrivait un cron qui n'existe pas, soit le « filet sur papier » que Am.R1 interdit dans la même release. Sans cette passe, je publiais une règle qui se viole elle-même. Et la discipline « privé d'abord, scrub, vérifier à zéro, repasser public » a tenu — j'ai vérifié `git log -p --all` ET les messages de commit avant chaque force-push.
+
+### Ce qui a foiré ou m'a surpris
+
+Ma note PILOTAGE de mai disait que rembrandt-samples était « niveau A cosmétique sur HEAD, sans filter-repo » — je l'avais oublié, et c'était toujours vrai : 13× mon nom, 38× rembrandt dans l'historique d'un repo PUBLIC lié depuis le footer de la doctrine. Scrubber la doctrine sans toucher à ça aurait été du théâtre. Deuxième surprise : remplacer les tokens ne suffit pas — « ceramic art school (six locations) » survivait, et sa version française a échappé à ma première règle, il a fallu deux passes. Troisième : bloqué 30 min sur ma propre 2FA GitHub parce que je n'avais aucune app TOTP — sauvé par un fichier recovery sur disque externe, puis passkey.
+
+### Ce que je veux essayer la prochaine fois
+
+Mettre un `git fetch` + `rev-list behind origin/main` en TOUT début de chantier, pas le découvrir au push rejeté (rebase à 1h du mat). Traiter « repo public » comme une checklist matérielle dès qu'on committe dedans : pas de path absolu, pas de descripteur métier, historique + messages, pas seulement HEAD. Enfin compacter MEMORY.md (200 lignes, le hook bloque) pour pouvoir y poser la leçon transversale — sinon R18 me nargue, capture sans place pour capturer.
+
+---
+
 ## 2026-05-22 matin — R15 V2 commit gate + refutation V3 amend par sonde matérielle (DRAFT à éditer)
 
 ### Ce qui a marché
