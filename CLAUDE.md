@@ -221,7 +221,7 @@ Calibration metric: *findings-that-changed-the-merge / reviews-run*; if a diff c
 
 **Exceptions tolerated.** `[spike]` (R14) merges; a branch whose diff touches no risk surface; an explicit `[review-ok]` after a conscious decision not to review a given diff.
 
-`[provisional]` per R18(b): the anchors are risk-surface incidents (≈17.8 k€ of uncaptured re-enrolments slipping the payment path 30/06; the 16/06 quality audit establishing the hot `actions.ts` files carry zero direct unit net; the 24/06 + 04/07 security audits shipping 7 RLS/auth/`search_path` migrations to prod), **not yet a review-omission with measured cost** — confirm with a 3rd material case (a merge where skipping review would have shipped a real defect) or demote.
+`[provisional]` per R18(b): the anchors are risk-surface incidents (a five-figure sum of uncaptured re-enrolments slipping the payment path; the 16/06 quality audit establishing the hot `actions.ts` files carry zero direct unit net; the 24/06 + 04/07 security audits shipping 7 RLS/auth/`search_path` migrations to prod), **not yet a review-omission with measured cost** — confirm with a 3rd material case (a merge where skipping review would have shipped a real defect) or demote.
 
 ---
 
