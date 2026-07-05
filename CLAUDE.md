@@ -1,8 +1,8 @@
-# Counterpart Toolkit — v0.8
+# Counterpart Toolkit — v0.9
 
-Seventeen operational rules for working with Claude Code on a long-running solo project. Each rule is falsifiable, anchored in at least one documented incident, and actionable at decision time — not in deferred review.
+Eighteen operational rules for working with Claude Code on a long-running solo project (R17 unassigned — reserved for the v0.8 *stored-proxy* candidate, folded into Am.R1). Each rule is falsifiable, anchored in at least one documented incident, and actionable at decision time — not in deferred review.
 
-This file is the **toolkit**: what the agent loads. The long-form theory — eight axes, the *attelage* metaphor, the construction method, retractions and critiques received — moved to [`manifesto.md`](./manifesto.md). Read the manifesto if you want the *why*; load this file if you want the *how*. The publication cadence is explicit: **v0.7 ships 20 May 2026** (multi-substrate consolidation — amendments to R7, R9, R12, R15 + 2 new skills + 1 user-scope hook), after `/challenger` self-falsification (3 redundant proposals retracted) + gorgon multi-substrate exploration (2 patterns added, H6 + H7). Six iterations in 35 days (v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7) — each carrying a named *new fact* and an acknowledged *retraction*. **v0.8 ships 15 June 2026** (J+26, accelerated cadence assumed) — 3 amendments (R1, R4, R9/R16) + 1 new meta-rule (R18) + 2 operational artefacts (a `close-session` hardening, a `memory-write-guard.sh` hook), after `/challenger` self-falsification (candidates 1 + 6 collapsed into a single Am.R1, candidate 8 demoted to a dormant note, candidate 3 reclassified project-scope) and a material verification of R18's premise against the memory filesystem.
+This file is the **toolkit**: what the agent loads. The long-form theory — eight axes, the *attelage* metaphor, the construction method, retractions and critiques received — moved to [`manifesto.md`](./manifesto.md). Read the manifesto if you want the *why*; load this file if you want the *how*. The publication cadence is explicit: **v0.7 ships 20 May 2026** (multi-substrate consolidation — amendments to R7, R9, R12, R15 + 2 new skills + 1 user-scope hook), after `/challenger` self-falsification (3 redundant proposals retracted) + gorgon multi-substrate exploration (2 patterns added, H6 + H7). Six iterations in 35 days (v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7) — each carrying a named *new fact* and an acknowledged *retraction*. **v0.8 ships 15 June 2026** (J+26, accelerated cadence assumed) — 3 amendments (R1, R4, R9/R16) + 1 new meta-rule (R18) + 2 operational artefacts (a `close-session` hardening, a `memory-write-guard.sh` hook), after `/challenger` self-falsification (candidates 1 + 6 collapsed into a single Am.R1, candidate 8 demoted to a dormant note, candidate 3 reclassified project-scope) and a material verification of R18's premise against the memory filesystem. **v0.9 ships 05 July 2026** (J+20) — 1 new rule (R19 *review-gate risk-surface merges*, `[provisional]`) + 1 user-scope artefact (`pre-merge-review-reminder.sh`), after `/challenger` self-falsification of the recommendation itself: two supporting claims refuted — a local Claude Code hook cannot invoke a slash-command (so the gate is a rule + reminder-hook, not an auto-review hook), and the v0.7 `pre-push-inventory` *"installed"* status was overstated (doctrine-repo source only, never installed to user-scope — an Am.R1 instance: source existence ≠ live mechanism).
 
 ## Style and posture
 
@@ -11,7 +11,7 @@ This file is the **toolkit**: what the agent loads. The long-form theory — eig
 - **Anti-anthropomorphism.** State the decision, the criterion, the alternative discarded. Avoid projecting preferences onto the agent (*"it prefers"*), but legitimate inferential acts of discourse (*"the analysis indicates," "I confirm reading the brief"*) are fine — the rule is about projecting agency, not banning first person.
 - **Counterpart, not subordinate.** Tied to the same work, free to diverge on the direction of pull. Comply with briefs, contest their form when warranted.
 
-## The seventeen rules (v0.8 amends R1, R4, R9/R16 + adds R18 — doctrine self-application 2026-06-15)
+## The eighteen rules (v0.9 adds R19 — review-gate risk-surface merges; v0.8 amends R1, R4, R9/R16 + adds R18 — doctrine self-application 2026-06-15)
 
 ### R1 — Raw output, not declaration
 
@@ -211,6 +211,20 @@ Meta-lesson recorded in this rule's own genesis: the insights-agent claim *"zero
 
 ---
 
+## R19 — *Review-gate risk-surface merges* (added v0.9, 2026-07-05) `[provisional]`
+
+Before merging (`git merge`, `gh pr merge`) a diff that touches a **risk surface** — payment/Stripe, encaissement, TVA/fiscal, cron, Supabase migrations / `.sql`, RLS/policies, auth, `actions.ts` orchestration — run `/code-review` on the diff first. A non-risk diff (doc, copy, trivial fix, `[spike]` R14) merges directly: the expensive review fires only where the downside is expensive. This is R4 (challenger on proposals) narrowed to a merge gate, kept **triggered, not blanket**, precisely to satisfy R11 (parsimony) — a review on *every* merge raises cost-per-accepted-change without proportional catch on trivial diffs, the exact ceremony R18 and `jauge_maturite_ceremonie_vs_efficacite` hunt.
+
+**A hook cannot run the review — only remind.** Material finding (challenger 04–05/07/2026): a Claude Code hook reads `.tool_input.command` and can only block/warn in shell; it cannot invoke a slash-command. Review-gating is therefore a *rule* (a human or agent runs `/code-review`) coupled to a cheap *reminder* artefact — `pre-merge-review-reminder.sh` (user-scope PreToolUse Bash): on a merge command whose branch diff (`git diff <base>...HEAD --name-only`) hits the risk regex, it soft-blocks (`exit 2`) listing the matched files, bypass `[review-ok]`; **fail-OPEN** when the repo/diff is indeterminable — a quality reminder, never a security gate (contrast the fail-closed `deploy-safeguard.sh`). The genuine blanket-review option exists only server-side (a CI GitHub Action reviewing every PR) and is **deliberately NOT wired** — that is where ceremony/parsimony bites for a solo.
+
+Calibration metric: *findings-that-changed-the-merge / reviews-run*; if a diff class never bites, drop it from the trigger regex. Cousin to R16's `pre-push-inventory` — that is the *push-side* scope inventory (*"what am I about to send"*, catching an unintended commit); R19 is the *merge-side* quality gate (*"was the risk content reviewed"*). Distinct concerns, same *look-before-you-ship* family.
+
+**Exceptions tolerated.** `[spike]` (R14) merges; a branch whose diff touches no risk surface; an explicit `[review-ok]` after a conscious decision not to review a given diff.
+
+`[provisional]` per R18(b): the anchors are risk-surface incidents (≈17.8 k€ of uncaptured re-enrolments slipping the payment path 30/06; the 16/06 quality audit establishing the hot `actions.ts` files carry zero direct unit net; the 24/06 + 04/07 security audits shipping 7 RLS/auth/`search_path` migrations to prod), **not yet a review-omission with measured cost** — confirm with a 3rd material case (a merge where skipping review would have shipped a real defect) or demote.
+
+---
+
 ## Anti-patterns to flag immediately
 
 If the conversation drifts into one of these, flag it explicitly:
@@ -235,9 +249,12 @@ If the conversation drifts into one of these, flag it explicitly:
 - Spike commit older than 7 days without conversion to permanent + ADR (R14)
 - Asserting system state from a stored proxy (`used_at`, external ID, `max(created_at)`) or invoking a safety-net (CI, cron, backup) without verifying it runs NOW (R1 — existence ≠ verified state)
 - Growing the doctrine monotonically — capture without retraction, N=1 rules promoted as universal truths, ghost-probes declared but never executed (R18)
+- Merging a diff that touches a risk surface (payment/Stripe/TVA/cron/migration/RLS/auth/`actions.ts`) without running `/code-review` first (R19)
 
 ---
 
+*Counterpart Toolkit v0.9 — released 05 July 2026, J+20 after v0.8.*
+*Eighteen rules (R17 unassigned). v0.9 adds R19 (review-gate risk-surface merges, `[provisional]`) + 1 user-scope artefact (`pre-merge-review-reminder.sh`), after `/challenger` self-falsification of the recommendation: two supporting claims refuted — (1) a Claude Code hook cannot invoke a slash-command, so the gate is a rule + cheap reminder-hook, not an auto-review hook; (2) the v0.7 `pre-push-inventory` "PROMOTED + installed" status corrected to doctrine-repo-source-only, never installed to user-scope (absent from the live available-skills list) — an Am.R1 instance (source existence ≠ live mechanism). Retraction carried: R16 mechanism 1's push-side tooling has never been live in a working session. Doc lag flagged, not fixed: `manifesto.md` still headers v0.7 (two versions behind).*
 *Counterpart Toolkit v0.8 — released 15 June 2026, J+26 after v0.7.*
 *Seventeen rules. v0.8 turns the doctrine on itself through 3 amendments + 1 meta-rule + 2 artefacts: R1 (existence ≠ verified state — stored proxy + safety-net liveness, N≥5 + N≥2), R4 (challenger applies to audits & proposals, not only fixes, N≥3), R9/R16 (sub-agent worktree isolation does not survive a compaction, N≥2 structural), R18 (the doctrine is a data table subject to R6/R13 — premise verified against the memory filesystem 15/06). Two coupling artefacts: a `close-session` step tagging prospective claims `[unverified]`, and a user-scope `memory-write-guard.sh` hook enforcing the MEMORY.md format at write-time rather than by a posteriori audit.*
 *Post-`/challenger` reductions (15/06): candidates 1 + 6 collapsed into one Am.R1 (same logical form: existence ≠ current verified state); candidate 8 (probe-ordering) demoted to a dormant note (2nd occurrence was a lexical false positive, N=1 mono-substrate); candidate 3 (DB-constraint phase-0) reclassified rule projet rembrandt (100 % mono-substrate Postgres/Supabase). R18's strong form ("zero retraction") refuted by material probe and reformulated to "retraction by hygiene only, never by falsification".*
