@@ -6,6 +6,22 @@ Pas de littérature, pas de théorie. Ce qui s'est passé matériellement.
 
 ---
 
+## 2026-07-05 après-midi — v0.9 : le hook qui ne peut pas se lancer lui-même (DRAFT à éditer)
+
+### Ce qui a marché
+
+Le `/challenger` sur ma *propre* recommandation. Je partais convaincu qu'il fallait faire de « /code-review avant merge » une règle OU un hook, je sentais un conflit avec la parcimonie, et au lieu de trancher au feeling j'ai lancé le protocole sur ma proposition. Il a tué deux de mes étais — un hook local ne peut pas lancer une slash-command, et j'avais affirmé que `pre-push-inventory` « n'existe pas » alors qu'il existe en source repo. Le cœur a tenu, donc j'ai shippé R19 avec moins d'échafaudage mais plus de vrai. Bonus : construire le hook en copiant l'idiome exact de `deploy-safeguard` (stdin JSON, bypass `[token]`, exit 2) l'a rendu testable en 4 cas synthétiques du premier coup.
+
+### Ce qui a foiré ou m'a surpris
+
+J'ai sur-vendu `pre-push-inventory` deux fois avant de vérifier. D'abord « n'existe pas sur disque » (faux — il est dans le `.claude/skills/` du repo doctrine), puis j'ai recommandé de l'installer avant de réaliser que `deploy-safeguard` gate déjà push-to-main, donc marginal. Deux claims sur ma propre install, faux jusqu'à ce que je lance vraiment un `ls`. Le vrai drift n'était pas dans CLAUDE.md l.57 (qui dit correctement « skills source ») — il était dans ma tête, à ne pas distinguer source-repo de user-scope. Autre surprise : la doctrine était déjà en v0.8 alors que mon CLAUDE.md projet cadre encore tout en v0.7 — j'avais perdu le fil de ma propre version.
+
+### Ce que je veux essayer la prochaine fois
+
+Lancer un `ls` littéral user-scope vs repo-source AVANT toute affirmation qu'un mécanisme « existe » ou « est actif » — la leçon Am.R1, mais je continue à me la faire sur mon propre outillage. Traiter « cette skill/ce hook est-il vivant ? » comme une sonde matérielle (la liste des skills disponibles), pas un rappel de mémoire. Et solder la dette de lag de version : `manifesto.md` et le CLAUDE.md projet ont deux versions de retard ; je bumpe toujours le fichier opérationnel et je laisse pourrir les fichiers de lecture humaine — à batcher dans le créneau dette mensuel plutôt que de le re-signaler à chaque fois.
+
+---
+
 ## 2026-06-16 nuit — v0.8 promue, et une fuite que mon « cleanup » de mai n'avait jamais vraiment réglée (DRAFT à éditer)
 
 ### Ce qui a marché
