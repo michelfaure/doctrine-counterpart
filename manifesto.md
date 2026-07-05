@@ -1,9 +1,9 @@
-# Counterpart Doctrine — Manifesto v0.7
+# Counterpart Doctrine — Manifesto v0.9
 
 > **📖 Optional reading — humans only, not loaded by Claude Code.**
-> To *use* the doctrine: run [`./install.sh --yes`](./install.sh) for a one-command install of the toolkit ([`CLAUDE.md`](./CLAUDE.md), 16 rules, ~220 lines) + the four hooks. This manifesto is the long-form theory you read if you want to understand *why* the rules exist — **it is not required for the doctrine to operate**. Two-minute path: install + skim the 16 rule titles in `CLAUDE.md`. Hour-long path: read this file end to end.
+> To *use* the doctrine: run [`./install.sh --yes`](./install.sh) for a one-command install of the toolkit ([`CLAUDE.md`](./CLAUDE.md), 18 rules) + the hooks. This manifesto is the long-form theory you read if you want to understand *why* the rules exist — **it is not required for the doctrine to operate**. Two-minute path: install + skim the 16 rule titles in `CLAUDE.md`. Hour-long path: read this file end to end.
 
-*Manifesto v0.7 — 20 May 2026 (multi-substrate consolidation — R7/R9/R12/R15 amendments + 2 new skills + 1 user-scope hook ; full amendment history at the bottom: v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7)*
+*Manifesto label v0.9 — 5 July 2026. **The long-form theory below is a v0.4.x-era snapshot** and lags the toolkit deliberately (rewriting 64 KB of theory each cadence is ceremony). The authoritative current rules and the full amendment history live in [`CLAUDE.md`](./CLAUDE.md): v0.8 (15 June) added Am.R1/R4/R9-R16 + the R18 meta-rule + 2 artefacts; v0.9 (5 July) added R19 — review-gate risk-surface merges, `[provisional]`. Version chain: v0.3 → v0.3.1 → v0.3.2 → v0.3.3 → v0.4 → v0.4.1 → v0.6 → v0.7 → v0.8 → v0.9.*
 
 ## Table of contents
 
