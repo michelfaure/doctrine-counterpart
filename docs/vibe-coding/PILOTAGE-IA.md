@@ -6,6 +6,20 @@ Pas de littérature, pas de théorie. Ce qui s'est passé matériellement.
 
 ---
 
+## 2026-07-17 après-midi — v0.10 : le cycle qui s'audite enfin lui-même (DRAFT à éditer)
+
+### Ce qui a marché
+
+Déléguer l'audit R18(c) à deux agents dédiés au lieu de le faire au fil de l'eau. Le harvest a dépouillé les 26 logs et les 28 entrées PILOTAGE sans en sauter un, et il est revenu avec la chose que je n'aurais pas trouvée moi-même en relisant : trois contradictions dures, dont deux contre R19 que je venais de shipper il y a douze jours. La promotion s'est ensuite écrite presque seule parce que chaque candidat arrivait avec son N et ses ancres — et le spot-check des ancres (3/3) avant de graver m'a coûté trente secondes pour une confiance réelle. R18(c) attendait depuis v0.8 sous forme de « cron trimestriel » jamais câblé ; il aura suffi d'une après-midi et d'une forme différente de celle prescrite.
+
+### Ce qui a foiré ou m'a surpris
+
+Ma propre sonde de mortalité était fausse — `find -newerBt` sur archive/ mesure la naissance, pas l'archivage, parce que `mv` préserve la birthtime ; j'ai failli rapporter « 5 archivages » quand la réalité était 28. Le README du repo annonçait encore v0.7 : deux bumps de version sans jamais lever la tête vers le doc d'entrée. M5 qui tourne « vert » en mesurant le vide depuis des semaines. Et la plus piquante : la contradiction Artefact A — c'est le mécanisme que j'avais durci en v0.8 pour attraper les claims faibles au close qui a laissé passer le « Bug LIVE confirmé » du 11/07, et je l'ai re-durci aujourd'hui pendant que son échec était encore chaud.
+
+### Ce que je veux essayer la prochaine fois
+
+Le test loop-until-dry sur le prochain diff chaud large, avec la colonne « single-pass vs loop » au journal R19, pour savoir si la deuxième vague de finders mord ou si je paie de la cérémonie. La sonde d'ouverture systématique en début de session pilotée par une note de reprise — le durcissement au close ne suffit pas, la classe a cinq occurrences. Et trancher M1/M5 au prochain cycle au lieu de porter deux instruments morts un cycle de plus : un instrument qu'on garde « au cas où » est exactement le cache sans refresher que la doctrine chasse partout ailleurs.
+
 ## 2026-07-05 après-midi — v0.9 : le hook qui ne peut pas se lancer lui-même (DRAFT à éditer)
 
 ### Ce qui a marché
