@@ -136,7 +136,7 @@ else
   echo "  ⊘ skip"
 fi
 
-# --- 4. Hooks (recommended by default in v0.3.3) ---
+# --- 4. Hooks (recommended by default since v0.3) ---
 echo ""
 echo "→ Step 4/6: Hooks (material enforcement — recommended)"
 echo "  Hooks block/warn if invariants are violated. Explicit bypass documented per hook:"

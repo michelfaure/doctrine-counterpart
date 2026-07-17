@@ -75,7 +75,8 @@ done
 echo ""
 echo "→ Skills frontmatter (yaml.safe_load + required keys)"
 if command -v python3 >/dev/null 2>&1 && python3 -c "import yaml" >/dev/null 2>&1; then
-  TARGET_SKILLS_DIR="$TARGET/.claude/skills" python3 <<'PYEOF'
+  YAML_RC=0
+  TARGET_SKILLS_DIR="$TARGET/.claude/skills" python3 <<'PYEOF' || YAML_RC=$?
 import yaml, re, os, sys, glob
 target_dir = os.environ.get('TARGET_SKILLS_DIR', '')
 if not os.path.isdir(target_dir):
@@ -106,7 +107,6 @@ for name, err in broken:
 print(f"  ✓ {ok_count} skill(s) parse cleanly" if ok_count else "")
 sys.exit(1 if broken else 0)
 PYEOF
-  YAML_RC=$?
   if [[ $YAML_RC -ne 0 ]]; then
     DRIFTS=$((DRIFTS + 1))
   fi

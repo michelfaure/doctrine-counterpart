@@ -28,4 +28,4 @@ Suggested citation:
 
 ## Disclaimer
 
-This doctrine is a v0.2 release under empirical testing. It has not been validated at scale. The author cannot be held responsible for the consequences of its application on real projects. Use at your own risk. No warranty of quality, robustness, or fitness for any particular purpose is provided.
+This doctrine is an actively versioned release under empirical testing (current version: see the CLAUDE.md header). It has not been validated at scale. The author cannot be held responsible for the consequences of its application on real projects. Use at your own risk. No warranty of quality, robustness, or fitness for any particular purpose is provided.
