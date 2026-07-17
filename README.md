@@ -70,13 +70,13 @@ V0.4 shipped the doctrine as **two distinct artefacts**, each fit for one use, a
 | R10 | **Silent failure forbidden, workaround tagged** | Axis 5 | stable |
 | R11 | **Parsimony, no speculative abstraction** | Axis 5 | stable |
 | R12 | **Cite the official text, materialise vendor defaults, test external AI claims** | Axis 6 | amended v0.7 |
-| R13 | **Audit, archive, three brief modes** *(M1–M7 inline)* | Axes 7 & 8 | stable |
+| R13 | **Audit, archive, three brief modes** *(M1–M5 inline; M6/M7 anchored in R14/R15)* | Axes 7 & 8 | stable |
 | R14 | **Spike escape hatch** | (cross-cutting) | new in v0.4.1 ; under R18 death-watch since v0.10 (0 uses in 60 d) |
 | R15 | **Checkpoint commits + autonomy meta-hook** | (autonomy) | new in v0.6, hooks shipped v0.7.x ; **empirically validated v0.10 (M7 : 92 → 1)** |
 | R16 | **Empirical parallel-agent limit** *(3 mechanisms)* | (autonomy) | new in v0.6 |
 | R17 | **Assertional coverage** *(a green test attests only what it asserts : written columns, fixture dimensions, terminal business state)* | Axis 1 | **new in v0.10** (N=4, single cycle, payment surface) |
 | R18 | **The doctrine is a data table subject to R6 and R13** *(mortality mechanism, `[provisional]` tag, falsification audit)* | Axis 7 / meta | new in v0.8 ; **R18(c) executed for the first time in v0.10** |
-| R19 | **Review-gate risk-surface merges** *(business-temperature trigger ; `[provisional]` SECURITY DEFINER privileges clause)* | Axis 5 | new in v0.9 `[provisional]` ; **promoted v0.10 on measured bite (hot 7/10, cold 0/3)** |
+| R19 | **Review-gate risk-surface merges** *(business-temperature trigger ; `[provisional]` SECURITY DEFINER privileges clause)* | Axis 5 | new in v0.9 `[provisional]` ; **promoted v0.10 on measured bite (hot 7/10; cold 0 findings across 2 reviews + 1 read-and-bypass)** |
 
 Each rule is fully formulated in [`CLAUDE.md`](./CLAUDE.md). Each rule's theoretical anchor is in [`manifesto.md`](./manifesto.md).
 

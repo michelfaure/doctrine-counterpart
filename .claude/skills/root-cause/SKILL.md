@@ -1,5 +1,5 @@
 ---
-name: root-cause-not-patch
+name: root-cause
 description: Activate this skill when the user or an agent mentions "fix", "bug", "patch", "workaround", "hack", "quick fix", "temporary", "band-aid", or proposes a correction on an observed symptom. Also when an arbitrary cap appears in a comment (`// limit = X`, `// don't exceed Y`), when a test documents an exclusion as intentional, when a fix seems too simple for the symptom. The skill enforces root cause identification, pattern widening, and explicit assumption of any workaround.
 ---
 

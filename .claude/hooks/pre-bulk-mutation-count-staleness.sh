@@ -65,7 +65,7 @@ if echo "$QUERY" | grep -qE -- "$COUNT_FRESH_PATTERN"; then
   # Parse YYYYMMDD-HHMM → epoch
   MARKER_DATE=$(echo "$MARKER" | cut -d- -f1)  # YYYYMMDD
   MARKER_TIME=$(echo "$MARKER" | cut -d- -f2)  # HHMM
-  MARKER_EPOCH=$(date -j -f "%Y%m%d%H%M" "${MARKER_DATE}${MARKER_TIME}" "+%s" 2>/dev/null || echo "0")
+  MARKER_EPOCH=$(date -j -f "%Y%m%d%H%M" "${MARKER_DATE}${MARKER_TIME}" "+%s" 2>/dev/null || date -d "${MARKER_DATE:0:4}-${MARKER_DATE:4:2}-${MARKER_DATE:6:2} ${MARKER_TIME:0:2}:${MARKER_TIME:2:2}" "+%s" 2>/dev/null || echo "0")
   NOW_EPOCH=$(date "+%s")
   AGE_SEC=$((NOW_EPOCH - MARKER_EPOCH))
 

@@ -99,7 +99,7 @@ If > 30% in obsolete + contradicted + abandoned, the domain is still in explorat
 
 **A doctrine that believes itself outside time betrays its own auditability principle.** This Counterpart Doctrine is versioned (v0.1, v0.2, etc.) and audited like an ADR.
 
-Practical consequence: at each doctrine update, open a changelog in `doctrine.md`:
+Practical consequence: at each doctrine update, open a changelog in `manifesto.md`:
 
 ```markdown
 ## Changelog
