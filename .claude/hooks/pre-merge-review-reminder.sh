@@ -4,8 +4,12 @@
 #
 # Rôle : quand une commande de MERGE (`git merge`, `gh pr merge`) est sur le point
 # de tourner ET que le diff de la branche courante touche une SURFACE À RISQUE
-# (paiement/Stripe, TVA/fiscal, cron, migrations, RLS/policies, auth, orchestration
-# `actions.ts`), rappeler de passer `/code-review` d'abord. Bypass : `[review-ok]`.
+# (paiement/Stripe, TVA/fiscal, cron, migrations, RLS/policies, auth), rappeler de
+# passer `/code-review` d'abord. Bypass : `[review-ok]` (après LECTURE du diff).
+#
+# v0.10 (17/07/2026) : clause `actions.ts` RETIRÉE du regex (température métier,
+# pas nom de fichier — 0/3 morsure sur froid) ; scan de contenu SECURITY DEFINER
+# ajouté (clause privilèges R19 : la review lit le code, pas les GRANT par défaut).
 #
 # Design (challenger 04/07/2026) :
 # - Déclenché UNIQUEMENT sur surface à risque → parcimonie (zéro friction sur un
@@ -57,20 +61,34 @@ done
 changed="$(git -C "$dir" diff --name-only "$base"...HEAD 2>/dev/null || true)"
 [[ -z "$changed" ]] && exit 0
 
-# 5) Surface à risque ? (avec money/sécurité au bout — pas tout l'app)
-risk_regex='(^|/)actions\.ts$|stripe|encaissement|paiement|payment|/api/cron/|supabase/migrations/|(^|/)migrations/|\.sql$|(^|/)rls|_rls|polic(y|ies)|/auth/|auth\.ts|(^|/)lib/auth|fiscal|(^|/)tva|_tva|tva_'
+# 5) Surface à risque ? (température métier — v0.10 : actions.ts retiré, 0/3 froid)
+risk_regex='stripe|encaissement|paiement|payment|/api/cron/|supabase/migrations/|(^|/)migrations/|\.sql$|(^|/)rls|_rls|polic(y|ies)|/auth/|auth\.ts|(^|/)lib/auth|fiscal|(^|/)tva|_tva|tva_'
 matched="$(printf '%s\n' "$changed" | grep -Ei -e "$risk_regex" || true)"
-[[ -z "$matched" ]] && exit 0
+
+# 5bis) Clause privilèges R19 (v0.10) : SECURITY DEFINER dans le CONTENU du diff —
+# la review lit le code, les GRANT par défaut (EXECUTE=PUBLIC) n'y sont pas.
+secdef="$(git -C "$dir" diff "$base"...HEAD 2>/dev/null | grep -ciE 'security[[:space:]]+definer' || true)"
+
+[[ -z "$matched" && "${secdef:-0}" -eq 0 ]] && exit 0
 
 {
   echo "RAPPEL code-review — ce merge touche une surface à RISQUE."
   echo "Commande : $cmd"
   echo ""
-  echo "Fichiers concernés (diff $base...HEAD) :"
-  printf '%s\n' "$matched" | sed 's/^/  - /'
-  echo ""
+  if [[ -n "$matched" ]]; then
+    echo "Fichiers concernés (diff $base...HEAD) :"
+    printf '%s\n' "$matched" | sed 's/^/  - /'
+    echo ""
+  fi
+  if [[ "${secdef:-0}" -gt 0 ]]; then
+    echo "⚠ SECURITY DEFINER détecté dans le diff ($secdef occurrence(s))."
+    echo "  Clause privilèges R19 : sonde has_function_privilege('anon'|'authenticated', …)"
+    echo "  DANS LE MÊME MESSAGE que le deploy (EXECUTE=PUBLIC par défaut ;"
+    echo "  DROP+CREATE re-grante via default privileges même après un REVOKE)."
+    echo ""
+  fi
   echo "→ Passe '/code-review' sur le diff AVANT de merger."
-  echo "→ Une fois relu (ou si tu juges que non), rejoue la commande avec '[review-ok]'."
+  echo "→ Une fois relu (ou si tu juges le diff froid), rejoue avec '[review-ok]'."
   echo "   ex: gh pr merge 324 --squash  # [review-ok]"
 } >&2
 exit 2
