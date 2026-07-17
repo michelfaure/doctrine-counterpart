@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# verify-install.sh — Counterpart Doctrine v0.7
+# verify-install.sh — Counterpart Doctrine
+# Version-agnostic since v0.10: expected version, hook list and skill count are
+# DERIVED from the source repo at run time, never hardcoded — a checker that
+# carries a stale cache of what it checks is the exact R6 drift it exists to catch.
 #
 # Verify that the doctrine is materially installed in the target project.
 # Compare source (this repo) against deployed (target project + ~/.claude/).
@@ -22,8 +25,12 @@ if [[ ! -d "$TARGET" ]]; then
   exit 1
 fi
 
+# Derive the expected version markers from the SOURCE (authority), never hardcode.
+TOOLKIT_MARKER="$(grep -m1 -oE 'Counterpart Toolkit — v[0-9.]+' "$SOURCE_DIR/CLAUDE.md" 2>/dev/null || echo 'Counterpart Toolkit')"
+MANIFESTO_MARKER="$(grep -m1 -oE 'Manifesto v[0-9.]+' "$SOURCE_DIR/manifesto.md" 2>/dev/null || echo 'Manifesto')"
+
 echo ""
-echo "  Counterpart Doctrine v0.7 — verify install"
+echo "  Counterpart Doctrine — verify install (source version: ${TOOLKIT_MARKER#Counterpart Toolkit — })"
 echo "  Source : $SOURCE_DIR"
 echo "  Target : $TARGET"
 echo ""
@@ -35,17 +42,17 @@ echo "→ CLAUDE.md"
 if [[ ! -f "$TARGET/CLAUDE.md" ]]; then
   echo "  ❌ missing"
   DRIFTS=$((DRIFTS + 1))
-elif grep -q "Counterpart Toolkit — v0.7" "$TARGET/CLAUDE.md"; then
-  echo "  ✓ contains v0.7 marker"
+elif grep -qF "$TOOLKIT_MARKER" "$TARGET/CLAUDE.md"; then
+  echo "  ✓ contains current marker ($TOOLKIT_MARKER)"
 elif grep -q "Counterpart" "$TARGET/CLAUDE.md"; then
-  echo "  ⚠ contains Counterpart marker but not v0.7 (older version, manual merge expected)"
+  echo "  ⚠ contains Counterpart marker but not the source version ($TOOLKIT_MARKER) — older install or manual merge"
 else
   echo "  ⚠ exists but no Counterpart Doctrine marker — manual merge presumed"
 fi
 
 # --- 2. Skills ---
 echo ""
-echo "→ Skills (12 expected in v0.7)"
+echo "→ Skills (expected count derived from source)"
 SOURCE_SKILLS=$(find "$SOURCE_DIR/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 TARGET_SKILLS=$(find "$TARGET/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 echo "  source: $SOURCE_SKILLS skills"
@@ -119,8 +126,9 @@ fi
 
 # --- 4. Hooks ---
 echo ""
-echo "→ Hooks (6 expected in v0.7.2, user-scope canonical)"
-EXPECTED_HOOKS=("deploy-safeguard.sh" "secret-scanner.sh" "audit-memory-reminder.sh" "check-workaround-assumed.sh" "r15-autonomous-counter.sh" "r15-commit-gate.sh")
+EXPECTED_HOOKS=()
+while IFS= read -r h; do EXPECTED_HOOKS+=("$(basename "$h")"); done < <(find "$SOURCE_DIR/.claude/hooks" -maxdepth 1 -name "*.sh" | sort)
+echo "→ Hooks (${#EXPECTED_HOOKS[@]} expected — list derived from source)"
 HOOKS_DIR_TARGET="$TARGET/.claude/hooks"
 
 for hook in "${EXPECTED_HOOKS[@]}"; do
@@ -151,10 +159,10 @@ fi
 echo ""
 echo "→ manifesto.md (long-form theory)"
 if [[ -f "$TARGET/docs/manifesto.md" ]]; then
-  if grep -q "Manifesto v0.7" "$TARGET/docs/manifesto.md"; then
-    echo "  ✓ v0.7 installed in docs/"
+  if grep -qF "$MANIFESTO_MARKER" "$TARGET/docs/manifesto.md"; then
+    echo "  ✓ current version installed in docs/ ($MANIFESTO_MARKER)"
   else
-    echo "  ⚠ exists but not v0.7 — older version"
+    echo "  ⚠ exists but not the source version ($MANIFESTO_MARKER) — older copy, re-run install"
   fi
 elif [[ -f "$TARGET/docs/doctrine.md" ]]; then
   echo "  ⚠ docs/doctrine.md present (pre-v0.4.1 layout). Renamed to manifesto.md in v0.4.1."

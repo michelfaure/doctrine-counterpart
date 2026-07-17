@@ -1,6 +1,6 @@
-# Anti-patterns checklist — Counterpart Doctrine v0.7
+# Anti-patterns checklist — Counterpart Doctrine v0.10
 
-Twenty-one anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
+Thirty anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
 
 The list is the densest doctrine-payload-per-line in the repo. If you have ten minutes to absorb the doctrine, read this file.
 
@@ -47,6 +47,17 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 - [ ] **External AI claim adopted without material test** *(new v0.7)* — accepting a claim from ChatGPT / another Claude / sparring AI about a concrete tool, an external resource, or a system structure you can probe, without testing it first. Test cost ≈ 1 shell command. Two AI reviews converging = one source, not two. R12.
 - [ ] **5+ autonomous commits without session log or self-critique** *(new v0.7)* — the human has effectively left the loop ; doctrine triggers (`close-session`, `falsify-before-fix`) are not invoked because they depend on human invocation. Silent autonomy drift — discipline holds when the human invokes, falls when autonomy takes over. R15.
 
+## Self-application and the review gate (v0.8 → v0.10 additions)
+
+- [ ] **Asserting state from a stored proxy, or invoking a safety net without checking it runs NOW** *(new v0.8)* — a `used_at` column, an external ID, a `max(created_at)`, a badge taken as system state; a CI, cron retry, or backup invoked as coverage while it has been red or silent for weeks. Existence is necessary, never sufficient — re-derive from the source or verify running now. *"Covered by X"* is itself a claim that carries X's verification command. Am.R1.
+- [ ] **Growing the doctrine monotonically** *(new v0.8)* — capture without retraction, N=1 lessons promoted as universal truths, ghost-probes declared but never executed, a feedback corpus that only ever grows. A corpus where nothing has ever been contradicted is statistically a tautology farm. R18.
+- [ ] **Merging a business-hot diff without review — or gating on the file name instead of the diff's content** *(new v0.9, rewritten v0.10)* — payment, tax, mutating crons, migrations, RLS, auth merged without `/code-review`; or a review trigger that fires on a path pattern while cold diffs in the same files never bite (0/3 measured) and hot content elsewhere ships unreviewed. Blind `[review-ok]` without reading the diff is the same anti-pattern in bypass form. R19.
+- [ ] **Deploying a `SECURITY DEFINER` function without a privilege probe in the same message** *(new v0.10)* — EXECUTE defaults to PUBLIC; a code-reading review cannot see default GRANTs; DROP+CREATE re-grants even after a prior REVOKE. `has_function_privilege('anon', …)` next to the deploy, every time. R19 privileges clause.
+- [ ] **Trusting a green suite on a surface it never asserts** *(new v0.10)* — unasserted written columns, fixture dimensions the model traverses but the test data lacks, a lifecycle never walked to its terminal business state ("created" tested, "settled" not). A green test attests only what it asserts; a safety net must prove it bites. R17.
+- [ ] **Mirroring a never-executed pattern as a validated reference** *(new v0.10)* — copying a table, RPC, or code path with zero production executions and inheriting its latent defects along with its structure. Verify the reference has actually run, and name the validity condition that differs. R1 facet C.
+- [ ] **Voicing a causal attribution to a human without probing the mutation** *(new v0.10)* — *"X deleted Y", "it's the card", "it's the payment provider"* said confidently before verifying the accused flow actually performs that mutation. A blame claim has a blast radius; it runs the falsification protocol before being voiced. R4.
+- [ ] **Diagnosing a shared surface without the in-flight-work scan** *(new v0.10)* — fixing CI, tooling, or cross-cutting files without first listing open PRs, remote branches, and worktrees. A verdict reached in ignorance of work-in-flight can be false under complete information — and redundant with the fix already open next door. R2.
+
 ---
 
-*Counterpart Doctrine v0.7 — 22 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14, +4 in v0.7 for multi-substrate consolidation). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*
+*Counterpart Doctrine v0.10 — 30 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14, 22 in v0.7 for multi-substrate consolidation, +8 across v0.8 → v0.10 for self-application, the review gate and assertional coverage). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*

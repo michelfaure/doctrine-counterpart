@@ -42,7 +42,7 @@ TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
 echo "=================================================="
-echo "  Counterpart Doctrine v0.7 — install (toolkit + manifesto)"
+echo "  Counterpart Doctrine v0.10 — install (toolkit + manifesto)"
 echo "=================================================="
 echo ""
 echo "Source: $SOURCE_DIR"
@@ -55,7 +55,7 @@ if [[ ! -d "$TARGET" ]]; then
 fi
 
 # --- 1. CLAUDE.md ---
-echo "→ Step 1/6: CLAUDE.md (toolkit — 16 operational rules)"
+echo "→ Step 1/6: CLAUDE.md (toolkit — 19 operational rules)"
 if [[ -f "$TARGET/CLAUDE.md" ]]; then
   echo "  A CLAUDE.md already exists in $TARGET."
   if [[ "$AUTO_YES" -eq 1 ]]; then
@@ -68,7 +68,7 @@ if [[ -f "$TARGET/CLAUDE.md" ]]; then
     a)
       echo "" >> "$TARGET/CLAUDE.md"
       echo "" >> "$TARGET/CLAUDE.md"
-      echo "<!-- ===== Counterpart Toolkit v0.7 (append) ===== -->" >> "$TARGET/CLAUDE.md"
+      echo "<!-- ===== Counterpart Toolkit v0.10 (append) ===== -->" >> "$TARGET/CLAUDE.md"
       cat "$SOURCE_DIR/CLAUDE.md" >> "$TARGET/CLAUDE.md"
       echo "  ✓ Doctrine appended to existing CLAUDE.md"
       ;;
@@ -139,13 +139,18 @@ fi
 # --- 4. Hooks (recommended by default in v0.3.3) ---
 echo ""
 echo "→ Step 4/6: Hooks (material enforcement — recommended)"
-echo "  Hooks block commit/push if invariants are violated. Explicit bypass documented:"
-echo "    - deploy-safeguard      : pushes to main require [deploy-ok]"
-echo "    - secret-scanner        : commits with literal secrets blocked"
-echo "    - audit-memory-reminder : quarterly memory audit reminder (SessionStart, non-blocking)"
-echo "    - check-workaround-assumed : workaround commits without [workaround-assumed] tag blocked"
+echo "  Hooks block/warn if invariants are violated. Explicit bypass documented per hook:"
+echo "    - deploy-safeguard           : pushes to main require [deploy-ok]"
+echo "    - secret-scanner             : commits with literal secrets blocked"
+echo "    - audit-memory-reminder      : quarterly memory audit reminder (SessionStart, non-blocking)"
+echo "    - check-workaround-assumed   : workaround commits without [workaround-assumed] tag blocked"
+echo "    - r15-autonomous-counter     : counts autonomous agent chains (R15)"
+echo "    - r15-commit-gate            : blocks git commit past autonomy threshold, bypass [autonomy-ack]"
+echo "    - pre-merge-review-reminder  : R19 review-gate on business-hot merges, bypass [review-ok]"
+echo "    - memory-write-guard         : R18 MEMORY.md format guard at write-time"
+echo "    - pre-bulk-mutation-count-staleness : R7 bulk re-count gate, bypass -- count-fresh:..."
 echo ""
-echo "  Default in v0.7 (unchanged since v0.3): Y. The doctrine's value relies on these guards."
+echo "  Default in v0.10 (unchanged since v0.3): Y. The doctrine's value relies on these guards."
 echo "  Decline only if you have an incompatible setup."
 choice=$(ask "  Activate hooks? [Y/n] ")
 if [[ "$choice" =~ ^[Yy]$ ]]; then
@@ -211,6 +216,6 @@ echo "Test request (if testing for someone else):"
 echo "  After 2-3 weeks of use, answer the 4 questions in the README:"
 echo "  (a) what did you load / use?"
 echo "  (b) what concretely changed?"
-echo "  (c) which of the 16 rules can you name without rereading?"
-echo "  (d) which rule is missing for your stack? (v0.8 candidates)"
+echo "  (c) which of the 19 rules can you name without rereading?"
+echo "  (d) which rule is missing for your stack? (next-cycle candidates)"
 echo ""
