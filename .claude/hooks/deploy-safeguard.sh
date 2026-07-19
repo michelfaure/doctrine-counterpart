@@ -26,6 +26,7 @@ patterns=(
   "vercel --prod|vercel([[:space:]]+[a-z]+)?([[:space:]]+[^;&|]+)?[[:space:]]--prod([[:space:]]|$)"
   "supabase db push|supabase[[:space:]]+db[[:space:]]+push"
   "git reset --hard main|git[[:space:]]+reset[[:space:]]+--hard[[:space:]]+([^;&|]+[[:space:]])?(main|master|origin/main|origin/master)([[:space:]]|$)"
+  # NOTE adopters: replace "rembrandt" below with YOUR project directory name.
   "rm -rf rembrandt|rm[[:space:]]+(-[a-zA-Z]*r[a-zA-Z]*f[a-zA-Z]*|-[a-zA-Z]*f[a-zA-Z]*r[a-zA-Z]*)[[:space:]]+[^;&|]*rembrandt"
 )
 

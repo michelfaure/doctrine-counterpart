@@ -14,7 +14,9 @@ INPUT=$(cat)
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null || echo "")
 
 # Only acts on git commit
-if [[ ! "$COMMAND" =~ ^git[[:space:]]+commit ]]; then
+# Unanchored (2026-07-20): chained `git add … && git commit …` is the agent's
+# default form; the anchored ^git commit left this reminder inert on it.
+if ! printf '%s' "$COMMAND" | grep -Eq '(^|[;&|[:space:]])git([[:space:]]+-C[[:space:]]+[^[:space:]]+)?[[:space:]]+commit([[:space:]]|$)'; then
   exit 0
 fi
 
