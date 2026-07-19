@@ -24,7 +24,7 @@ file_path="$(printf '%s' "$payload" | jq -r '.tool_input.file_path // empty')"
 
 # Guard only THE user-scope memory index MEMORY.md (not the topic files, not other repos).
 case "$file_path" in
-  */memory/MEMORY.md) : ;;
+  MEMORY.md|*/MEMORY.md) : ;;   # root-level index (adopter default) or any */MEMORY.md path
   *) exit 0 ;;
 esac
 

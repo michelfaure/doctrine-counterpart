@@ -8,10 +8,26 @@ set -euo pipefail
 INPUT=$(cat)
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/null || echo "")
 
-# Only acts on git commit
-if [[ ! "$COMMAND" =~ ^git[[:space:]]+commit ]]; then
+# Only acts on git commit — UNANCHORED: agents emit chained commands
+# (`git add -A && git commit …`, `cd X && git commit …`) as their default form;
+# an anchored ^git commit left this gate inert on exactly that form
+# (caught by an external review, 2026-07-20 — R17: a green test attests only
+# what it asserts, and the synthetic tests had only asserted the canonical form).
+if ! printf '%s' "$COMMAND" | grep -Eq '(^|[;&|[:space:]])git([[:space:]]+-C[[:space:]]+[^[:space:]]+)?[[:space:]]+commit([[:space:]]|$)'; then
   exit 0
 fi
+
+# Locate the repo the commit targets (git -C <dir> | cd <dir> | PWD) — a chained
+# `cd /elsewhere && git commit` must be scanned in /elsewhere, not in $PWD.
+DIR=""
+if [[ "$COMMAND" =~ git[[:space:]]+-C[[:space:]]+([^[:space:]]+) ]]; then
+  DIR="${BASH_REMATCH[1]}"
+elif [[ "$COMMAND" =~ cd[[:space:]]+([^[:space:]&;|]+) ]]; then
+  DIR="${BASH_REMATCH[1]}"
+fi
+DIR="${DIR/#\~/$HOME}"
+[[ -z "$DIR" ]] && DIR="$PWD"
+git -C "$DIR" rev-parse --show-toplevel >/dev/null 2>&1 || exit 0
 
 # Bypass explicite
 if echo "$COMMAND" | grep -q '\[secret-ok\]'; then
@@ -35,7 +51,7 @@ declare -a PATTERNS=(
 )
 
 # Get staged files
-STAGED_FILES=$(git diff --cached --name-only 2>/dev/null || echo "")
+STAGED_FILES=$(git -C "$DIR" diff --cached --name-only 2>/dev/null || echo "")
 
 if [[ -z "$STAGED_FILES" ]]; then
   exit 0
@@ -45,7 +61,7 @@ DETECTED=0
 DETECTED_DETAILS=""
 
 while IFS= read -r FILE; do
-  if [[ -z "$FILE" ]] || [[ ! -f "$FILE" ]]; then
+  if [[ -z "$FILE" ]]; then
     continue
   fi
 
@@ -57,9 +73,16 @@ while IFS= read -r FILE; do
     continue
   fi
 
+  # Scan the STAGED content (`git show :file` = the index blob), never the file
+  # on disk: what the commit records is the index — a secret staged then cleaned
+  # from the working tree would pass a disk grep and land in history anyway
+  # (caught by the same external review, 2026-07-20).
+  CONTENT="$(git -C "$DIR" show ":$FILE" 2>/dev/null || true)"
+  [[ -z "$CONTENT" ]] && continue
+
   for PATTERN in "${PATTERNS[@]}"; do
-    if grep -qE "$PATTERN" "$FILE" 2>/dev/null; then
-      MATCH=$(grep -nE "$PATTERN" "$FILE" 2>/dev/null | head -1)
+    if printf '%s' "$CONTENT" | grep -qE "$PATTERN"; then
+      MATCH=$(printf '%s' "$CONTENT" | grep -nE "$PATTERN" | head -1)
       DETECTED=1
       DETECTED_DETAILS+="\n  - $FILE: $MATCH"
     fi
