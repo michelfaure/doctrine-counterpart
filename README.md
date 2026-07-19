@@ -10,7 +10,7 @@ git clone https://github.com/michelfaure/doctrine-counterpart.git && \
   ./install.sh --yes /path/to/your/project
 ```
 
-This installs the **toolkit** (`CLAUDE.md`, 19 terse rules, ~60 lines — plus `calibration-ledger.md`, the evidence base its pointers resolve to), the **12 skills**, the **agent-challenger**, the **9 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter`, `r15-commit-gate`, `pre-merge-review-reminder`, `memory-write-guard`, `pre-bulk-mutation-count-staleness`), and the optional `manifesto.md` — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
+This installs the **toolkit** (`CLAUDE.md`, 19 terse rules, ~60 lines — plus `calibration-ledger.md`, the evidence base its pointers resolve to), the **12 skills**, the **agent-challenger**, the **10 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter`, `r15-commit-gate`, `pre-merge-review-reminder`, `memory-write-guard`, `pre-bulk-mutation-count-staleness`, `public-repo-identity-guard`), and the optional `manifesto.md` — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
 
 **Interactive install** (control each step) : `./install.sh /path/to/your/project` — same components, prompts on each one.
 
@@ -30,15 +30,15 @@ Seven metrics (M1–M7) instrument the doctrine's own self-application, and a si
 
 | Metric | Rule | Target | Baseline (21 May) | Re-measure (17 July) | Verdict |
 |---|---|---|---|---|---|
-| **M1** anti-pattern recurrence / 7-day session | R13 | ≤ 1 | 14.63 | 15.0 | Invalid by construction two cycles running (counts feedbacks *applied*, not recurrences) — repair-or-retire owed |
+| **M1** anti-pattern recurrence / 7-day session | R13 | ≤ 1 | 14.63 | 15.0 | **Retired v0.11** — invalid by construction two cycles running (counted feedback *mentions*, not recurrences); never produced one valid measurement |
 | **M2** multi-file commits without ADR / 28d | R8 | ≤ 5 % | 0.8 % | 3.7 % | **Met** (degrading, concentrated on one day's cluster) |
 | **M3** median drift apparition → detection / 90d | R13 | ≤ 30 days | 35.7 d | 66.5 d | Miss — population ×3 since baseline, chiffre-à-chiffre comparison fragile ; manual-annotation re-baseline owed |
 | **M4** position of 1st DB probe in session | R13 | ≤ 90 min | ~58 min | ~66 min | **Met** (sliding 41 → 58 → 66) |
-| **M5** pure-command ratio / 7d (sclerosis alarm > 80 %) | R13 | provisional | 94 % `unknown` | **0 briefs extracted** | **Dead instrument** — its source drifted from bullets to prose ; repair-or-retire owed |
+| **M5** pure-command ratio / 7d (sclerosis alarm > 80 %) | R13 | provisional | 94 % `unknown` | **0 briefs extracted** | **Retired v0.11** — dead instrument (source drifted to prose); the sclerosis alarm stays qualitative in R13 |
 | **M6** spike orphans > 7 days | R14 | 0 | 0 (1 valid spike) | 0 (**0 spikes in 60 d**) | Met — by vacuity ; R14 under R18 death-watch |
 | **M7** runs > 5 uncheckpointed commits | R15 | 0 | 4 runs (longest = **92**) | 0 runs (longest = **1**) | **Met — the series' first red-to-green reversal ; the R15 hook holds where the declarative rule failed** |
 
-The headline of the 17 July re-measure is M7: the chain of 92 autonomous commits without a session log that justified the R15 commit-gate has collapsed to 1 under hook enforcement — direct empirical validation of *enforced over declared*. The honest column is the instruments themselves: M1 and M5 owe a repair-or-retire decision at the next cycle, because a metric kept "just in case" is the exact unrefreshed Cache the doctrine hunts everywhere else. Seven metrics instrument four rules (R8, R13, R14, R15); the other fifteen rules remain qualitative or candidates for future instrumentation (see `doctrine-metrics.ts` for the coverage map). The doctrine **does not retro-fit targets to fit measurements** — gaps are acknowledged and recalibrated only when they reveal an intuition-set threshold rather than a doctrinal one.
+The headline of the 17 July re-measure is M7: the chain of 92 autonomous commits without a session log that justified the R15 commit-gate has collapsed to 1 under hook enforcement — direct empirical validation of *enforced over declared*. The honest column is the instruments themselves: **v0.11 retired M1 and M5** — neither ever produced a valid measurement, and a metric kept "just in case" is the exact unrefreshed Cache the doctrine hunts everywhere else. This is the doctrine's first falsification-driven retirement of its own structures (R18's mortality mechanism producing its first kills); the scripts remain in the samples repo as dated archive. Five live metrics instrument four rules (R8, R13, R14, R15); the other rules remain qualitative or candidates for future instrumentation (see `doctrine-metrics.ts` for the coverage map). The doctrine **does not retro-fit targets to fit measurements** — gaps are acknowledged and recalibrated only when they reveal an intuition-set threshold rather than a doctrinal one.
 
 ## Invariant rule
 
@@ -77,7 +77,7 @@ The rule text lives in **one place**: [`CLAUDE.md`](./CLAUDE.md) (Live norm). Am
 | [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (R8). |
 | [`.claude/skills/`](./.claude/skills/) | 12 universal skills. |
 | [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R4, R5). |
-| [`.claude/hooks/`](./.claude/hooks/) | 9 hooks, each single-responsibility: `deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter`, `r15-commit-gate`, `pre-merge-review-reminder` *(R19 — business-temperature + SECURITY DEFINER content scan)*, `memory-write-guard` *(R18 — write-time format guard)*, `pre-bulk-mutation-count-staleness` *(R7 — bulk re-count gate)*. All wired in [`settings.json.template`](./.claude/settings.json.template). |
+| [`.claude/hooks/`](./.claude/hooks/) | 10 hooks, each single-responsibility: `deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter`, `r15-commit-gate`, `pre-merge-review-reminder` *(R19 — business-temperature + SECURITY DEFINER content scan)*, `memory-write-guard` *(R18 — write-time format guard)*, `pre-bulk-mutation-count-staleness` *(R7 — bulk re-count gate)*, `public-repo-identity-guard` *(publication gate — blocks a public push carrying blocklisted identifiers; opt-in, fail-closed once configured)*. All wired in [`settings.json.template`](./.claude/settings.json.template). |
 
 ## Living vs Published — the two-tier doctrine
 
@@ -99,7 +99,7 @@ If you have **an hour**: read `manifesto.md` end to end, then pick the three rul
 
 If you have **ten minutes**: read the nineteen rule titles in `CLAUDE.md`, paste `anti-patterns-checklist.md` into your next PR review, move on. The checklist is the densest doctrine-payload-per-line of the repo.
 
-If you have **two minutes**: run `./install.sh /path/to/your/project` and answer Y when prompted for hooks. The default has been `[Y/n]` since v0.3 — most of the doctrine's value lives in the material enforcement of the nine hooks.
+If you have **two minutes**: run `./install.sh /path/to/your/project` and answer Y when prompted for hooks. The default has been `[Y/n]` since v0.3 — most of the doctrine's value lives in the material enforcement of the ten hooks.
 
 After installation, run `./verify-install.sh` to confirm the integrity of the installed stack and surface drift between the doctrine you installed and what currently lives in `.claude/`.
 
@@ -121,7 +121,7 @@ The doctrine asks four things back. Free format, GitHub Issues with subject pref
 
 **(c) Which rules can you name without rereading?** Without reopening the file — how many of the 19 toolkit rules can you list? This metric measures whether the doctrine has been **integrated** (you think of it spontaneously) or merely **consulted**. This is the most important test.
 
-**(d) Which rule is missing for your stack?** Candidates for the next cycle are harvested continuously (the standing open items: instrument repair-or-retire for M1/M5, a loop-until-dry review protocol awaiting its first measured run, R18's cron and auto-demotion mechanisms still prescribed-not-wired). Real practice may reveal what the nineteen rules still miss.
+**(d) Which rule is missing for your stack?** Candidates for the next cycle are harvested continuously (the standing open items: a loop-until-dry review protocol awaiting its first measured run, an M3 re-baseline with manual annotation, R18's cron and auto-demotion mechanisms still prescribed-not-wired). Real practice may reveal what the nineteen rules still miss.
 
 Testers wanting attribution can opt-in via the issue (default is anonymous).
 
