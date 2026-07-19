@@ -1,6 +1,6 @@
 # Contributing to the Counterpart Doctrine
 
-This doctrine is at **v0.10** (17 July 2026 — R17 *Assertional coverage* fills the vacant slot, R19 promoted on measured bite, 4 amendments, produced by the first real execution of the R18(c) falsification audit; see `v0.10-candidates.md`). Feedback is precious and will structure the next cycle — calendar-uncommitted, paced by accumulated empirical material rather than fixed dates.
+The doctrine's current version lives in the header of [`CLAUDE.md`](./CLAUDE.md) (the Live norm); the full version trail and release notes live in [`calibration-ledger.md`](./calibration-ledger.md). Feedback is precious and will structure the next cycle — calendar-uncommitted, paced by accumulated empirical material rather than fixed dates.
 
 ## If you're testing the doctrine on a project
 
@@ -20,11 +20,11 @@ Critical integration test: if the answer is weak (1-5 rules after 3 weeks), the 
 
 **(d) Which rule is missing for your stack?**
 
-Candidates for the next cycle. The doctrine grew by one axis between v0.2 and v0.3, separated toolkit from manifesto between v0.3.3 and v0.4, refactored to fourteen rules in v0.4.1, added R15 + R16 post-Gorgon in v0.6, consolidated multi-substrate in v0.7, turned on itself in v0.8 (R18), added the review gate in v0.9, and executed its first self-audit in v0.10 (R17 filled, R19 promoted) — real practice may reveal what those nineteen rules still miss.
+Candidates for the next cycle. The full version trail — how the doctrine grew, amended, and retracted from v0.2 on — lives in [`calibration-ledger.md`](./calibration-ledger.md); real practice may reveal what the nineteen rules still miss.
 
 ## Feedback formats
 
-- **GitHub Issue** on this repo, tag `feedback-test-v0.10`
+- **GitHub Issue** on this repo, tag `feedback-test`
 - **DEV.to comment** under the relevant arc-2 article
 - **Email** to the address listed on the GitHub profile
 
@@ -63,4 +63,4 @@ These questions will structure the next cycles.
 
 ---
 
-*v0.10 — under CC-BY-4.0 — Michel Faure*
+*Under CC-BY-4.0 — Michel Faure*
