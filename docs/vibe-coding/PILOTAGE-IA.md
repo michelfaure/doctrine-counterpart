@@ -6,6 +6,20 @@ Pas de littérature, pas de théorie. Ce qui s'est passé matériellement.
 
 ---
 
+## 2026-07-19 soir — v0.11 : la doctrine passe aux ciseaux (DRAFT à éditer)
+
+### Ce qui a marché
+
+J'ai fait relire le repo à une session fraîche sans lui dire que Michel Faure c'était moi — la clause de triangulation exécutée pour de vrai, en aveugle. Cinq tours de lecture hostile, zéro finding matériel, et la seule critique restée debout — je réponds à chaque problème par une structure de plus — est devenue le fait nouveau d'un cycle entier. Ce qui a tout déclenché, c'est la conversion de cette critique non-matérielle en sondes locales : 11 806 tokens toujours-chargés mesurés, R19 vivant en 8 copies, 10 fichiers porteurs de version. Le split terse s'est fait en une soirée avec son filet : le ledger reçoit le texte long v0.10 verbatim (byte-identité vérifiée au diff avant réécriture), et l'audit d'équivalence par un agent frais a attrapé six clauses normatives que MA compression avait perdues — toutes réintégrées avant merge. Tuer M1/M5 m'a coûté dix minutes de décision une fois la sonde posée (« ils n'ont jamais produit une mesure valide ») : c'est la première retraite par falsification du corpus, exactement celle que le relecteur croyait absente.
+
+### Ce qui a foiré ou m'a surpris
+
+La compression perd du normatif même quand on fait attention — six clauses tombées, dont l'interdiction du méga-hook et la décision blanket-CI-non-câblée. Sans l'agent d'équivalence je les aurais découvertes dans six mois, en les violant. Surprise plus piquante : ma propre passe de cohérence du 17/07 avait AJOUTÉ une copie — la table R1-R19 complète du README, 42 lignes de contenu-règle — le biais d'accumulation opère pendant qu'on le répare. Et le balayage final a trouvé le drift jusque chez gorgon (référence v0.4.1, sept versions de retard) et dans mon CLAUDE.md personnel, qui affirmait deux choses devenues fausses : le trigger `actions.ts` pourtant retiré au v0.10, et ask-3-options « pas installé » alors qu'il l'est depuis le 17/07. La copie doctrine ne vit pas que dans le repo — elle essaime dans chaque fichier d'instructions de la machine.
+
+### Ce que je veux essayer la prochaine fois
+
+Ouvrir le prochain cycle par la sonde delta — structures nées vs tuées depuis v0.11 — avant tout harvest, pour que la discipline net ≤ 0 soit mesurée et pas déclarée. Tenir cette ligne : ce soir l'identity-guard n'a été promu que parce que M1/M5 mouraient en face. Au premier gros diff chaud venu, tester enfin loop-until-dry avec la colonne single-pass vs loop au journal R19 — le dernier reste du cycle précédent sans données. Billing GHA rembrandt : toujours `[unverified]` (non re-sondé ce soir, reset attendu 01/08).
+
 ## 2026-07-17 après-midi — v0.10 : le cycle qui s'audite enfin lui-même (DRAFT à éditer)
 
 ### Ce qui a marché

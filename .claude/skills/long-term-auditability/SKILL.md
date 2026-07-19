@@ -97,20 +97,15 @@ If > 30% in obsolete + contradicted + abandoned, the domain is still in explorat
 
 ## The doctrine applies to itself
 
-**A doctrine that believes itself outside time betrays its own auditability principle.** This Counterpart Doctrine is versioned (v0.1, v0.2, etc.) and audited like an ADR.
+**A doctrine that believes itself outside time betrays its own auditability principle.** This Counterpart Doctrine is versioned and audited like an ADR — its real version trail (every release with its named new fact and documented retraction) lives in `calibration-ledger.md`, never duplicated elsewhere.
 
-Practical consequence: at each doctrine update, open a changelog in `manifesto.md`:
+Practical consequence for your own doctrine: keep ONE dated version trail in ONE file, and make each entry carry the new fact that justified the bump and anything retracted. A template entry:
 
 ```markdown
-## Changelog
-
-### v0.2 (YYYY-MM-DD)
-- Added skill X following feedback from Y
-- Reformulation of axis Z after incident A
-- Open question 4 resolved by hypothesis B tested over 6 weeks
-
-### v0.1 (YYYY-MM-DD)
-- First version
+### vN (YYYY-MM-DD)
+- New fact: <the incident or measurement that forced the change>
+- Added / amended: <rule or skill, with its N count>
+- Retracted: <what was removed or demoted, and why>
 ```
 
 ## Bus factor of the AI-native solo
