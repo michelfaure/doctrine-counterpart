@@ -36,13 +36,16 @@ ask() {
 # Detect source directory (where this script lives)
 SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Version derived from the Live norm — never hardcoded here (drift class caught 17/07/2026)
+DOCTRINE_V="$(grep -m1 -oE 'v[0-9]+\.[0-9]+' "$SOURCE_DIR/CLAUDE.md" 2>/dev/null || echo '(unknown)')"
+
 # Target (first non-flag arg, or pwd)
 TARGET="${ARGS[0]:-$(pwd)}"
 TARGET="$(cd "$TARGET" && pwd)"
 
 echo ""
 echo "=================================================="
-echo "  Counterpart Doctrine v0.10 — install (toolkit + manifesto)"
+echo "  Counterpart Doctrine ${DOCTRINE_V} — install (toolkit + ledger + manifesto)"
 echo "=================================================="
 echo ""
 echo "Source: $SOURCE_DIR"
@@ -55,7 +58,7 @@ if [[ ! -d "$TARGET" ]]; then
 fi
 
 # --- 1. CLAUDE.md ---
-echo "→ Step 1/6: CLAUDE.md (toolkit — 19 operational rules)"
+echo "→ Step 1/6: CLAUDE.md (toolkit — 19 terse rules) + calibration-ledger.md (evidence base)"
 if [[ -f "$TARGET/CLAUDE.md" ]]; then
   echo "  A CLAUDE.md already exists in $TARGET."
   if [[ "$AUTO_YES" -eq 1 ]]; then
@@ -68,7 +71,7 @@ if [[ -f "$TARGET/CLAUDE.md" ]]; then
     a)
       echo "" >> "$TARGET/CLAUDE.md"
       echo "" >> "$TARGET/CLAUDE.md"
-      echo "<!-- ===== Counterpart Toolkit v0.10 (append) ===== -->" >> "$TARGET/CLAUDE.md"
+      echo "<!-- ===== Counterpart Toolkit ${DOCTRINE_V} (append) ===== -->" >> "$TARGET/CLAUDE.md"
       cat "$SOURCE_DIR/CLAUDE.md" >> "$TARGET/CLAUDE.md"
       echo "  ✓ Doctrine appended to existing CLAUDE.md"
       ;;
@@ -87,6 +90,12 @@ if [[ -f "$TARGET/CLAUDE.md" ]]; then
 else
   cp "$SOURCE_DIR/CLAUDE.md" "$TARGET/CLAUDE.md"
   echo "  ✓ CLAUDE.md installed"
+fi
+
+# The terse rules point to the ledger (→ ledger §Rn) — install it alongside so pointers resolve.
+if [[ -f "$SOURCE_DIR/calibration-ledger.md" ]]; then
+  cp "$SOURCE_DIR/calibration-ledger.md" "$TARGET/calibration-ledger.md"
+  echo "  ✓ calibration-ledger.md installed"
 fi
 
 # --- 2. .claude/ (skills + agents) ---
@@ -150,7 +159,7 @@ echo "    - pre-merge-review-reminder  : R19 review-gate on business-hot merges,
 echo "    - memory-write-guard         : R18 MEMORY.md format guard at write-time"
 echo "    - pre-bulk-mutation-count-staleness : R7 bulk re-count gate, bypass -- count-fresh:..."
 echo ""
-echo "  Default in v0.10 (unchanged since v0.3): Y. The doctrine's value relies on these guards."
+echo "  Default (unchanged since v0.3): Y. The doctrine's value relies on these guards."
 echo "  Decline only if you have an incompatible setup."
 choice=$(ask "  Activate hooks? [Y/n] ")
 if [[ "$choice" =~ ^[Yy]$ ]]; then

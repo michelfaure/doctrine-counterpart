@@ -1,4 +1,6 @@
-# Anti-patterns checklist — Counterpart Doctrine v0.10
+# Anti-patterns checklist — Counterpart Doctrine
+
+*Live quick-scan list, aligned with the Live norm in [`CLAUDE.md`](./CLAUDE.md) (which points here).*
 
 Thirty anti-patterns to flag immediately in a session with an AI coding agent. Paste this list into your PR review template, your session retrospective, or your team's brief-review process. Each item is observable in a single turn of dialogue — no instrumentation required, only attention.
 
@@ -60,4 +62,4 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 ---
 
-*Counterpart Doctrine v0.10 — 30 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14, 22 in v0.7 for multi-substrate consolidation, +8 across v0.8 → v0.10 for self-application, the review gate and assertional coverage). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*
+*30 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14, 22 in v0.7 for multi-substrate consolidation, +8 across v0.8 → v0.10 for self-application, the review gate and assertional coverage). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*
