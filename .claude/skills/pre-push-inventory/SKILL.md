@@ -5,6 +5,8 @@ description: Activate this skill before any `git push` on a long-running branch 
 
 # Pre-push inventory — invocable protocol
 
+> **Status (v0.11, 2026-07-19): CLOSED in the author's living tier — kept as a repo example, no longer installed by default.** Promoted in v0.7 but never installed user-scope across three cycles (an Am.R1 gap: source existence ≠ live mechanism). Its bite surface is now covered by *enforcement*, which held where this declarative protocol never ran: the `public-repo-identity-guard` hook gates public pushes mechanically, and the Am.R2 in-flight-work scan covers the "what else is on this chain" question. Adopt it manually if your setup lacks those layers — the protocol below remains valid.
+
 R16 of the toolkit states textually: *"Strictly non-overlapping material scope — each agent can modify only files/directories explicitly listed in its prompt."* This skill extends that mechanism to a related class: the local git chain that accumulates when multiple sub-agents (or a sub-agent + manual edits) commit in parallel, and where the next `git push` will send not just the latest commit but the entire ahead chain.
 
 Companion to `material-verification` (raw output for build/test claims). `pre-push-inventory` runs *before* the push itself — it materially answers *"what am I about to send"*.

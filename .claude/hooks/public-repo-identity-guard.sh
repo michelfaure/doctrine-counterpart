@@ -95,6 +95,16 @@ fi
 head_hits="$(git -C "$dir" grep -iE -c "$pattern" HEAD 2>/dev/null | head -8 || true)"
 [[ -n "$head_hits" ]] && hits+="HEAD tree:"$'\n'"$head_hits"$'\n'
 
+# 6) Chained commit&&push blind spot (caught on a live bite, 2026-07-19): a
+#    PreToolUse hook runs BEFORE the command executes — a `git commit && git push`
+#    chain is scanned at the PRE-commit HEAD, so the offending commit's content
+#    escapes the scan. If the command also creates a commit/add, scan the
+#    WORKING TREE (tracked files) as well.
+if printf '%s' "$cmd" | grep -Eq '(^|[;&|[:space:]])git([[:space:]]+-C[[:space:]]+[^[:space:]]+)?[[:space:]]+(commit|add)([[:space:]]|$)'; then
+  wt_hits="$(git -C "$dir" grep -iE --untracked -c "$pattern" -- . 2>/dev/null | head -8 || true)"
+  [[ -n "$wt_hits" ]] && hits+="working tree (chained commit before push):"$'\n'"$wt_hits"$'\n'
+fi
+
 [[ -z "$hits" ]] && exit 0
 
 {
