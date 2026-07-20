@@ -6,6 +6,20 @@ Pas de littérature, pas de théorie. Ce qui s'est passé matériellement.
 
 ---
 
+## 2026-07-20 — trois relectures externes, et le garde qui me mord (DRAFT à éditer)
+
+### Ce qui a marché
+
+Faire relire le repo en aveugle, par sessions fraîches et successives, est le meilleur rendement méthodo que j'aie eu. Trois passes, trois couches : la doctrine (rien de matériel, une critique structurelle qui a lancé v0.11), les skills (deux drifts réels), les hooks (deux trous de sécurité, avec tests exécutés). Ce qui rend ces retours utilisables, c'est de les traiter comme des claims à falsifier et pas comme des verdicts : sur les skills, « les refs axis sont périmées » était faux — les axes sont stables depuis v0.3, seul le qualificatif de version driftait ; sur les hooks, le triage vivant/publié a montré que mon scanner de secrets personnel, câblé sur Write/Edit, était structurellement hors d'atteinte des deux défauts. Sans ces sondes j'aurais « corrigé » des choses saines et cru mon tier vivant troué.
+
+### Ce qui a foiré ou m'a surpris
+
+Le secret-scanner publié était éteint sur la forme de commit que les agents émettent en réalité (`git add -A && git commit`), à cause d'un `^` d'ancrage — et il greppait le disque là où le commit embarque l'index. Un secret stagé puis nettoyé passait. Deux ans de fausse confiance en puissance, sur le pattern JWT Supabase qui est précisément le plus cher à fuiter chez moi. Et dans la même soirée, l'identity-guard promu quelques heures plus tôt m'a bloqué pour une fuite réelle : mes propres docs de clôture portaient mes initiales et le vrai nom du projet — pendant que le commit fautif, lui, était déjà parti au push précédent parce que j'avais chaîné commit et push dans une seule commande, et qu'un hook PreToolUse ne voit que le HEAD d'avant. Le garde a mordu et révélé son propre angle mort dans le même mouvement.
+
+### Ce que je veux essayer la prochaine fois
+
+Écrire les tests de hook comme R17 l'exige : jamais la seule forme canonique — la forme chaînée, la forme `-C`, la forme depuis un autre répertoire, et un cas négatif ré-armé pour prouver que le filet mord. Vers un remote public, commit et push restent deux commandes, toujours. Et industrialiser ce que la triangulation a rendu évident : une passe de relecture externe par couche (norme, skills, hooks) à chaque cycle, en aveugle, en la traitant comme une source Am.R12 — matérielle avant d'être crue.
+
 ## 2026-07-19 soir — v0.11 : la doctrine passe aux ciseaux (DRAFT à éditer)
 
 ### Ce qui a marché
