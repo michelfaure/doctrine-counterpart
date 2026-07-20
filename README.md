@@ -74,7 +74,9 @@ The rule text lives in **one place**: [`CLAUDE.md`](./CLAUDE.md) (Live norm). Am
 | [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) | Seven M1–M7 scripts + `doctrine-metrics.ts` orchestrator + 21 May baseline + dated 17 July re-measure. The empirical half of the doctrine. |
 | [`install.sh`](./install.sh) | Interactive installer. Default `[Y/n]` for hooks. |
 | [`verify-install.sh`](./verify-install.sh) | Checks installation integrity, signals drift. |
-| [`tests/hooks/run.sh`](./tests/hooks/run.sh) | **Hook test suite** — 25 assertions: one per command form (chained, `cd`, `-C`, `;`, `cd`-in-message), one per secret pattern, staged-vs-disk, plus a negative case per hook. Run it before touching any hook. Mutation-tested: reverting a fix reddens exactly its assertion. |
+| [`tests/hooks/run.sh`](./tests/hooks/run.sh) | **Hook test suite** — 59 assertions covering all 10 hooks (8 gating + 2 documented non-gating exemptions): one case per command form, one per secret pattern, staged-vs-disk, and a blocking + passing pair per gate. Run it before touching any hook. |
+| [`tests/hooks/mutate.sh`](./tests/hooks/mutate.sh) | **Mutation harness** — neutralises each gating hook in turn and re-introduces the four defects that actually shipped; every mutation must redden the suite (12/12). This is what proves the net bites rather than merely passing. |
+| [`.github/workflows/hooks.yml`](./.github/workflows/hooks.yml) | CI: shell syntax, suite, mutation testing, installer dry-run — on every push touching hooks, tests or the installer. |
 | [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (R8). |
 | [`.claude/skills/`](./.claude/skills/) | 12 universal skills. |
 | [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R4, R5). |
