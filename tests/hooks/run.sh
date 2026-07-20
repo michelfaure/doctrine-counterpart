@@ -19,7 +19,9 @@
 
 set -uo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HOOKS="$(cd "$HERE/../../.claude/hooks" && pwd)"
+# Overridable so the same harness can be pointed at another tier (the living
+# user-scope hooks have their own suite): HOOKS_DIR=~/.claude/hooks ./run.sh
+HOOKS="${HOOKS_DIR:-$(cd "$HERE/../../.claude/hooks" && pwd)}"
 export HOOKS
 # shellcheck source=lib.sh
 source "$HERE/lib.sh"
