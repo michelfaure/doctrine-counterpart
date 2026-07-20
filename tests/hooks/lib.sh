@@ -75,3 +75,11 @@ summary() {
 # copy run.sh, point HOOKS_DIR at your own directory, and keep your suite where
 # your hooks live. A suite that tests the artefact you publish says nothing
 # about the enforcement you run.
+
+# ONE-WAY FLOW (2026-07-20) — living → scrubbed → published, never the reverse.
+# Measured that day: a practitioner's own copy of `root-cause` carried the real
+# incident figures while the published one carries neutral ones that never
+# existed in production. Same filename, opposite direction of impoverishment —
+# the living copy is richer in anchoring, the published one richer in
+# amendments. Merging must therefore take the current published TEXT and keep
+# the local ANCHORS; a plain re-install silently does the opposite.

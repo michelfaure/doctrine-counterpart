@@ -101,6 +101,16 @@ fi
 # --- 2. .claude/ (skills + agents) ---
 echo ""
 echo "→ Step 2/6: .claude/skills + .claude/agents"
+# ONE-WAY FLOW — living → scrubbed → published, never the reverse.
+# The published skills are deliberately generic: their examples carry neutral
+# figures where a practitioner's own copy carries the real incident that made
+# the rule exist. Re-installing over a customised skill therefore replaces a
+# rule anchored in something that happened with a rule anchored in nothing,
+# and the two files bear the same name, so the loss is invisible.
+# Existing skills are skipped below for exactly this reason — do not "fix" that
+# by adding an overwrite flag.
+echo "  (existing skills are never overwritten — a local copy may carry your own"
+echo "   incident anchors, which the generic version does not)"
 mkdir -p "$TARGET/.claude/skills"
 mkdir -p "$TARGET/.claude/agents"
 
