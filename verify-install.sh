@@ -53,13 +53,23 @@ fi
 # --- 2. Skills ---
 echo ""
 echo "→ Skills (expected count derived from source)"
+# Skills deliberately not installed by default — the SAME list install.sh reads.
+# Without this shared source the two scripts contradicted each other: the
+# installer skipped a skill and the verifier still counted it as missing,
+# failing every install with exit 1 (caught by CI on its first run, 20/07/2026).
+NOT_INSTALLED="$SOURCE_DIR/.claude/skills/.not-installed"
+is_exempt() { [[ -f "$NOT_INSTALLED" ]] && grep -qxF "$1" "$NOT_INSTALLED"; }
+
 SOURCE_SKILLS=$(find "$SOURCE_DIR/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
 TARGET_SKILLS=$(find "$TARGET/.claude/skills" -maxdepth 1 -mindepth 1 -type d 2>/dev/null | wc -l | tr -d ' ')
-echo "  source: $SOURCE_SKILLS skills"
+EXEMPT_COUNT=0
+[[ -f "$NOT_INSTALLED" ]] && EXEMPT_COUNT=$(grep -cvE '^\s*(#|$)' "$NOT_INSTALLED" || true)
+echo "  source: $SOURCE_SKILLS skills ($EXEMPT_COUNT not installed by default)"
 echo "  target: $TARGET_SKILLS skills"
 
 for skill_dir in "$SOURCE_DIR/.claude/skills"/*/; do
   skill_name=$(basename "$skill_dir")
+  is_exempt "$skill_name" && { echo "  ⊘ $skill_name (not installed by default)"; continue; }
   target_skill="$TARGET/.claude/skills/$skill_name/SKILL.md"
   if [[ ! -f "$target_skill" ]]; then
     echo "  ❌ missing skill: $skill_name"

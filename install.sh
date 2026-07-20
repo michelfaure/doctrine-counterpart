@@ -107,9 +107,10 @@ mkdir -p "$TARGET/.claude/agents"
 # Skills
 for skill_dir in "$SOURCE_DIR/.claude/skills"/*/; do
   skill_name=$(basename "$skill_dir")
-  # Closed in v0.11 (superseded by enforcement hooks) — kept as repo example, not installed by default.
-  if [[ "$skill_name" == "pre-push-inventory" ]]; then
-    echo "  ⊘ skip $skill_name (closed v0.11 — superseded by enforcement hooks; copy manually if wanted)"
+  # Not-installed-by-default list — single source shared with verify-install.sh.
+  if [[ -f "$SOURCE_DIR/.claude/skills/.not-installed" ]] \
+     && grep -qxF "$skill_name" "$SOURCE_DIR/.claude/skills/.not-installed"; then
+    echo "  ⊘ skip $skill_name (listed in .claude/skills/.not-installed; copy manually if wanted)"
     continue
   fi
   target_skill_dir="$TARGET/.claude/skills/$skill_name"

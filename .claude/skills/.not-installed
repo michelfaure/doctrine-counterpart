@@ -1,0 +1,5 @@
+# Skills present as repo examples but NOT installed by default.
+# Single source of truth read by install.sh AND verify-install.sh — the two
+# contradicted each other for a day (installer skipped, verifier still expected).
+# One name per line.
+pre-push-inventory
