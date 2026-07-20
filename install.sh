@@ -150,6 +150,20 @@ else
   echo "  ⊘ skip"
 fi
 
+# The two working artefacts the rules actually reference: R8 mandates an ADR
+# template, and the README calls the checklist the densest page of the repo —
+# both were missing from every install for four cycles (external review, 20/07).
+if [[ -f "$SOURCE_DIR/ADR-template.md" ]]; then
+  mkdir -p "$TARGET/docs/adr"
+  cp "$SOURCE_DIR/ADR-template.md" "$TARGET/docs/adr/ADR-template.md"
+  echo "  ✓ ADR-template.md placed in docs/adr/ (R8)"
+fi
+if [[ -f "$SOURCE_DIR/anti-patterns-checklist.md" ]]; then
+  mkdir -p "$TARGET/docs"
+  cp "$SOURCE_DIR/anti-patterns-checklist.md" "$TARGET/docs/anti-patterns-checklist.md"
+  echo "  ✓ anti-patterns-checklist.md placed in docs/"
+fi
+
 # --- 4. Hooks (recommended by default since v0.3) ---
 echo ""
 echo "→ Step 4/6: Hooks (material enforcement — recommended)"

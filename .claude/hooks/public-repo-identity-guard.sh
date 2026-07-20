@@ -56,10 +56,13 @@ printf '%s' "$cmd" | grep -Eq '(^|[;&|[:space:]])git([[:space:]]+-C[[:space:]]+[
 
 # 2) Locate the repo (git -C <dir> | cd <dir> | PWD)
 dir=""
+# `cd` matched ONLY at a command boundary: unanchored, it also reads the commit
+# message (`-m "fix: cd in build.sh"`), captures a bogus path and disarms the gate.
+CD_AT_BOUNDARY='(^|&&|;|\|)[[:space:]]*cd[[:space:]]+([^[:space:]&;|]+)'
 if [[ "$cmd" =~ git[[:space:]]+-C[[:space:]]+([^[:space:]]+) ]]; then
   dir="${BASH_REMATCH[1]}"
-elif [[ "$cmd" =~ cd[[:space:]]+([^[:space:]&;|]+) ]]; then
-  dir="${BASH_REMATCH[1]}"
+elif [[ "$cmd" =~ $CD_AT_BOUNDARY ]]; then
+  dir="${BASH_REMATCH[2]}"
 fi
 dir="${dir/#\~/$HOME}"
 [[ -z "$dir" ]] && dir="$PWD"

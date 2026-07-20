@@ -19,14 +19,23 @@ fi
 
 # Locate the repo the commit targets (git -C <dir> | cd <dir> | PWD) — a chained
 # `cd /elsewhere && git commit` must be scanned in /elsewhere, not in $PWD.
+# The `cd` is matched ONLY at a command boundary (start, &&, ;, |): an unanchored
+# match also reads the COMMIT MESSAGE, so `git commit -m "fix: cd in build.sh"`
+# captured DIR="in", the repo lookup failed, and the gate fell open — a bypass
+# introduced by the previous fix and caught by the next external review
+# (2026-07-20). Failing to resolve a directory now falls back to $PWD instead of
+# exiting: a security gate must not disarm because a path was unparseable.
 DIR=""
+CD_AT_BOUNDARY='(^|&&|;|\|)[[:space:]]*cd[[:space:]]+([^[:space:]&;|]+)'
 if [[ "$COMMAND" =~ git[[:space:]]+-C[[:space:]]+([^[:space:]]+) ]]; then
   DIR="${BASH_REMATCH[1]}"
-elif [[ "$COMMAND" =~ cd[[:space:]]+([^[:space:]&;|]+) ]]; then
-  DIR="${BASH_REMATCH[1]}"
+elif [[ "$COMMAND" =~ $CD_AT_BOUNDARY ]]; then
+  DIR="${BASH_REMATCH[2]}"
 fi
 DIR="${DIR/#\~/$HOME}"
-[[ -z "$DIR" ]] && DIR="$PWD"
+if [[ -z "$DIR" ]] || ! git -C "$DIR" rev-parse --show-toplevel >/dev/null 2>&1; then
+  DIR="$PWD"
+fi
 git -C "$DIR" rev-parse --show-toplevel >/dev/null 2>&1 || exit 0
 
 # Bypass explicite
@@ -80,9 +89,12 @@ while IFS= read -r FILE; do
   CONTENT="$(git -C "$DIR" show ":$FILE" 2>/dev/null || true)"
   [[ -z "$CONTENT" ]] && continue
 
+  # `--` is REQUIRED: patterns starting with a dash (the PEM `-----BEGIN…` one)
+  # are otherwise parsed by grep as options — that pattern never matched anything
+  # from the day the hook was written, silently (2026-07-20 review).
   for PATTERN in "${PATTERNS[@]}"; do
-    if printf '%s' "$CONTENT" | grep -qE "$PATTERN"; then
-      MATCH=$(printf '%s' "$CONTENT" | grep -nE "$PATTERN" | head -1)
+    if printf '%s' "$CONTENT" | grep -qE -- "$PATTERN"; then
+      MATCH=$(printf '%s' "$CONTENT" | grep -nE -- "$PATTERN" | head -1)
       DETECTED=1
       DETECTED_DETAILS+="\n  - $FILE: $MATCH"
     fi
