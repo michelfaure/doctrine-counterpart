@@ -64,3 +64,14 @@ summary() {
   if [[ $FAIL -eq 0 ]]; then echo "All $PASS hook assertions passed."; return 0
   else echo "$FAIL FAILED, $PASS passed."; return 1; fi
 }
+
+# NOTE — two tiers, two suites, one harness.
+# This library is shared by:
+#   - tests/hooks/run.sh        (published tier, in this repo, run by CI)
+#   - a user-scope living suite (the author's own hooks, never published)
+# The published suite cannot attest the living one: on the author's machine the
+# two diverge substantially (different matchers, stack-specific patterns, and
+# two living-only hooks). If you adopt this toolkit and customise your hooks,
+# copy run.sh, point HOOKS_DIR at your own directory, and keep your suite where
+# your hooks live. A suite that tests the artefact you publish says nothing
+# about the enforcement you run.
