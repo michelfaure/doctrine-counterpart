@@ -1,0 +1,33 @@
+name: hooks
+
+# A net nobody runs is a Cache without a refresher (R6, one layer up): the suite
+# existed for a day before anything executed it automatically. Runs on every push
+# and PR touching the hooks, their tests, or the installer.
+on:
+  push:
+    paths: ['.claude/hooks/**', 'tests/hooks/**', 'install.sh', 'verify-install.sh', '.github/workflows/hooks.yml']
+  pull_request:
+    paths: ['.claude/hooks/**', 'tests/hooks/**', 'install.sh', 'verify-install.sh', '.github/workflows/hooks.yml']
+  workflow_dispatch:
+
+jobs:
+  suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shell syntax check (every hook and test)
+        run: for f in .claude/hooks/*.sh tests/hooks/*.sh install.sh verify-install.sh; do bash -n "$f" || exit 1; done
+      - name: Hook test suite
+        run: ./tests/hooks/run.sh
+      - name: Mutation testing (the suite must prove it bites)
+        run: ./tests/hooks/mutate.sh
+      - name: Installer dry-run (artefacts actually land)
+        run: |
+          set -euo pipefail
+          T="$(mktemp -d)"
+          ./install.sh --yes "$T" > /dev/null
+          for f in CLAUDE.md calibration-ledger.md docs/adr/ADR-template.md docs/anti-patterns-checklist.md; do
+            test -f "$T/$f" || { echo "MISSING after install: $f"; exit 1; }
+          done
+          test -d "$T/.claude/hooks" || { echo "MISSING: hooks not installed"; exit 1; }
+          echo "installer OK"

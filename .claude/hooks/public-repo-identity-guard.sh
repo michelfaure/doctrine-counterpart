@@ -65,7 +65,12 @@ elif [[ "$cmd" =~ $CD_AT_BOUNDARY ]]; then
   dir="${BASH_REMATCH[2]}"
 fi
 dir="${dir/#\~/$HOME}"
-[[ -z "$dir" ]] && dir="$PWD"
+# An unresolvable path falls back to $PWD instead of exiting: a security gate
+# must not disarm because a directory could not be parsed (class propagated from
+# secret-scanner, 2026-07-20 — the instance was fixed there a round earlier).
+if [[ -z "$dir" ]] || ! git -C "$dir" rev-parse --show-toplevel >/dev/null 2>&1; then
+  dir="$PWD"
+fi
 git -C "$dir" rev-parse --show-toplevel >/dev/null 2>&1 || exit 0
 
 # 3) Does the repo have a PUBLIC remote? Otherwise out of scope.
