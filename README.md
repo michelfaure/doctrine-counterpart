@@ -10,7 +10,7 @@ git clone https://github.com/michelfaure/doctrine-counterpart.git && \
   ./install.sh --yes /path/to/your/project
 ```
 
-This installs the **toolkit** (`CLAUDE.md`, 19 terse rules, ~60 lines — plus `calibration-ledger.md`, the evidence base its pointers resolve to), the **12 skills**, the **agent-challenger**, the **10 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter`, `r15-commit-gate`, `pre-merge-review-reminder`, `memory-write-guard`, `pre-bulk-mutation-count-staleness`, `public-repo-identity-guard`), and the optional `manifesto.md` — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
+This installs the **toolkit** (`CLAUDE.md`, 19 terse rules, ~60 lines — plus `calibration-ledger.md`, the evidence base its pointers resolve to), the **12 skills**, the **agent-challenger**, the **10 hooks** (`deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter`, `r15-commit-gate`, `pre-merge-review-reminder`, `memory-write-guard`, `pre-bulk-mutation-count-staleness`, `public-repo-identity-guard`), the `ADR-template.md` (R8) and `anti-patterns-checklist.md` into `docs/`, and the optional `manifesto.md` — without asking. Defaults `Y` on every prompt; an existing `CLAUDE.md` is placed alongside as `CLAUDE.md.doctrine-counterpart` for safe manual merge.
 
 **Interactive install** (control each step) : `./install.sh /path/to/your/project` — same components, prompts on each one.
 
@@ -74,6 +74,7 @@ The rule text lives in **one place**: [`CLAUDE.md`](./CLAUDE.md) (Live norm). Am
 | [`rembrandt-samples/falsifiable-metrics/`](https://github.com/michelfaure/rembrandt-samples/tree/main/falsifiable-metrics) | Seven M1–M7 scripts + `doctrine-metrics.ts` orchestrator + 21 May baseline + dated 17 July re-measure. The empirical half of the doctrine. |
 | [`install.sh`](./install.sh) | Interactive installer. Default `[Y/n]` for hooks. |
 | [`verify-install.sh`](./verify-install.sh) | Checks installation integrity, signals drift. |
+| [`tests/hooks/run.sh`](./tests/hooks/run.sh) | **Hook test suite** — 25 assertions: one per command form (chained, `cd`, `-C`, `;`, `cd`-in-message), one per secret pattern, staged-vs-disk, plus a negative case per hook. Run it before touching any hook. Mutation-tested: reverting a fix reddens exactly its assertion. |
 | [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (R8). |
 | [`.claude/skills/`](./.claude/skills/) | 12 universal skills. |
 | [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R4, R5). |
