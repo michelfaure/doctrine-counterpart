@@ -56,11 +56,11 @@ Hot capture, not literary. The pattern emerges from rereading, not from a single
 
 Maintain an index file at root (`MEMORY.md` or equivalent) with:
 
-- **One line per memory**, format: `- [title](file.md) — one-sentence hook < 150 chars`
+- **One line per memory**, format: `- [title](file.md) — one-sentence hook`, kept short enough that the whole index stays under the truncation limit (set your own per-line cap and state it in your project instructions)
 - Detail in separate topic files
 - **Strict 200-line limit** — beyond, Claude Code silently truncates
 
-If the index exceeds 200 lines: refactor obligatory. Archive sessions > 6 days old in a `sessions/INDEX.md`. Move project detail into dedicated files.
+If the index exceeds 200 lines: refactor obligatory. Move project detail into dedicated files, and archive entries **per your own documented criterion** — age alone is not one: it retires durable references (canonical files, infra pointers) and future commitments while keeping noisy recent entries. State the criterion where your memory policy lives, then apply it manually.
 
 ## Feedback memory tied to drift = mandatory probe
 
