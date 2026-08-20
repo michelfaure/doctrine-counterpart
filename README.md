@@ -1,6 +1,6 @@
 # counterpart-doctrine/
 
-Eighteen live operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged from solo coding with Claude Code on a production ERP (70+ effective days measured 22 May 2026, running daily through July 2026) + game dev dogfooding (Godot/GDScript multi-substrate test). Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.11** (the terse split, 19 July 2026 — `CLAUDE.md` reduced to a ~3.5k-token Live norm, the full-length rule text and all provenance frozen verbatim in [`calibration-ledger.md`](./calibration-ledger.md); a response by *subtraction* to an external review's one structural critique, accumulation bias. v0.10 two days earlier filled R17, promoted R19 on measured bite, and ran the first real R18(c) falsification audit — see [`v0.10-candidates.md`](./v0.10-candidates.md)).
+Seventeen live operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged from solo coding with Claude Code on a production ERP (70+ effective days measured 22 May 2026, running daily through July 2026) + game dev dogfooding (Godot/GDScript multi-substrate test). Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.11** (the terse split, 19 July 2026 — `CLAUDE.md` reduced to a ~3.5k-token Live norm, the full-length rule text and all provenance frozen verbatim in [`calibration-ledger.md`](./calibration-ledger.md); a response by *subtraction* to an external review's one structural critique, accumulation bias. v0.10 two days earlier filled R17, promoted R19 on measured bite, and ran the first real R18(c) falsification audit — see [`v0.10-candidates.md`](./v0.10-candidates.md)).
 
 ## Quick install (one command)
 
@@ -50,14 +50,14 @@ The doctrine *constrains the exchanges* of the attelage — the two-horse team w
 
 v0.11 declares an R6 category for every corpus surface (the doctrine's own Live/Snapshot/Cache taxonomy, applied to itself — before this, the rule text lived in 8 copies and the drift bit three times in a single day):
 
-- **The toolkit** — [`CLAUDE.md`](./CLAUDE.md). **Live norm.** Eighteen terse live rules (rule + trigger + action + exceptions), ~60 lines / ~3.5k tokens. This is what your Claude Code loads at session start, and what governs on conflict. **This is what you install.**
+- **The toolkit** — [`CLAUDE.md`](./CLAUDE.md). **Live norm.** Seventeen terse live rules (rule + trigger + action + exceptions), ~60 lines / ~3.5k tokens. This is what your Claude Code loads at session start, and what governs on conflict. **This is what you install.**
 - **The calibration ledger** — [`calibration-ledger.md`](./calibration-ledger.md). **Snapshot journal.** The full-length v0.10 rule text frozen verbatim, all incident provenance, N counts, metric baselines, the version trail, and a dated journal where post-v0.10 evidence appends. Append-only — a dated snapshot cannot drift.
 - **The manifesto** — [`manifesto.md`](./manifesto.md). **Theory.** Eight axes, the *attelage* metaphor, the construction method, the retractions, the critiques received and integrated. ~71 k characters. Read by humans who want the *why*; never loaded by the agent.
 - **The candidates audits** — [`v0.7-candidates.md`](./v0.7-candidates.md), [`v0.8-candidates.md`](./v0.8-candidates.md), [`v0.10-candidates.md`](./v0.10-candidates.md). Dated audit material behind each promotion. (v0.9's audit trail lives in its session log.)
 
 ## The toolkit rules
 
-R1 *Raw output, not declaration* · R2 *Filesystem over summary* · R3 *Success criteria before code* · R4 *Falsify before fix* · R5 *No revision without new fact* · R6 *Live / Snapshot / Cache mandatory* · R7 *Provenance + bulk re-count* · R8 *ADR before code, phase-0 grep* · R9 *Sub-agent briefing, FIFO 3* · R10 *Silent failure forbidden* · R11 *Parsimony* · R12 *Cite the official text, test external-AI claims* · R13 *Audit, archive, three brief modes* · ~~R14 *Spike escape hatch*~~ (retired 20 Aug 2026, falsification) · R15 *Checkpoint commits in autonomous sessions* · R16 *Parallel-agent limit* · R17 *Assertional coverage* · R18 *The doctrine is a data table* · R19 *Review-gate on business-hot merges*
+R1 *Raw output, not declaration* · R2 *Filesystem over summary* · R3 *Success criteria before code* · R4 *Falsify before fix* · ~~R5 *No revision without new fact*~~ (retired 20 Aug 2026, native overlap — limb 2 merged into R1) · R6 *Live / Snapshot / Cache mandatory* · R7 *Provenance + bulk re-count* · R8 *ADR before code, phase-0 grep* · R9 *Sub-agent briefing, FIFO 3* · R10 *Silent failure forbidden* · R11 *Parsimony* · R12 *Cite the official text, test external-AI claims* · R13 *Audit, archive, three brief modes* · ~~R14 *Spike escape hatch*~~ (retired 20 Aug 2026, falsification) · R15 *Checkpoint commits in autonomous sessions* · R16 *Parallel-agent limit* · R17 *Assertional coverage* · R18 *The doctrine is a data table* · R19 *Review-gate on business-hot merges*
 
 The rule text lives in **one place**: [`CLAUDE.md`](./CLAUDE.md) (Live norm). Amendment history, incident anchors and per-rule provenance: [`calibration-ledger.md`](./calibration-ledger.md). Theoretical anchors (eight axes): [`manifesto.md`](./manifesto.md).
 
@@ -65,7 +65,7 @@ The rule text lives in **one place**: [`CLAUDE.md`](./CLAUDE.md) (Live norm). Am
 
 | File | Role |
 |---|---|
-| [`CLAUDE.md`](./CLAUDE.md) | **Toolkit — the Live norm.** Eighteen terse live rules, drop-in for project root. ~60 lines, ~3.5k tokens. |
+| [`CLAUDE.md`](./CLAUDE.md) | **Toolkit — the Live norm.** Seventeen terse live rules, drop-in for project root. ~60 lines, ~3.5k tokens. |
 | [`calibration-ledger.md`](./calibration-ledger.md) | **Snapshot journal** — full v0.10 rule text frozen verbatim, provenance, N counts, metrics, version trail, dated evidence journal. |
 | [`anti-patterns-checklist.md`](./anti-patterns-checklist.md) | **30 anti-patterns** — densest doctrine-payload-per-line. Paste into PR review. |
 | [`manifesto.md`](./manifesto.md) | **Manifesto** — long-form theory: 8 axes, *attelage*, retractions, critiques. ~71 k characters. |
@@ -79,7 +79,7 @@ The rule text lives in **one place**: [`CLAUDE.md`](./CLAUDE.md) (Live norm). Am
 | [`.github/workflows/hooks.yml`](./.github/workflows/hooks.yml) | CI: shell syntax, suite, mutation testing, installer dry-run — on every push touching hooks, tests or the installer. |
 | [`ADR-template.md`](./ADR-template.md) | One-page Architecture Decision Record template (R8). |
 | [`.claude/skills/`](./.claude/skills/) | 12 universal skills. |
-| [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R4, R5). |
+| [`.claude/agents/agent-challenger.md`](./.claude/agents/agent-challenger.md) | Adversarial sub-agent (R4). |
 | [`.claude/hooks/`](./.claude/hooks/) | 10 hooks, each single-responsibility: `deploy-safeguard`, `secret-scanner`, `audit-memory-reminder`, `check-workaround-assumed`, `r15-autonomous-counter`, `r15-commit-gate`, `pre-merge-review-reminder` *(R19 — business-temperature + SECURITY DEFINER content scan)*, `memory-write-guard` *(R18 — write-time format guard)*, `pre-bulk-mutation-count-staleness` *(R7 — bulk re-count gate)*, `public-repo-identity-guard` *(publication gate — blocks a public push carrying blocklisted identifiers; opt-in, fail-closed once configured)*. All wired in [`settings.json.template`](./.claude/settings.json.template). |
 
 ## Living vs Published — the two-tier doctrine
@@ -100,7 +100,7 @@ The toolkit/manifesto split (v0.4) is orthogonal to a second long-standing disti
 
 If you have **an hour**: read `manifesto.md` end to end, then pick the three rules whose anchor axes most fit your current pain (typically R1, R10, R13 — *material verification*, *root cause*, *three brief modes*) and inline them into your `CLAUDE.md`. Run `./install.sh` to install the hooks and skills.
 
-If you have **ten minutes**: read the eighteen rule titles in `CLAUDE.md`, paste `anti-patterns-checklist.md` into your next PR review, move on. The checklist is the densest doctrine-payload-per-line of the repo.
+If you have **ten minutes**: read the seventeen rule titles in `CLAUDE.md`, paste `anti-patterns-checklist.md` into your next PR review, move on. The checklist is the densest doctrine-payload-per-line of the repo.
 
 If you have **two minutes**: run `./install.sh /path/to/your/project` and answer Y when prompted for hooks. The default has been `[Y/n]` since v0.3 — most of the doctrine's value lives in the material enforcement of the ten hooks.
 
@@ -111,7 +111,7 @@ After installation, run `./verify-install.sh` to confirm the integrity of the in
 Three patterns observed:
 
 1. **Drop-in then trim.** Install everything, run for a week, comment out what produces friction without payoff in your stack. Hooks have explicit bypass mechanisms — use them, log the bypass, decide later whether the rule was wrong or the bypass was lazy.
-2. **Rule-by-rule adoption.** Pick the rule that maps to your current pain (failed deploy → R1, drifted derived column → R6, sycophantic agent → R4+R5, green-tests-but-broken-feature → R17, sclerosis → R13). Apply only that rule and its associated skill. Add the next rule after the first has stuck for two weeks.
+2. **Rule-by-rule adoption.** Pick the rule that maps to your current pain (failed deploy → R1, drifted derived column → R6, sycophantic agent → R4, green-tests-but-broken-feature → R17, sclerosis → R13). Apply only that rule and its associated skill. Add the next rule after the first has stuck for two weeks.
 3. **Two-tier yourself.** If you publish or share your own variant, maintain explicitly two tiers — the generic one others can install, and the specialised one you actually run. Mark the boundary in your `CLAUDE.md`. The drift between them is informative.
 
 ## Four questions for testers

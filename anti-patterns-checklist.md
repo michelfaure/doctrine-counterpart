@@ -27,7 +27,6 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 ## Adversariality and authority
 
-- [ ] **Pushback "are you sure?" producing revision without a new fact** — the agent revises its recommendation on mere expressed doubt, with no new factual element. Sycophancy by RLHF. Maintaining the first answer is legitimate when no fact has changed. Axis 2.
 - [ ] **Mention of "you need" + norm without citation of exact text** — *"you need eIDAS Advanced for this,"* *"VAT 20% is mandatory here,"* without the article, edition, date, or quoted excerpt. Probably marketing. Axis 6.
 - [ ] **Platform-side mutation without prior GET + diff** — `updateProject`, `setEnvVar`, `patchConfig` on Vercel / Supabase / Stripe / GitHub without first reading the current state and diffing field by field. The mutation will overwrite something invisible to the local repo. Axis 1 / Axis 6.
 
@@ -61,4 +60,4 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 ---
 
-*29 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14 — that item retired 20 Aug 2026 with R14 itself, 22 in v0.7 for multi-substrate consolidation, +8 across v0.8 → v0.10 for self-application, the review gate and assertional coverage). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*
+*28 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14 — that item retired 20 Aug 2026 with R14 itself, 22 in v0.7 for multi-substrate consolidation, +8 across v0.8 → v0.10 for self-application, the review gate and assertional coverage). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*

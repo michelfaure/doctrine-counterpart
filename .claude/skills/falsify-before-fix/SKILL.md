@@ -1,7 +1,7 @@
 ---
 name: falsify-before-fix
 description: >-
-  Activate this skill before writing the fix code on a bug or incident, OR before posting an unverified claim of feature-future / residual limitation at the close of a session. Bug-side triggers: "fix", "bug", "patch", "hotfix", "workaround", "doesn't work", "diagnose", "hypothesis", "root cause", any commit subject in `fix:` / `hotfix:` / `bugfix:` on a production incident. Feature-future triggers: "V3-candidate", "v-suivante", "vN candidate", "next version will", "TODO:", "to-do:", "limite résiduelle", "residual limitation", "amélioration possible", "future enhancement", "à ajouter plus tard", "to be tested later", any "À suivre" / "Next steps" entry in a session log or PILOTAGE-IA draft. Distinct from `root-cause` (defensive checklist applied when *evaluating* a proposed fix): this skill is the invocable protocol the agent runs when it is about to *write* the fix OR *post* the unverified limitation. Enforces a single-sentence causal or descriptive hypothesis and three material probes designed to refute it before code is committed or claim is published. Operational instance of R4 *Falsify before fix* and R5 *No revision without new fact* of the Counterpart Toolkit.
+  Activate this skill before writing the fix code on a bug or incident, OR before posting an unverified claim of feature-future / residual limitation at the close of a session. Bug-side triggers: "fix", "bug", "patch", "hotfix", "workaround", "doesn't work", "diagnose", "hypothesis", "root cause", any commit subject in `fix:` / `hotfix:` / `bugfix:` on a production incident. Feature-future triggers: "V3-candidate", "v-suivante", "vN candidate", "next version will", "TODO:", "to-do:", "limite résiduelle", "residual limitation", "amélioration possible", "future enhancement", "à ajouter plus tard", "to be tested later", any "À suivre" / "Next steps" entry in a session log or PILOTAGE-IA draft. Distinct from `root-cause` (defensive checklist applied when *evaluating* a proposed fix): this skill is the invocable protocol the agent runs when it is about to *write* the fix OR *post* the unverified limitation. Enforces a single-sentence causal or descriptive hypothesis and three material probes designed to refute it before code is committed or claim is published. Operational instance of R4 *Falsify before fix* of the Counterpart Toolkit.
 ---
 
 # Falsify before fix — invocable protocol
@@ -21,7 +21,7 @@ If the hypothesis doesn't fit in one sentence, the diagnosis is still vague. Res
 
 ## Step 2 — List three probes designed to REFUTE the hypothesis
 
-Not to confirm. To **refute**. A confirmation probe is complaisance by construction (R5 — no revision without new fact).
+Not to confirm. To **refute**. A confirmation probe is complaisance by construction (R4).
 
 Each probe has three fields:
 
@@ -74,7 +74,7 @@ The same protocol applies when, at the close of a session (or anywhere else), th
 - *"À suivre: l'amend n'est pas couvert par V2"*
 - *"TODO: the cache invalidator probably misses event X"*
 
-Each of these is a hypothesis about a feature / system / regex behaviour that is not yet tested. Posting it without a probe is exactly the failure mode the doctrine condemns under R5 (*"no revision without new fact"*). The cost is doubled because such a claim typically survives until the next session, where it triggers code-writing on a hypothesis that may be false — wasting hours.
+Each of these is a hypothesis about a feature / system / regex behaviour that is not yet tested. Posting it without a probe is exactly the failure mode the doctrine condemns under R1 (*existence is not verified state*). The cost is doubled because such a claim typically survives until the next session, where it triggers code-writing on a hypothesis that may be false — wasting hours.
 
 Apply the same five steps:
 
@@ -101,6 +101,6 @@ The protocol is mandatory whenever there is a word *"bug"*, *"fix"*, *"doesn't w
 
 ## Why refutation, not confirmation
 
-A confirmation probe finds what it was looking for, by selection. Three confirmation probes on the same hypothesis produce mutual reinforcement, not evidence. A refutation probe is the only one that can return a *new fact* in the sense of R5 — and the only one that breaks the fix-first reflex when the first plausible cause is wrong.
+A confirmation probe finds what it was looking for, by selection. Three confirmation probes on the same hypothesis produce mutual reinforcement, not evidence. A refutation probe is the only one that can return a genuinely *new fact* — and the only one that breaks the fix-first reflex when the first plausible cause is wrong.
 
 Empirically, the cost of one fix-then-rollback cycle (typically 30-90 minutes plus a misleading commit) dominates the 5-10 minute cost of three probes. The protocol pays for itself on the first incident where the first hypothesis was wrong.
