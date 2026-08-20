@@ -6,6 +6,32 @@ Pas de littérature, pas de théorie. Ce qui s'est passé matériellement.
 
 ---
 
+## 2026-08-20 soir — la première règle que je tue, et la redondance qui n'était pas là où je la cherchais (DRAFT à éditer)
+
+### Ce qui a marché
+
+J'ouvre la session convaincu que la doctrine est devenue redondante avec ce qu'Opus 5 fait tout seul, et je demande de l'alléger. La première chose faite a été de sonder mes propres claims avant de planifier — la doc relue mot pour mot, le modèle vérifié, les compteurs recomptés, le ledger dépouillé règle par règle. Trois des quatre sondes ont confirmé ce que j'avançais. La quatrième a retourné la question : ce qui coûte n'est pas la Norme Live, qui n'est même pas chargée automatiquement, mais un fichier privé de 9k tokens chargé dans toutes mes sessions, y compris celles où je ne touche pas une ligne de code. J'avais visé le poste le moins cher du budget.
+
+R14 est morte. Une seule ligne de commande a suffi : sur 152 jours de repo, l'unique commit qui matche `[spike]` est celui qui a introduit la règle. Zéro usage réel, contre neuf `[autonomy-ack]`, sept `[review-ok]` et cinq `[workaround-assumed]` sur la même période. Le ledger l'avait mise sous surveillance de mortalité à 60 jours ; elle est morte à 150. C'est la première règle du corpus tuée par falsification et pas par ménage — exactement la classe que la relecture externe de juillet disait n'avoir jamais été démontrée.
+
+### Ce qui a foiré ou m'a surpris
+
+Ma prémisse était fausse dans sa forme forte, et pas dans le sens que je croyais. J'ai fait inventorier toutes les prescriptions chiffrées du corpus : presque toutes sont des seuils de déclenchement ou des plafonds — elles *restreignent*. Il ne restait que deux prescriptions faisant produire un volume fixe de vérification. Le corpus normatif est sobre. Les dix régressions de la veille ne venaient donc pas des règles : elles venaient de la couche d'usage accumulée autour d'elles, mes journaux qui consignent « review high, 3 finders, 8 angles » et un critère d'arrêt que j'avais formulé en boucle. Ce qui grossit chez moi, ce ne sont pas les règles, ce sont les habitudes que je relis comme des prescriptions.
+
+Deux fois dans la même session, la garde a mordu sur le texte qui la définit. Le hook R19 a bloqué un merge de markdown pur en annonçant « SECURITY DEFINER détecté » : les deux occurrences étaient la clause privilèges de R19 elle-même. Troisième faux positif de cette classe en deux jours. Et j'ai découvert au passage que mon skill `challenger` porte le bon amendement mais ne se déclenche pas sur le cas qu'il vise — un finding de review n'est ni un bug ni un incident de production. Écrire la règle au bon endroit ne sert à rien si le déclencheur ne l'atteint jamais.
+
+Le plus utile a été mon propre recadrage en cours de route : le nombre de tokens n'est pas l'enjeu, l'enjeu est de ne pas créer de sur-correction. Ça a fait tomber tout un lot que je m'apprêtais à faire, et ça a révélé que j'avais moi-même glissé un seuil inventé — « au-delà de deux ou trois sites, ça appelle un ADR » — dans le skill que je venais de durcir. Un chiffre que rien ne mesure devient une prescription à la relecture suivante. Retiré.
+
+### Ce que je veux essayer la prochaine fois
+
+Une seule passe de review sur la prochaine surface chaude, et compter. Compter les findings réels, et estimer honnêtement ce qu'une deuxième aurait ajouté. C'est la seule façon de trancher entre ce que dit la doc du modèle et ce que dit mon journal, parce que ma mesure des finders multiples date d'avant Opus 5 et que je ne l'ai jamais refaite. Tant que ce chiffre n'existe pas, ma cadence à une passe est une décision, pas un fait — et je l'ai écrite comme telle.
+
+Vérifier la propagation avant de me féliciter. J'ai failli clore en ayant publié proprement sur le dépôt public tout en laissant deux fichiers auto-chargés annoncer « 19 règles » — dont celui que toutes mes sessions ERP lisent. Le public est la surface la moins opérante de mon installation ; c'est celle que j'avais soignée en premier. La prochaine fois, la phase-0 d'énumération commence par les hooks et les fichiers auto-chargés, et le dépôt vient en dernier.
+
+Trancher R5 et R3, ou décider explicitement de les garder. Ce sont les deux seules règles qui restent dans la cible réelle de la doc, et les laisser en suspens, c'est reconduire l'accumulation que je dis vouloir arrêter.
+
+---
+
 ## 2026-07-20 — trois relectures externes, et le garde qui me mord (DRAFT à éditer)
 
 ### Ce qui a marché
