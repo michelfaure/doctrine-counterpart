@@ -14,7 +14,7 @@ Toolkit `CLAUDE.md` full or partial, which skills triggered, challenger agent in
 
 A decision taken differently, a bug avoided, useless friction, the net feeling (notable / marginal / negative).
 
-**(c) Which of the 19 rules can you name without rereading?**
+**(c) Which of the 18 live rules can you name without rereading?**
 
 Critical integration test: if the answer is weak (1-5 rules after 3 weeks), the loadable format has an intrinsic limit the next cycle will need to address.
 

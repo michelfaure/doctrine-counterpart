@@ -35,7 +35,6 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 - [ ] **Silent error swallowing** — `catch (e) { /* silent */ }`, `await mutation()` without destructuring `{ error }`, `2>/dev/null` in committed scripts, silent strip of a forbidden value, server action that throws without surfacing the failure in the UI. Silencing the signal is never a fix. Axis 5 (R10).
 - [ ] **Untagged workaround** — a temporary fix in the codebase without the `[workaround-assumed]` tag in the commit and a corresponding ADR or feedback memory. The unowned workaround returns six months later under a different mask. Axis 5 (R10).
-- [ ] **Spike commit older than 7 days without conversion to permanent + ADR** *(new v0.4.1)* — a commit tagged `[spike]` whose code is still on disk or in a live branch beyond 7 days. R14 makes the escape hatch time-bounded; an orphan spike beyond the window is a violation that requires either deletion or retroactive ADR + conversion under R6/R7/R8. Audit via `git log --grep '\[spike\]' --since='7 days ago'`.
 
 ## Discursive disposition
 
@@ -62,4 +61,4 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 ---
 
-*30 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14, 22 in v0.7 for multi-substrate consolidation, +8 across v0.8 → v0.10 for self-application, the review gate and assertional coverage). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*
+*29 anti-patterns (was 8 in v0.2, 16 in v0.3.3, 17 in v0.4, 18 in v0.4.1 for the *orphan spike* of R14 — that item retired 20 Aug 2026 with R14 itself, 22 in v0.7 for multi-substrate consolidation, +8 across v0.8 → v0.10 for self-application, the review gate and assertional coverage). Paste into PR review templates, session retrospectives, or onboarding kits for projects using Claude Code. Each item is a single observable behaviour in a single turn of dialogue; no instrumentation needed.*

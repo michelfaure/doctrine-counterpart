@@ -1,6 +1,6 @@
 # counterpart-doctrine/
 
-Nineteen operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged from solo coding with Claude Code on a production ERP (70+ effective days measured 22 May 2026, running daily through July 2026) + game dev dogfooding (Godot/GDScript multi-substrate test). Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.11** (the terse split, 19 July 2026 — `CLAUDE.md` reduced to a ~3.5k-token Live norm, the full-length rule text and all provenance frozen verbatim in [`calibration-ledger.md`](./calibration-ledger.md); a response by *subtraction* to an external review's one structural critique, accumulation bias. v0.10 two days earlier filled R17, promoted R19 on measured bite, and ran the first real R18(c) falsification audit — see [`v0.10-candidates.md`](./v0.10-candidates.md)).
+Eighteen live operational rules for working with Claude Code on a long-running solo project, plus the long-form theory that produced them. The rules emerged from solo coding with Claude Code on a production ERP (70+ effective days measured 22 May 2026, running daily through July 2026) + game dev dogfooding (Godot/GDScript multi-substrate test). Each rule was born from a recurring failure mode, not from upfront design. Versioned, dated, falsifiable — including the doctrine itself. **Current release: v0.11** (the terse split, 19 July 2026 — `CLAUDE.md` reduced to a ~3.5k-token Live norm, the full-length rule text and all provenance frozen verbatim in [`calibration-ledger.md`](./calibration-ledger.md); a response by *subtraction* to an external review's one structural critique, accumulation bias. v0.10 two days earlier filled R17, promoted R19 on measured bite, and ran the first real R18(c) falsification audit — see [`v0.10-candidates.md`](./v0.10-candidates.md)).
 
 ## Quick install (one command)
 
@@ -35,10 +35,10 @@ Seven metrics (M1–M7) instrument the doctrine's own self-application, and a si
 | **M3** median drift apparition → detection / 90d | R13 | ≤ 30 days | 35.7 d | 66.5 d | Miss — population ×3 since baseline, chiffre-à-chiffre comparison fragile ; manual-annotation re-baseline owed |
 | **M4** position of 1st DB probe in session | R13 | ≤ 90 min | ~58 min | ~66 min | **Met** (sliding 41 → 58 → 66) |
 | **M5** pure-command ratio / 7d (sclerosis alarm > 80 %) | R13 | provisional | 94 % `unknown` | **0 briefs extracted** | **Retired v0.11** — dead instrument (source drifted to prose); the sclerosis alarm stays qualitative in R13 |
-| **M6** spike orphans > 7 days | R14 | 0 | 0 (1 valid spike) | 0 (**0 spikes in 60 d**) | Met — by vacuity ; R14 under R18 death-watch |
+| **M6** spike orphans > 7 days | R14 | 0 | 0 (1 valid spike) | 0 (**0 spikes in 60 d**) | **Retired 20 Aug 2026 with R14** — met by vacuity for 150 d; a metric whose rule is dead instruments nothing |
 | **M7** runs > 5 uncheckpointed commits | R15 | 0 | 4 runs (longest = **92**) | 0 runs (longest = **1**) | **Met — the series' first red-to-green reversal ; the R15 hook holds where the declarative rule failed** |
 
-The headline of the 17 July re-measure is M7: the chain of 92 autonomous commits without a session log that justified the R15 commit-gate has collapsed to 1 under hook enforcement — direct empirical validation of *enforced over declared*. The honest column is the instruments themselves: **v0.11 retired M1 and M5** — neither ever produced a valid measurement, and a metric kept "just in case" is the exact unrefreshed Cache the doctrine hunts everywhere else. This is the doctrine's first falsification-driven retirement of its own structures (R18's mortality mechanism producing its first kills); the scripts remain in the samples repo as dated archive. Five live metrics instrument four rules (R8, R13, R14, R15); the other rules remain qualitative or candidates for future instrumentation (see `doctrine-metrics.ts` for the coverage map). The doctrine **does not retro-fit targets to fit measurements** — gaps are acknowledged and recalibrated only when they reveal an intuition-set threshold rather than a doctrinal one.
+The headline of the 17 July re-measure is M7: the chain of 92 autonomous commits without a session log that justified the R15 commit-gate has collapsed to 1 under hook enforcement — direct empirical validation of *enforced over declared*. The honest column is the instruments themselves: **v0.11 retired M1 and M5** — neither ever produced a valid measurement, and a metric kept "just in case" is the exact unrefreshed Cache the doctrine hunts everywhere else. This is the doctrine's first falsification-driven retirement of its own structures (R18's mortality mechanism producing its first kills); the scripts remain in the samples repo as dated archive. Four live metrics instrument three rules (R8, R13, R15); the other rules remain qualitative or candidates for future instrumentation (see `doctrine-metrics.ts` for the coverage map). The doctrine **does not retro-fit targets to fit measurements** — gaps are acknowledged and recalibrated only when they reveal an intuition-set threshold rather than a doctrinal one.
 
 ## Invariant rule
 
@@ -50,14 +50,14 @@ The doctrine *constrains the exchanges* of the attelage — the two-horse team w
 
 v0.11 declares an R6 category for every corpus surface (the doctrine's own Live/Snapshot/Cache taxonomy, applied to itself — before this, the rule text lived in 8 copies and the drift bit three times in a single day):
 
-- **The toolkit** — [`CLAUDE.md`](./CLAUDE.md). **Live norm.** Nineteen terse rules (rule + trigger + action + exceptions), ~60 lines / ~3.5k tokens. This is what your Claude Code loads at session start, and what governs on conflict. **This is what you install.**
+- **The toolkit** — [`CLAUDE.md`](./CLAUDE.md). **Live norm.** Eighteen terse live rules (rule + trigger + action + exceptions), ~60 lines / ~3.5k tokens. This is what your Claude Code loads at session start, and what governs on conflict. **This is what you install.**
 - **The calibration ledger** — [`calibration-ledger.md`](./calibration-ledger.md). **Snapshot journal.** The full-length v0.10 rule text frozen verbatim, all incident provenance, N counts, metric baselines, the version trail, and a dated journal where post-v0.10 evidence appends. Append-only — a dated snapshot cannot drift.
 - **The manifesto** — [`manifesto.md`](./manifesto.md). **Theory.** Eight axes, the *attelage* metaphor, the construction method, the retractions, the critiques received and integrated. ~71 k characters. Read by humans who want the *why*; never loaded by the agent.
 - **The candidates audits** — [`v0.7-candidates.md`](./v0.7-candidates.md), [`v0.8-candidates.md`](./v0.8-candidates.md), [`v0.10-candidates.md`](./v0.10-candidates.md). Dated audit material behind each promotion. (v0.9's audit trail lives in its session log.)
 
-## The nineteen toolkit rules
+## The toolkit rules
 
-R1 *Raw output, not declaration* · R2 *Filesystem over summary* · R3 *Success criteria before code* · R4 *Falsify before fix* · R5 *No revision without new fact* · R6 *Live / Snapshot / Cache mandatory* · R7 *Provenance + bulk re-count* · R8 *ADR before code, phase-0 grep* · R9 *Sub-agent briefing, FIFO 3* · R10 *Silent failure forbidden* · R11 *Parsimony* · R12 *Cite the official text, test external-AI claims* · R13 *Audit, archive, three brief modes* · R14 *Spike escape hatch* · R15 *Checkpoint commits in autonomous sessions* · R16 *Parallel-agent limit* · R17 *Assertional coverage* · R18 *The doctrine is a data table* · R19 *Review-gate on business-hot merges*
+R1 *Raw output, not declaration* · R2 *Filesystem over summary* · R3 *Success criteria before code* · R4 *Falsify before fix* · R5 *No revision without new fact* · R6 *Live / Snapshot / Cache mandatory* · R7 *Provenance + bulk re-count* · R8 *ADR before code, phase-0 grep* · R9 *Sub-agent briefing, FIFO 3* · R10 *Silent failure forbidden* · R11 *Parsimony* · R12 *Cite the official text, test external-AI claims* · R13 *Audit, archive, three brief modes* · ~~R14 *Spike escape hatch*~~ (retired 20 Aug 2026, falsification) · R15 *Checkpoint commits in autonomous sessions* · R16 *Parallel-agent limit* · R17 *Assertional coverage* · R18 *The doctrine is a data table* · R19 *Review-gate on business-hot merges*
 
 The rule text lives in **one place**: [`CLAUDE.md`](./CLAUDE.md) (Live norm). Amendment history, incident anchors and per-rule provenance: [`calibration-ledger.md`](./calibration-ledger.md). Theoretical anchors (eight axes): [`manifesto.md`](./manifesto.md).
 
@@ -65,7 +65,7 @@ The rule text lives in **one place**: [`CLAUDE.md`](./CLAUDE.md) (Live norm). Am
 
 | File | Role |
 |---|---|
-| [`CLAUDE.md`](./CLAUDE.md) | **Toolkit — the Live norm.** Nineteen terse rules, drop-in for project root. ~60 lines, ~3.5k tokens. |
+| [`CLAUDE.md`](./CLAUDE.md) | **Toolkit — the Live norm.** Eighteen terse live rules, drop-in for project root. ~60 lines, ~3.5k tokens. |
 | [`calibration-ledger.md`](./calibration-ledger.md) | **Snapshot journal** — full v0.10 rule text frozen verbatim, provenance, N counts, metrics, version trail, dated evidence journal. |
 | [`anti-patterns-checklist.md`](./anti-patterns-checklist.md) | **30 anti-patterns** — densest doctrine-payload-per-line. Paste into PR review. |
 | [`manifesto.md`](./manifesto.md) | **Manifesto** — long-form theory: 8 axes, *attelage*, retractions, critiques. ~71 k characters. |
@@ -100,7 +100,7 @@ The toolkit/manifesto split (v0.4) is orthogonal to a second long-standing disti
 
 If you have **an hour**: read `manifesto.md` end to end, then pick the three rules whose anchor axes most fit your current pain (typically R1, R10, R13 — *material verification*, *root cause*, *three brief modes*) and inline them into your `CLAUDE.md`. Run `./install.sh` to install the hooks and skills.
 
-If you have **ten minutes**: read the nineteen rule titles in `CLAUDE.md`, paste `anti-patterns-checklist.md` into your next PR review, move on. The checklist is the densest doctrine-payload-per-line of the repo.
+If you have **ten minutes**: read the eighteen rule titles in `CLAUDE.md`, paste `anti-patterns-checklist.md` into your next PR review, move on. The checklist is the densest doctrine-payload-per-line of the repo.
 
 If you have **two minutes**: run `./install.sh /path/to/your/project` and answer Y when prompted for hooks. The default has been `[Y/n]` since v0.3 — most of the doctrine's value lives in the material enforcement of the ten hooks.
 
