@@ -28,7 +28,7 @@ Une seule passe de review sur la prochaine surface chaude, et compter. Compter l
 
 Vérifier la propagation avant de me féliciter. J'ai failli clore en ayant publié proprement sur le dépôt public tout en laissant deux fichiers auto-chargés annoncer « 19 règles » — dont celui que toutes mes sessions ERP lisent. Le public est la surface la moins opérante de mon installation ; c'est celle que j'avais soignée en premier. La prochaine fois, la phase-0 d'énumération commence par les hooks et les fichiers auto-chargés, et le dépôt vient en dernier.
 
-Trancher R5 et R3, ou décider explicitement de les garder. Ce sont les deux seules règles qui restent dans la cible réelle de la doc, et les laisser en suspens, c'est reconduire l'accumulation que je dis vouloir arrêter.
+Tranché dans la foulée, et pas dans le sens que je croyais. R5 part — son volet « pushback » est déjà dans le harnais mot pour mot, son volet mémoire rejoint R1. R3 reste : elle dit quoi produire avant de commencer, pas combien de fois vérifier après, et R17 s'appuie dessus. Le moment qui m'a le plus servi : mon propre manifesto affirmait que R5 était la deuxième règle la plus invoquée — j'ai compté, elle est cinquième. Un classement écrit quand j'avais dix règles n'a jamais été refait quand j'en ai eu dix-neuf. Si je ne l'avais pas sondé, une phrase périmée de mon corpus aurait sauvé une règle que les données ne soutiennent plus.
 
 ---
 

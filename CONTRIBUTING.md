@@ -14,7 +14,7 @@ Toolkit `CLAUDE.md` full or partial, which skills triggered, challenger agent in
 
 A decision taken differently, a bug avoided, useless friction, the net feeling (notable / marginal / negative).
 
-**(c) Which of the 18 live rules can you name without rereading?**
+**(c) Which of the 17 live rules can you name without rereading?**
 
 Critical integration test: if the answer is weak (1-5 rules after 3 weeks), the loadable format has an intrinsic limit the next cycle will need to address.
 
@@ -55,7 +55,7 @@ The manifesto lists five hypotheses where the doctrine appears singular within t
 The doctrine explicitly refuses four dominant positions (see `manifesto.md` — Preface section). Critiques on these choices are the most precious:
 
 - Is *AI as counterpart* truly superior to *AI as tool* / *AI as colleague* in your experience?
-- Is bidirectional adversariality (R4, R5) practicable, or too cognitively costly?
+- Is bidirectional adversariality (R4) practicable, or too cognitively costly?
 - Is the Live/Snapshot/Cache taxonomy (R6) useful or over-engineered for a solo?
 - Does long-term auditability (R13) hold, or rot in practice despite the invariants?
 
