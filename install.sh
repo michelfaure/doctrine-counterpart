@@ -6,6 +6,7 @@
 #   ./install.sh [path/to/project]        # interactive, target = path
 #   ./install.sh --yes                    # non-interactive (defaults Y), target = pwd
 #   ./install.sh --yes [path/to/project]  # non-interactive, target = path
+#   ./install.sh --allow-home ...         # permit target = $HOME (refused by default)
 #
 # One-line install from a clone (non-interactive):
 #   git clone https://github.com/michelfaure/doctrine-counterpart.git && cd doctrine-counterpart && ./install.sh --yes /path/to/your/project
@@ -18,6 +19,7 @@ ARGS=()
 for arg in "$@"; do
   case "$arg" in
     --yes|-y) AUTO_YES=1 ;;
+    --allow-home) ALLOW_HOME=1 ;;
     *) ARGS+=("$arg") ;;
   esac
 done
@@ -54,6 +56,17 @@ echo ""
 
 if [[ ! -d "$TARGET" ]]; then
   echo "❌ Target directory does not exist: $TARGET"
+  exit 1
+fi
+
+# Installing into $HOME writes user-scope files (~/CLAUDE.md, ~/.claude/hooks) that
+# every project loads, and that an adopter has usually customised. Refused by default,
+# --yes included: an auto-confirm must not be the thing that overwrites a user scope.
+if [[ "$TARGET" == "$HOME" && "${ALLOW_HOME:-0}" -ne 1 ]]; then
+  echo "❌ Target is your home directory ($HOME)."
+  echo "   This would install into your USER scope, loaded by every project."
+  echo "   Install into a project directory instead, or re-run with --allow-home"
+  echo "   if you really mean it (existing hooks are still never overwritten)."
   exit 1
 fi
 
@@ -198,8 +211,21 @@ if [[ "$choice" =~ ^[Yy]$ ]]; then
   # Copy scripts
   for hook_file in "$SOURCE_DIR/.claude/hooks"/*.sh; do
     hook_name=$(basename "$hook_file")
-    cp "$hook_file" "$TARGET/.claude/hooks/$hook_name"
-    chmod +x "$TARGET/.claude/hooks/$hook_name"
+    target_hook="$TARGET/.claude/hooks/$hook_name"
+    # An existing hook is never overwritten: adopters customise hooks (project names,
+    # identity patterns, local fixes), and a silent cp would erase that with no trace.
+    if [[ -f "$target_hook" ]]; then
+      if cmp -s "$hook_file" "$target_hook"; then
+        echo "  = hook $hook_name already up to date"
+      else
+        cp "$hook_file" "$target_hook.doctrine-counterpart"
+        echo "  ⊘ hook $hook_name differs locally — kept yours; doctrine version placed alongside:"
+        echo "      $target_hook.doctrine-counterpart (merge manually)"
+      fi
+      continue
+    fi
+    cp "$hook_file" "$target_hook"
+    chmod +x "$target_hook"
     echo "  ✓ hook $hook_name installed and made executable"
   done
 
