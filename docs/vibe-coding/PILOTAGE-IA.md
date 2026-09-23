@@ -6,6 +6,34 @@ Pas de littérature, pas de théorie. Ce qui s'est passé matériellement.
 
 ---
 
+## 2026-09-23 — v0.12 : j'ai demandé un audit complet, et la doctrine m'a répondu qu'elle n'était pas le bon outil pour la moitié de ses problèmes (DRAFT à éditer)
+
+### Ce qui a marché
+
+Tout est parti d'un avertissement banal : ma règle de review était trop longue pour être chargée entière, et c'était la fin qui sautait — les entrées les plus récentes, les plus utiles. En août j'avais refusé de déplacer ce journal parce que l'argument était le coût en tokens ; là l'argument était la perte de contenu, et c'est un fait nouveau. Revenir sur une décision parce qu'un fait a changé, pas parce que je doute, ça a tenu en une ligne de justification et je n'ai pas eu à me battre avec moi-même.
+
+J'ai demandé un audit complet plutôt qu'un harvest sur le seul journal de review, et c'est ce qui a changé le cycle. Le harvest donnait douze amendements et zéro retrait ; les quatre lecteurs sur le corpus entier ont trouvé huit clauses mortes, dont certaines que je citais encore de mémoire comme vivantes. Le plafond de trois projets, par exemple : je tourne à cinq ou six sessions en parallèle, c'est devenu ma façon normale de travailler, et la règle continuait d'affirmer le contraire.
+
+Les deux screens adverses ont fait leur travail au lieu de valider. Chaque retrait est passé, mais avec une réserve qui l'empêchait de casser quelque chose : la moitié « fermer avant d'ouvrir » de la règle des projets avait mordu — un correctif resté dix jours sur une branche, le bug qui remord — et elle est restée.
+
+### Ce qui a foiré ou m'a surpris
+
+Le tag de contournement que j'imposais depuis mai n'a jamais servi une seule fois sur un vrai commit. Pire, le hook qui devait le faire respecter ne pouvait pas se déclencher : il cherchait des mots anglais dans un repo où j'écris « contournement ». Et quand on l'a resserré en français, il bloquait dix-sept commits sur vingt-six, presque tous des commits qui parlaient d'un contournement sans en faire un. On l'a retiré. Je le croyais vivant parce qu'il était câblé, testé et cité partout.
+
+J'ai trouvé un vrai nom d'élève dans un fichier public, en ligne depuis deux mois. On a réécrit l'historique et fait un force-push. Mais GitHub garde encore l'ancien commit accessible par son identifiant, et ça ne se règle qu'en écrivant au support. Une fuite se rattrape mal ; elle s'évite au moment d'écrire.
+
+Et on m'a annoncé un cycle « plus léger », delta de clauses négatif, et c'était faux : huit retirées, quatorze ajoutées. La longueur restait plate seulement parce qu'on avait compressé deux vieux paragraphes. C'est l'audit d'équivalence qui l'a recompté. J'ai failli publier une norme dont le pied de page mentait sur sa propre sobriété.
+
+### Ce que je veux essayer la prochaine fois
+
+Arrêter d'ajouter des phrases pour les erreurs qui reviennent. L'audit a compté au moins dix fois la même chose : une classe d'erreur nommée dans le journal, puis refaite dans les jours qui suivent, parfois dans le même commit. La prochaine fois qu'une classe revient, je demande un outil qui empêche le geste — un type, un module, un hook — et je vérifie que cet outil mord vraiment, sur l'historique, avant de le croire.
+
+Écrire au support GitHub pour purger l'ancien commit. Et relire tout fichier destiné au dépôt public avec un seul critère en tête : y a-t-il un nom, un montant, un dossier réel ?
+
+Le prochain audit est dû avant Noël. Je veux qu'il commence par compter les clauses de la norme, pas par en proposer.
+
+---
+
 ## 2026-08-20 soir — la première règle que je tue, et la redondance qui n'était pas là où je la cherchais (DRAFT à éditer)
 
 ### Ce qui a marché
