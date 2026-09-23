@@ -72,14 +72,6 @@ for s in "${SAMPLES[@]}"; do
   check_cmd "pattern $name" 2 secret-scanner.sh "git commit -m x" "$d"
 done
 
-echo "== check-workaround-assumed =="
-RW="$(fresh_repo wa clean)"
-check_cmd "canonical  hack: message"            2 check-workaround-assumed.sh "git commit -m 'hack: patch'" "$RW"
-check_cmd "chained    cd <repo> && hack:"       2 check-workaround-assumed.sh "cd $RW && git commit -m 'hack: patch'"
-check_cmd "chained    add -A && hack:"          2 check-workaround-assumed.sh "git add -A && git commit -m 'hack: patch'" "$RW"
-check_cmd "assumed tag passes"                  0 check-workaround-assumed.sh "git commit -m 'hack: patch [workaround-assumed]'" "$RW"
-check_cmd "NEGATIVE: ordinary message"          0 check-workaround-assumed.sh "git commit -m 'feat: add endpoint'" "$RW"
-
 echo "== deploy-safeguard (one case per blocked pattern) =="
 check_cmd "git push origin main"                2 deploy-safeguard.sh "git push origin main"
 check_cmd "chained  cd x && git push main"      2 deploy-safeguard.sh "cd /tmp && git push origin main"

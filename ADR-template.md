@@ -1,6 +1,6 @@
 # ADR-NNNN — <Decision title>
 
-> One-page Architecture Decision Record. Required before any project > 2 files (axis 4 of the Counterpart Doctrine). Filename convention: `docs/adr/NNNN-kebab-title.md`. NNNN is monotonically increasing, never reused, never rewritten in place.
+> One-page Architecture Decision Record. Required before the first commit of any structurally significant decision (R8; the "> 2 files" threshold was retired in v0.12). Filename convention: `docs/adr/NNNN-kebab-title.md`. NNNN is monotonically increasing, never reused, never rewritten in place.
 
 **Status**: Proposed | Accepted | Superseded by ADR-XXXX
 **Date**: YYYY-MM-DD

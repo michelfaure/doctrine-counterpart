@@ -1,6 +1,6 @@
 ---
 name: session-discipline
-description: Activate this skill when the user opens a multi-file project, mentions "module", "spec", "refactor", "ADR", "architecture", "phase", "lot", "feature", "implementation", creates a new migration or a new template. Also on "git push", "deploy", "production", when a cron is created or modified, and at session start to open a project FIFO. The skill enforces ADR before code, phase-0 exhaustive grep, lots of 5 lines max, project FIFO, manual trigger post-deploy, cleanup before push, calendar event for self-validation.
+description: Activate this skill when the user opens a multi-file project, mentions "module", "spec", "refactor", "ADR", "architecture", "phase", "lot", "feature", "implementation", creates a new migration or a new template. Also on "git push", "deploy", "production", when a cron is created or modified, and at session start to list open projects. The skill enforces ADR before code, phase-0 exhaustive grep, short validatable lots, close-before-open, manual trigger post-deploy, cleanup before push, calendar event for self-validation.
 ---
 
 # Session discipline
@@ -9,7 +9,7 @@ The AI-native solo structures work before writing, archives while working, close
 
 ## ADR before code
 
-**Any project > 2 files** triggers an ADR before the first commit.
+**Any structurally significant decision** triggers an ADR before the first commit (v0.12: the "> 2 files" threshold retired — the ADR follows the decision, not the file count).
 
 Minimal format (1 page):
 
@@ -41,7 +41,7 @@ The ADR serves as oracle during implementation: when a UX detail wavers, return 
 
 ## Phase 0 — exhaustive grep
 
-**Before any spec of a new module or refactor > 2 files**: exhaustive grep of symbols, assets, formats of the concerned domain.
+**Before any spec of a new module or refactor**: exhaustive grep of symbols, assets, formats of the concerned domain.
 
 ```bash
 # Example for a post-meeting mail module
@@ -55,18 +55,18 @@ Report what exists *before* proposing new. If a module already produces or consu
 
 ## Work lots
 
-On step-by-step projects, **each lot must be validatable by a short recap (3-5 lines)**. If the recap of a lot exceeds 5 lines, the lot is too large — split before proceeding.
+On step-by-step projects, **each lot must be validatable by a short recap**. If the recap no longer fits in a few lines, the lot is too large — split before proceeding.
 
 At each end of lot:
-- Recap 3-5 lines (commits, files touched, next step)
+- Short recap (commits, files touched, next step)
 - Explicit question "shall we move on?"
 - User validation before next lot
 
-## Project FIFO
+## Close before open
 
-**No more than 3 projects open in parallel.** Open a new = close an old (shipped, deferred, or explicitly abandoned with ADR).
+**Opening a project = shipping or explicitly deferring another** (shipped, deferred, or explicitly abandoned with ADR). An unpushed branch is neither: it is open. (v0.12: the "3 projects" cap retired — never applied, and the measured cost came from unshipped work and concurrent sessions, not from the count.)
 
-At session start, list open projects. If > 3, refuse to open a new one until explicit closure.
+At session start, list open projects and unpushed branches (`git branch -vv`, `git log --branches --not --remotes`).
 
 ## Manual trigger post-deploy
 
@@ -121,10 +121,10 @@ Ticket format:
 
 ## Project start checklist
 
-- [ ] Project > 2 files? → ADR written
+- [ ] Structurally significant decision? → ADR written
 - [ ] Phase 0 exhaustive grep done
 - [ ] Existing identified, "reuse or create" decision taken
-- [ ] Lot decomposition previewed (recap < 5 lines per lot)
+- [ ] Lot decomposition previewed (short recap per lot)
 - [ ] If cron: manual trigger post-deploy planned
 - [ ] If D+1/D+2 effect: calendar event set
-- [ ] FIFO respected (≤ 3 projects open)
+- [ ] No project left unshipped and undeferred; no unpushed branch

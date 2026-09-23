@@ -70,7 +70,7 @@ The useful criterion: if the 1st patch reveals a 2nd missing object, it's a drif
 
 A workaround is **legitimate** under 4 conditions:
 
-1. Explicit commit message: "workaround," "assumed band-aid," "TODO root cause," or `[workaround-assumed]` tag
+1. Explicit commit message naming the workaround with its **scope and expiry** ("workaround — scope: …, expiry: …", "TODO root cause", or "cf. ADR-NNNN")
 2. ADR or feedback memory reference documenting the debt
 3. Calendar event or ticket for clean resolution
 4. No adjacent scope creep: the workaround addresses exactly the symptom, no more

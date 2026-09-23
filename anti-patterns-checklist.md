@@ -21,8 +21,8 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 
 ## Process and discipline
 
-- [ ] **Starting a project > 2 files without an ADR** — the decision is made implicit, the alternatives discarded are forgotten, the consequences become apparent only at integration time. Axis 4.
-- [ ] **More than 3 projects open in parallel** — context fragmentation crosses a threshold above 3 and quality drops on each. FIFO: close one before opening a fourth. Axis 4.
+- [ ] **A structurally significant decision without an ADR** — the decision is made implicit, the alternatives discarded are forgotten, the consequences become apparent only at integration time. Axis 4.
+- [ ] **Opening a project while another is neither shipped nor explicitly deferred** — an unpushed branch counts as open; a fix left on a local branch keeps the bug alive. On a shared tree, concurrent sessions are writers too: no `git stash`, measure in a dedicated worktree. R9 (v0.12 — the "3 projects" number retired).
 - [ ] **Pure-command framing on a topic where the outcome is actually unknown** — the brief says *"refactor X to do Y"* but neither agent nor user knows whether Y is the right answer. The pure command should have been a question or a command-with-oracle. Axis 8.
 
 ## Adversariality and authority
@@ -33,7 +33,7 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 ## Workarounds and silencing
 
 - [ ] **Silent error swallowing** — `catch (e) { /* silent */ }`, `await mutation()` without destructuring `{ error }`, `2>/dev/null` in committed scripts, silent strip of a forbidden value, server action that throws without surfacing the failure in the UI. Silencing the signal is never a fix. Axis 5 (R10).
-- [ ] **Untagged workaround** — a temporary fix in the codebase without the `[workaround-assumed]` tag in the commit and a corresponding ADR or feedback memory. The unowned workaround returns six months later under a different mask. Axis 5 (R10).
+- [ ] **Unnamed workaround** — a temporary fix whose commit message does not name it as such with its scope and expiry. The unowned workaround returns six months later under a different mask. R10 (v0.12 — the `[workaround-assumed]` tag and its hook retired: zero real use, and a text detector cannot tell discussing a workaround from making one).
 
 ## Discursive disposition
 
@@ -50,7 +50,7 @@ The list is the densest doctrine-payload-per-line in the repo. If you have ten m
 ## Self-application and the review gate (v0.8 → v0.10 additions)
 
 - [ ] **Asserting state from a stored proxy, or invoking a safety net without checking it runs NOW** *(new v0.8)* — a `used_at` column, an external ID, a `max(created_at)`, a badge taken as system state; a CI, cron retry, or backup invoked as coverage while it has been red or silent for weeks. Existence is necessary, never sufficient — re-derive from the source or verify running now. *"Covered by X"* is itself a claim that carries X's verification command. Am.R1.
-- [ ] **Growing the doctrine monotonically** *(new v0.8)* — capture without retraction, N=1 lessons promoted as universal truths, ghost-probes declared but never executed, a feedback corpus that only ever grows. A corpus where nothing has ever been contradicted is statistically a tautology farm. R18.
+- [ ] **Growing the doctrine monotonically** *(new v0.8)* — capture without retraction, N=1 lessons promoted as universal truths, a class recommitted after being named with no mechanism now forbidding it, a feedback corpus that only ever grows. A corpus where nothing has ever been contradicted is statistically a tautology farm. R18.
 - [ ] **Merging a business-hot diff without review — or gating on the file name instead of the diff's content** *(new v0.9, rewritten v0.10)* — payment, tax, mutating crons, migrations, RLS, auth merged without `/code-review`; or a review trigger that fires on a path pattern while cold diffs in the same files never bite (0/3 measured) and hot content elsewhere ships unreviewed. Blind `[review-ok]` without reading the diff is the same anti-pattern in bypass form. R19.
 - [ ] **Deploying a `SECURITY DEFINER` function without a privilege probe in the same message** *(new v0.10)* — EXECUTE defaults to PUBLIC; a code-reading review cannot see default GRANTs; DROP+CREATE re-grants even after a prior REVOKE. `has_function_privilege('anon', …)` next to the deploy, every time. R19 privileges clause.
 - [ ] **Trusting a green suite on a surface it never asserts** *(new v0.10)* — unasserted written columns, fixture dimensions the model traverses but the test data lacks, a lifecycle never walked to its terminal business state ("created" tested, "settled" not). A green test attests only what it asserts; a safety net must prove it bites. R17.

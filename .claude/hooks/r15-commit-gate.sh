@@ -11,7 +11,7 @@
 #
 # Wiring (in ~/.claude/settings.json):
 #   PreToolUse  matcher "Bash"  →  r15-commit-gate.sh  (alongside
-#                                  deploy-safeguard.sh and check-workaround-assumed.sh)
+#                                  deploy-safeguard.sh)
 #
 # Behavior
 #   exit 0   if the command is not `git commit`, OR count < THRESHOLD, OR the

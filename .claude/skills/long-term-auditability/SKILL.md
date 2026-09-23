@@ -1,6 +1,6 @@
 ---
 name: long-term-auditability
-description: Activate this skill at the end of a significant session (> 1h or > 3 commits), on each ADR creation or modification, on mention of "MEMORY", "doctrine", "audit", "quarterly", "session log", "handover". Also when a feedback memory is created or modified, when a drift is documented without an associated probe, or when the MEMORY.md index exceeds 200 lines. The skill enforces ADR trace for structurally significant decisions, session log after significant session, quarterly memory audit, and the reminder that the doctrine applies to itself.
+description: Activate this skill at the end of a significant session (> 1h or > 3 commits), on each ADR creation or modification, on mention of "MEMORY", "doctrine", "audit", "quarterly", "session log", "handover". Also when a feedback memory is created or modified, when a drift is documented without an associated probe, or when the MEMORY.md index nears the harness truncation limit. The skill enforces ADR trace for structurally significant decisions, session log after significant session, event-triggered memory audit, the quarterly R18(c) falsification audit, and the reminder that the doctrine applies to itself.
 ---
 
 # Long-term auditability
@@ -52,15 +52,15 @@ Minimal format:
 
 Hot capture, not literary. The pattern emerges from rereading, not from a single session.
 
-## MEMORY.md — index ≤ 200 lines
+## MEMORY.md — index under the truncation limit
 
 Maintain an index file at root (`MEMORY.md` or equivalent) with:
 
 - **One line per memory**, format: `- [title](file.md) — one-sentence hook`, kept short enough that the whole index stays under the truncation limit (set your own per-line cap and state it in your project instructions)
 - Detail in separate topic files
-- **Strict 200-line limit** — beyond, Claude Code silently truncates
+- **Stay under the harness truncation limit, measured in bytes** — a line cap is a proxy (measured 2026: a 200-line index can be ~2.7× over a byte budget); beyond, the tail is silently dropped
 
-If the index exceeds 200 lines: refactor obligatory. Move project detail into dedicated files, and archive entries **per your own documented criterion** — age alone is not one: it retires durable references (canonical files, infra pointers) and future commitments while keeping noisy recent entries. State the criterion where your memory policy lives, then apply it manually.
+If the index nears the limit: refactor obligatory — split into domain indexes if compaction alone cannot hold it. Move project detail into dedicated files, and archive entries **per your own documented criterion** — age alone is not one: it retires durable references (canonical files, infra pointers) and future commitments while keeping noisy recent entries. State the criterion where your memory policy lives, then apply it manually.
 
 ## Feedback memory tied to drift = mandatory probe
 
@@ -70,18 +70,12 @@ Typical case: memory says "drift on schedule statuses active since 04/26". At D+
 
 Rule: *any feedback memory on an active drift must point to a probe that confirms it, otherwise it rots*.
 
-## Mandatory quarterly audit
+## Audit on event, and the quarterly falsification audit
 
-**Every 3 months**: re-read the MEMORY.md index line by line, ask for each entry "is this still true?".
+**v0.12**: the calendar memory audits were retired — never executed on schedule, and they missed a false authority rule for three months. What replaces them:
 
-Calendar recurrently:
-
-```
-Calendar: 1st Sunday of the quarter, 1h
-Action: line-by-line audit MEMORY.md + reread recent ADRs + flag obsolete ones
-```
-
-Cost: 1h per quarter. Benefit: a memory that remains an asset instead of rotting.
+- **On event**: when a constant, policy or schema changes, ask "which memory or rule does this make false?" — and write rules that cite a constant's **name**, never its value.
+- **Quarterly R18(c) falsification audit** (reminder hook `audit-memory-reminder`): read the practice journal and session logs since the last audit, per rule search contradictions and signs of death, record births and deaths.
 
 ## ADR obsolescence criterion
 
@@ -120,8 +114,8 @@ Periodically test: "if I stopped tomorrow, what could another solo dev who opens
 - [ ] If session > 1h or > 3 commits: session log created
 - [ ] If new feedback memory: point to probe if drift
 - [ ] If new recurring pattern identified: capture as rule or skill
-- [ ] MEMORY.md updated, < 200 lines
-- [ ] If end of quarter: memory audit planned
+- [ ] MEMORY.md updated, under the truncation limit
+- [ ] If 90 days since the last R18(c) audit: audit planned
 
 ## Quarterly checklist
 

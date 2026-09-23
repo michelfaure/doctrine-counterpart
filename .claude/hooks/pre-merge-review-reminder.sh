@@ -62,7 +62,7 @@ changed="$(git -C "$dir" diff --name-only "$base"...HEAD 2>/dev/null || true)"
 [[ -z "$changed" ]] && exit 0
 
 # 5) Surface à risque ? (température métier — v0.10 : actions.ts retiré, 0/3 froid)
-risk_regex='stripe|encaissement|paiement|payment|/api/cron/|supabase/migrations/|(^|/)migrations/|\.sql$|(^|/)rls|_rls|polic(y|ies)|/auth/|auth\.ts|(^|/)lib/auth|fiscal|(^|/)tva|_tva|tva_'
+risk_regex='stripe|encaissement|paiement|payment|/api/cron/|supabase/migrations/|(^|/)migrations/|\.sql$|(^|/)rls|_rls|polic(y|ies)|/auth/|auth\.ts|(^|/)lib/auth|fiscal|(^|/)tva|_tva|tva_|contrat|contract|juridique|legal'
 matched="$(printf '%s\n' "$changed" | grep -Ei -e "$risk_regex" || true)"
 
 # 5bis) Clause privilèges R19 (v0.10) : SECURITY DEFINER dans le CONTENU du diff —
